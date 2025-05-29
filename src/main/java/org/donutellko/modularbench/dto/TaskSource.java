@@ -30,7 +30,7 @@ public class TaskSource {
           - should-use-libraries  # if we want the solution to use foreign dependencies
           - etc.
         * */
-        private List<String> available_parameters = new ArrayList<String>();
+        private List<String> availableParameters = new ArrayList<String>();
         /*
         available_criteria:
           - ram_usage         # only for languages that we can run in a sandbox
@@ -42,11 +42,11 @@ public class TaskSource {
           - java-codestyle    # only for java
           - python-pyright    # only for python
           */
-        private List<String> available_criteria = new ArrayList<String>();
+        private List<String> availableCriteria = new ArrayList<String>();
         private TaskDescription task;
-        private GoldenSolution golden_solution;
+        private GoldenSolution goldenSolution;
         /* Only if "use-llm-judge" is set to True */
-        private String llm_judge_prompt;
+        private String llmJudgePrompt;
     }
 
     static class GoldenSolution extends HashMap<String, String> {
@@ -54,15 +54,15 @@ public class TaskSource {
 
     @Data
     public static class TaskDescription {
-        private String common_prompt;
-        private HashMap<String, LanguageSpecificTask> languages_specific;
+        private String commonPrompt;
+        private HashMap<String, LanguageSpecificTask> languagesSpecific;
     }
 
     @Data
     public static class LanguageSpecificTask {
         private String description;
-        private List<TestDefinition> public_tests = new ArrayList<>();
-        private List<TestDefinition> hidden_tests = new ArrayList<>();
+        private List<TestDefinition> publicTests = new ArrayList<>();
+        private List<TestDefinition> hiddenTests = new ArrayList<>();
     }
 
     @Data
