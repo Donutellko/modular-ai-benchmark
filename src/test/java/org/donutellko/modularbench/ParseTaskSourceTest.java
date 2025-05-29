@@ -13,7 +13,7 @@ import java.io.InputStream;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ParseYamlTest {
+public class ParseTaskSourceTest {
 
     @Test
     public void testParse() {
@@ -23,7 +23,7 @@ public class ParseYamlTest {
         mapper.enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS);
         mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
 //        mapper.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL);
-        try (InputStream inputStream = ParseYamlTest.class.getClassLoader().getResourceAsStream("config-example-1.yaml")) {
+        try (InputStream inputStream = ParseTaskSourceTest.class.getClassLoader().getResourceAsStream("task-source-example-1.yaml")) {
             assertNotNull(inputStream);
             if (inputStream == null) {
                 System.err.println("YAML file not found!");
