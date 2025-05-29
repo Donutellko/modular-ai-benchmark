@@ -1,13 +1,29 @@
 package org.donutellko.modularbench.dto;
 
-import java.util.ArrayList;
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Set;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ExecutionConfig {
     private Set<TaskDifficulty> difficulties;
     private Set<String> areas;
-    private List<String> languages = new ArrayList<String>();
-    private List<String> parameters = new ArrayList<String>();
-    private List<String> criteria = new ArrayList<String>();
+    private Set<String> languages;
+    private Set<ExecutionParameter> parameters;
+    private Set<ExecutionParameter> criteria;
+
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ExecutionParameter {
+        private String name;
+        private Boolean enabled;
+    }
 }

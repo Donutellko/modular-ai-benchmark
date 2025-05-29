@@ -1,0 +1,35 @@
+difficulties:
+  - easy
+  - medium
+  - hard
+areas:
+languages:
+  - java
+parameters:
+  - name: should-generate-tests # if the LLM should generate tests for the code
+    enabled: false
+  - name: use-llm-judge         # if we want to check the results with an LLM-judge
+    enabled: true
+  - name: all-tests-public      # if we want to give the LLM all tests as a reference
+    enabled: false
+  - name: all-tests-hidden      # if we don't want to give any tests as a reference
+    enabled: true
+  - name: should-use-libraries  # if we want the solution to use foreign dependencies
+    enabled: false
+criteria: # list of criteria to evaluate the solutions
+  - name: ram_usage         # only for languages that we can run in a sandbox
+    enabled: true
+  - name: cpu_usage         # only for languages that we can run in a sandbox
+    enabled: true
+  - name: sonarqube         # for all languages
+    enabled: true
+  - name: llm-judge-code-quality    # for all languages
+    enabled: true
+  - name: llm-judge-comment-quality # for all languages
+    enabled: true
+  - name: java-jacoco       # only for jvm languages
+    enabled: true
+  - name: java-codestyle    # only for java
+    enabled: true
+  - name: python-pyright    # only for python
+    enabled: false
