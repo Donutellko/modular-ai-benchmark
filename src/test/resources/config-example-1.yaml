@@ -1,0 +1,120 @@
+tasks:
+  -
+    name: highest common factor, implementation from zero
+    type: implementation from zero
+    difficulty: easy
+    area: math
+    source: MBPP    # from which benchmark did we get this task
+    languages:
+      - python
+      - java
+      - custom    # not every criteria is available for custom languages
+    available_parameters: # mostly True/False
+      - should-generate-tests # if the LLM should generate tests for the code
+      - use-llm-judge         # if we want to check the results with an LLM-judge
+      - all-tests-public      # if we want to give the LLM all tests as a reference
+      - all-tests-hidden      # if we don't want to give any tests as a reference
+      - should-use-libraries  # if we want the solution to use foreign dependencies
+    available_criteria:
+      - ram_usage         # only for languages that we can run in a sandbox
+      - cpu_usage         # only for languages that we can run in a sandbox
+      - sonarqube         # for all languages
+      - llm-judge-code-quality    # for all languages
+      - llm-judge-comment-quality # for all languages
+      - java-jacoco       # only for jvm languages
+      - java-codestyle    # only for java
+      - python-pyright    # only for python
+    task:
+      common_prompt: |
+        Write a function in ${language} to calculate the 
+        highest common factor of two numbers. 
+        
+        The generated code should only contain one function called `gcd()` 
+        and accept two numbers as parameters.
+        %if parameters['should-use-libraries']
+        You should use a numpy function to achieve the goal.
+        %else
+        You shouldn't use any foreign libraries to achieve the goal.
+        %endif
+        
+        %if !parameters['all-tests-hidden']
+            Here are the tests:
+            ${public-tests}
+            % if parameters['all-tests-public']
+                ${hidden-tests}
+            % endif
+        %endif
+
+      languages_specific:
+        python:
+          description: |
+            ${common_prompt}
+
+          public_tests:
+            -
+             code: |
+              result = ${solution.function_name}(10, 15)
+              assert result == 5
+          hidden_tests:
+            -
+             code: |
+              result = ${solution.function_name}(2, 5)
+              assert result == 1
+            -
+             code: |
+              # tests can validate the source code 
+              # and benchmark parameters, 
+              # for example if we don't want the solution 
+              # to involve additional dependencies
+              if parameters['should-use-libraries'] == True:
+                  assert ${solution.code}.contains('numpy')
+              else:
+                  assert not ${solution.code}.contains('import')
+        java:
+          description: |
+            ${common_prompt}
+
+          public_tests:
+            - code: |
+                // to do
+          hidden_tests:
+            - code: |
+                // to do
+
+    golden_solution:
+      java: |
+        # to do
+      python: |
+        # to do
+      custom: | # pseudocode or natural language description
+        # to do
+
+    llm_judge_prompt: |
+      You are an experienced interviewer assessing the candidate's solution. 
+      Here is the task that was given to the candidate:
+      ```
+      ${prompt}
+      ```
+      Based on the given task, the candidate wrote the following solution:
+      ```
+      ${solution.code}
+      ```
+      
+      %if parameters['generate_tests']
+          And also implemented the following tests:
+          ```
+          ${solution.tests}
+          ```
+      %endif
+      
+      Based on the provided task and candidate's solution, 
+      respond with a YAML that contains numeric evaluations of the 
+      following concepts on a scale from 0 to 10:
+      ```
+      solution_correctness: int
+      code_quality: int
+      style_quality: int
+      %if parameters['generate_tests']
+      test_quality: int
+      %end_if
+      ```
