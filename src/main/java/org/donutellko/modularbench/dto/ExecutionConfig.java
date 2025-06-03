@@ -17,6 +17,7 @@ public class ExecutionConfig {
     private Set<String> languages;
     private Set<ExecutionParameter> parameters;
     private Set<ExecutionParameter> criteria;
+    private Set<String> llms;
 
     @Data
     @Builder

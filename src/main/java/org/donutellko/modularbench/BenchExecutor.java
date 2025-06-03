@@ -68,8 +68,12 @@ public class BenchExecutor {
                             ? desc.getLanguagesSpecific().get(lang).getDescription()
                             : desc.getCommonPrompt();
 
-                    // For each LLM (simulate with one for now)
+                    // For each LLM, filter by config.llms if specified
                     for (String llmName : llmClient.getAvailableLLMs()) {
+                        if (config.getLlms() != null && !config.getLlms().isEmpty()
+                                && !config.getLlms().contains(llmName)) {
+                            continue;
+                        }
                         String llmResponse = llmClient.generateSolution(llmName, prompt, lang);
                         TaskResult result = new TaskResult(taskSource, task, config, lang, llmName, prompt, llmResponse);
                         results.add(result);

@@ -41,6 +41,7 @@ public class ParseExecutionConfigTest {
                         new ExecutionParameter("java-codestyle", true),
                         new ExecutionParameter("python-pyright", false)
                 ))
+                .llms(Set.of("stub-llm"))
                 .build();
         /*
 

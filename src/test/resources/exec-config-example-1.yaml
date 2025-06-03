@@ -33,3 +33,5 @@ criteria: # list of criteria to evaluate the solutions
     enabled: true
   - name: python-pyright    # only for python
     enabled: false
+llms:
+  - stub-llm
