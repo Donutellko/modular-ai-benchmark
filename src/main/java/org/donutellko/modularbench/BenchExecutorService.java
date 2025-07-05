@@ -1,0 +1,159 @@
+package org.donutellko.modularbench;
+
+import lombok.RequiredArgsConstructor;
+import org.donutellko.modularbench.dto.BenchResults;
+import org.donutellko.modularbench.dto.ExecutionConfig;
+import org.donutellko.modularbench.dto.TaskResults;
+import org.donutellko.modularbench.dto.TaskSource;
+import org.donutellko.modularbench.dto.TaskSource.TaskDefinition;
+import org.donutellko.modularbench.dto.TaskSource.TaskDescription;
+import org.donutellko.modularbench.evaluator.EvaluatorsRegistry;
+import org.donutellko.modularbench.evaluator.Evaluator;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
+
+@Service
+@RequiredArgsConstructor
+public class BenchExecutorService {
+    private static final boolean FILTER_BY_PARAMETERS = false;
+    private static final boolean FILTER_BY_CRITERIA = true;
+    private final LLMClientRegistry llmClientRegistry;
+    private final EvaluatorsRegistry evaluatorsRegistry;
+
+    public BenchResults evaluate(ExecutionConfig config, Iterable<TaskSource> taskSourceList) {
+        Map<TaskSource, Map<TaskDefinition, TaskResults>> results = new HashMap<>();
+
+        for (TaskSource taskSource : taskSourceList) {
+            Map<TaskDefinition, TaskResults> taskResults = evaluateTaskSource(config, taskSource);
+            results.put(taskSource, taskResults);
+        }
+        return BenchResults.builder()
+                .taskResultsMap(results)
+                .build();
+    }
+
+    private Map<TaskDefinition, TaskResults> evaluateTaskSource(ExecutionConfig config, TaskSource taskSource) {
+        Map<TaskDefinition, TaskResults> taskSourceResults = new HashMap<>();
+        for (TaskDefinition task : taskSource.getTasks()) {
+            TaskResults taskResultsList = evaluateTask(taskSource, task, config);
+            taskSourceResults.put(task, taskResultsList);
+        }
+        return taskSourceResults;
+    }
+
+    private TaskResults evaluateTask(TaskSource taskSource, TaskDefinition task, ExecutionConfig config) {
+        TaskResults taskResults = TaskResults.builder()
+                .taskSourceName(taskSource.getName())
+                .taskSourcePath(taskSource.getPath())
+                .taskDefinitionName(task.getName())
+                .build();
+
+        List<String> skipReasons = filter(config, task);
+
+        if (!skipReasons.isEmpty()) {
+            taskResults.setSkipReasons(skipReasons);
+            return taskResults;
+        }
+
+        // For each language in intersection of config and task
+        for (String lang : task.getLanguages()) {
+            if (config.getLanguages() != null && !config.getLanguages().isEmpty()
+                    && !config.getLanguages().contains(lang)) {
+                continue;
+            }
+            // Get prompt for this language
+            TaskDescription desc = task.getTask();
+            String prompt = desc.getLanguagesSpecific() != null && desc.getLanguagesSpecific().containsKey(lang)
+                    ? desc.getLanguagesSpecific().get(lang).getDescription()
+                    : desc.getCommonPrompt();
+
+            // For each LLM, filter by config.llms if specified
+            LLMClient llmClient = llmClientRegistry.getDefault();
+            for (String llmName : llmClient.getAvailableLLMs()) {
+                if (config.getLlms() != null && !config.getLlms().isEmpty()
+                        && !config.getLlms().contains(llmName)) {
+                    continue;
+                }
+                TaskResults.TaskResult taskResult = TaskResults.TaskResult.builder()
+                        .llmName(llmName)
+                        .language(lang)
+                        .build();
+
+                TaskResults.LlmGenerationResult llmResponse = llmClient.generateSolution(config, llmName, prompt, lang);
+                taskResult.setLlmResponse(llmResponse);
+
+                List<Evaluator> evaluators = evaluatorsRegistry.getEvaluators(config, task);
+                for (Evaluator evaluator : evaluators) {
+                    List<? extends TaskResults.LlmResponseEvaluationsResult> evaluationResult = evaluator.execute(task, llmResponse);
+                    taskResult.getEvaluationResult().addAll(evaluationResult);
+                }
+
+                taskResults.getTaskResults().add(taskResult);
+            }
+        }
+        return taskResults;
+    }
+
+    /**
+     * returns skip reasons if the task should be skipped, otherwise returns empty list
+     */
+    private static List<String> filter(ExecutionConfig config, TaskDefinition task) {
+        List<String> skipReasons = new ArrayList<>();
+
+        // Filter by difficulty
+        if (config.getDifficulties() != null && !config.getDifficulties().isEmpty()
+                && !config.getDifficulties().contains(task.getDifficulty())) {
+            skipReasons.add(task.getDifficulty() + " not in config difficulties: " + config.getDifficulties());
+        }
+
+        // Filter by area
+        if (config.getAreas() != null && !config.getAreas().isEmpty()
+                && (task.getArea() == null || !config.getAreas().contains(task.getArea()))) {
+            skipReasons.add("Area " + task.getArea() + " not in config areas: " + config.getAreas());
+        }
+
+        // Filter by language
+        Set<String> configLangs = config.getLanguages();
+        List<String> taskLangs = task.getLanguages();
+        if (configLangs != null && !configLangs.isEmpty()) {
+            boolean found = false;
+            for (String lang : taskLangs) {
+                if (configLangs.contains(lang)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                skipReasons.add("No matching language in task " + task.getName() + ": " + taskLangs
+                        + " for config languages: " + configLangs);
+            }
+        }
+        if (FILTER_BY_PARAMETERS) {
+            // If we want to only run tasks that have the used parameter
+            if (config.getParameters() != null && !config.getParameters().isEmpty()) {
+                boolean allMatch = config.getParameters().stream().allMatch(param ->
+                        task.getAvailableParameters().contains(param.getName())
+                );
+                if (!allMatch) {
+                    skipReasons.add("Not all parameters in config are available in task: "
+                            + task.getAvailableParameters() + " for config parameters: " + config.getParameters());
+                }
+            }
+        }
+        if (FILTER_BY_CRITERIA) {
+            // We want all enabled criteria to be available for the task
+            if (config.getCriteria() != null && !config.getCriteria().isEmpty()) {
+                boolean allMatch = config.getCriteria()
+                        .stream().filter(ExecutionConfig.ExecutionParameter::getEnabled)
+                        .allMatch(param -> task.getAvailableCriteria().contains(param.getName()));
+                if (!allMatch) {
+                    skipReasons.add("Not all criteria in config are available in task: "
+                            + task.getAvailableCriteria() + " for config criteria: " + config.getCriteria());
+                }
+            }
+        }
+
+        return skipReasons;
+    }
+}
