@@ -1,4 +1,4 @@
-package org.donutellko.modularbench;
+package org.donutellko.modularbench.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

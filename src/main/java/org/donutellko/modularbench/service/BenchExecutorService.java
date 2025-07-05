@@ -1,4 +1,4 @@
-package org.donutellko.modularbench;
+package org.donutellko.modularbench.service;
 
 import lombok.RequiredArgsConstructor;
 import org.donutellko.modularbench.dto.BenchResults;
@@ -7,8 +7,10 @@ import org.donutellko.modularbench.dto.TaskResults;
 import org.donutellko.modularbench.dto.TaskSource;
 import org.donutellko.modularbench.dto.TaskSource.TaskDefinition;
 import org.donutellko.modularbench.dto.TaskSource.TaskDescription;
-import org.donutellko.modularbench.evaluator.EvaluatorsRegistry;
+import org.donutellko.modularbench.evaluator.EvaluatorRegistry;
 import org.donutellko.modularbench.evaluator.Evaluator;
+import org.donutellko.modularbench.llm.LLMClient;
+import org.donutellko.modularbench.llm.LLMClientRegistry;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -19,7 +21,7 @@ public class BenchExecutorService {
     private static final boolean FILTER_BY_PARAMETERS = false;
     private static final boolean FILTER_BY_CRITERIA = true;
     private final LLMClientRegistry llmClientRegistry;
-    private final EvaluatorsRegistry evaluatorsRegistry;
+    private final EvaluatorRegistry evaluatorRegistry;
 
     public BenchResults evaluate(ExecutionConfig config, Iterable<TaskSource> taskSourceList) {
         Map<TaskSource, Map<TaskDefinition, TaskResults>> results = new HashMap<>();
@@ -52,7 +54,7 @@ public class BenchExecutorService {
         List<String> skipReasons = filter(config, task);
 
         if (!skipReasons.isEmpty()) {
-            taskResults.setSkipReasons(skipReasons);
+            taskResults.getSkipReasons().addAll(skipReasons);
             return taskResults;
         }
 
@@ -69,21 +71,25 @@ public class BenchExecutorService {
                     : desc.getCommonPrompt();
 
             // For each LLM, filter by config.llms if specified
-            LLMClient llmClient = llmClientRegistry.getDefault();
-            for (String llmName : llmClient.getAvailableLLMs()) {
-                if (config.getLlms() != null && !config.getLlms().isEmpty()
-                        && !config.getLlms().contains(llmName)) {
+            for (String modelName : config.getLlms()) {
+                LLMClient llmClient;
+                try {
+                    llmClient = llmClientRegistry.getForModel(modelName);
+                } catch (IllegalArgumentException e) {
+                    taskResults.getSkipReasons().add(e.getMessage());
                     continue;
                 }
+
                 TaskResults.TaskResult taskResult = TaskResults.TaskResult.builder()
-                        .llmName(llmName)
+                        .providerName(llmClient.getClass().getName())
+                        .modelName(modelName)
                         .language(lang)
                         .build();
 
-                TaskResults.LlmGenerationResult llmResponse = llmClient.generateSolution(config, llmName, prompt, lang);
+                TaskResults.LlmGenerationResult llmResponse = llmClient.generateSolution(config, modelName, prompt, lang);
                 taskResult.setLlmResponse(llmResponse);
 
-                List<Evaluator> evaluators = evaluatorsRegistry.getEvaluators(config, task);
+                List<Evaluator> evaluators = evaluatorRegistry.getEvaluators(config, task);
                 for (Evaluator evaluator : evaluators) {
                     List<? extends TaskResults.LlmResponseEvaluationsResult> evaluationResult = evaluator.execute(task, llmResponse);
                     taskResult.getEvaluationResult().addAll(evaluationResult);
@@ -148,8 +154,15 @@ public class BenchExecutorService {
                         .stream().filter(ExecutionConfig.ExecutionParameter::getEnabled)
                         .allMatch(param -> task.getAvailableCriteria().contains(param.getName()));
                 if (!allMatch) {
-                    skipReasons.add("Not all criteria in config are available in task: "
-                            + task.getAvailableCriteria() + " for config criteria: " + config.getCriteria());
+                    List<String> requiredCriteria = config.getCriteria()
+                            .stream().filter(ExecutionConfig.ExecutionParameter::getEnabled)
+                            .map(ExecutionConfig.ExecutionParameter::getName).toList();
+                    Set<String> diffSet = new HashSet<>(requiredCriteria);
+                    diffSet.removeAll(task.getAvailableCriteria());
+
+                    skipReasons.add("Criteria mismatch: " + diffSet
+                            + ", available in task: " + task.getAvailableCriteria()
+                            + ", required in config: " + requiredCriteria);
                 }
             }
         }

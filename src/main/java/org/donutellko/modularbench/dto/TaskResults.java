@@ -1,71 +1,79 @@
 package org.donutellko.modularbench.dto;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@RequiredArgsConstructor
 @Builder
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class TaskResults {
     private String taskSourcePath;
     private String taskSourceName;
     private String taskDefinitionName;
-    private List<String> skipReasons;
+    @Builder.Default
+    private List<String> skipReasons = new ArrayList<>();
     @Builder.Default
     private List<TaskResult> taskResults = new ArrayList<>();
 
     @Data
-    @RequiredArgsConstructor
     @Builder
+    @RequiredArgsConstructor
+    @AllArgsConstructor
     public static class TaskResult {
-        private String language;
-        private String llmName;
+        private final String language;
+        private final String providerName;
+        private final String modelName;
         private LlmGenerationResult llmResponse;
-        private List<LlmResponseEvaluationsResult> evaluationResult;
+        private final List<LlmResponseEvaluationsResult> evaluationResult;
     }
 
     @Data
-    @RequiredArgsConstructor
     @Builder
+    @RequiredArgsConstructor
     public static class LlmGenerationResult {
-        private String llmName;
-        private String prompt;
-        private String responseText;
-        private String responseCode;
-        private int tokenCount;
-        private int promptTokenCount;
-        private long timeMillis;
+        private final String modelName;
+        private final String prompt;
+        private final String language;
+        private final String responseText;
+        private final String responseCode;
+        private final int tokenCount;
+        private final int promptTokenCount;
+        private final long timeMillis;
     }
 
     @Data
-    @RequiredArgsConstructor
-    @Builder
-    public static class LlmResponseEvaluationsResult {
+    public static abstract class LlmResponseEvaluationsResult {
+        private String criteria;
         private int evaluationNumber;
         private double score;
-        private String evaluationType;
     }
 
-    @EqualsAndHashCode(callSuper = true)
     @Data
-    @RequiredArgsConstructor
     @Builder
+    @AllArgsConstructor
+    @RequiredArgsConstructor
+    @EqualsAndHashCode(callSuper = true)
     public static class TestExecutionResult extends LlmResponseEvaluationsResult {
         @Builder.Default
-        private String evaluationType = "unit-test";
+        private String criteria = "unit-test";
+        private String executorClass;
         private boolean success;
         private String output;
         private String error;
         private int exitCode;
         private long timeMillis;
+    }
 
-        public boolean isSuccess() {
-            return success && exitCode == 0 && error == null;
-        }
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @RequiredArgsConstructor
+    @EqualsAndHashCode(callSuper = true)
+    public static class CodeQualityResult extends LlmResponseEvaluationsResult {
+        private String output;
+        private long timeMillis;
     }
 }

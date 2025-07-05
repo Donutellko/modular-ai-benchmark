@@ -18,11 +18,11 @@ parameters:
   - name: should-use-libraries  # if we want the solution to use foreign dependencies
     enabled: false
 criteria: # list of criteria to evaluate the solutions
-  - name: unit_test         # only for languages that we can run in a sandbox
+  - name: unit-test         # only for languages that we can run in a sandbox
     enabled: true
-  - name: ram_usage         # only for languages that we can run in a sandbox
+  - name: ram-usage         # only for languages that we can run in a sandbox if unit_test criteria is enabled
     enabled: true
-  - name: cpu_usage         # only for languages that we can run in a sandbox
+  - name: cpu-usage         # only for languages that we can run in a sandbox if unit_test criteria is enabled
     enabled: true
   - name: sonarqube         # for all languages
     enabled: true

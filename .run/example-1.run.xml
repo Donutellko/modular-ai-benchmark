@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="example-1" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="org.donutellko.modularbench.Main" />
+    <module name="modular-ai-benchmark" />
+    <option name="PROGRAM_PARAMETERS" value="-bench -config src/test/resources/exec-config-example-1.yaml  -tasks src/test/resources/task-source-example-1.yaml " />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="org.donutellko.modularbench.dto.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

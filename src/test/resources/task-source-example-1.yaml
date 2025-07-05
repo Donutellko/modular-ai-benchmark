@@ -18,12 +18,13 @@ tasks:
       - all-tests-hidden      # if we don't want to give any tests as a reference
       - should-use-libraries  # if we want the solution to use foreign dependencies
     available_criteria:
-      - ram_usage         # only for languages that we can run in a sandbox
-      - cpu_usage         # only for languages that we can run in a sandbox
+      - unit-test         # only for languages that we can run in a sandbox
+      - ram-usage         # only for languages that we can run in a sandbox if unit_test criteria is enabled
+      - cpu-usage         # only for languages that we can run in a sandbox if unit_test criteria is enabled
       - sonarqube         # for all languages
       - llm-judge-code-quality    # for all languages
       - llm-judge-comment-quality # for all languages
-      - java-jacoco       # only for jvm languages
+      - java-jacoco       # only for jvm languages if unit_test criteria is enabled
       - java-codestyle    # only for java
       - python-pyright    # only for python
     task:

@@ -45,7 +45,7 @@ public class TaskSource {
           - java-codestyle    # only for java
           - python-pyright    # only for python
           */
-        private List<String> availableCriteria = new ArrayList<String>();
+        private List<String> availableCriteria = new ArrayList<>();
         private TaskDescription task;
         private GoldenSolution goldenSolution;
         /* Only if "use-llm-judge" is set to True */

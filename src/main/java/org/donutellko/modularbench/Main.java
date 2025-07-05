@@ -4,6 +4,8 @@ import org.apache.commons.cli.*;
 import org.donutellko.modularbench.dto.BenchResults;
 import org.donutellko.modularbench.dto.ExecutionConfig;
 import org.donutellko.modularbench.dto.TaskSource;
+import org.donutellko.modularbench.service.BenchExecutorService;
+import org.donutellko.modularbench.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

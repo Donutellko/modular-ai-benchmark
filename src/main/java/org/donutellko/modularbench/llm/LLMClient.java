@@ -1,4 +1,4 @@
-package org.donutellko.modularbench;
+package org.donutellko.modularbench.llm;
 
 import org.donutellko.modularbench.dto.ExecutionConfig;
 import org.donutellko.modularbench.dto.TaskResults;

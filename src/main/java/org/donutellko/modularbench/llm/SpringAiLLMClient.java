@@ -1,4 +1,4 @@
-package org.donutellko.modularbench;
+package org.donutellko.modularbench.llm;
 
 import org.donutellko.modularbench.dto.ExecutionConfig;
 import org.donutellko.modularbench.dto.TaskResults;
@@ -8,11 +8,13 @@ import org.springframework.ai.chat.metadata.ChatResponseMetadata;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public class SpringAiLLMClient implements LLMClient {
 
     @Autowired(required = false)
@@ -44,7 +46,8 @@ public class SpringAiLLMClient implements LLMClient {
         ChatResponseMetadata metadata = response.chatResponse().getMetadata();
 
         return TaskResults.LlmGenerationResult.builder()
-                .llmName(llmName)
+                .modelName(llmName)
+                .language(language)
                 .prompt(prompt)
                 .responseText(responseText)
                 .responseCode("")

@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class EvaluatorsRegistry {
+public class EvaluatorRegistry {
     private final List<Evaluator> evaluators;
 
     public List<Evaluator> getEvaluators(ExecutionConfig config, TaskSource.TaskDefinition task) {

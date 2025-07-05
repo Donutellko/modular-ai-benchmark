@@ -11,7 +11,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Builder
 public class BenchResults {
-    Map<TaskSource, Map<TaskSource.TaskDefinition, TaskResults>> taskResultsMap;
+    private final Map<TaskSource, Map<TaskSource.TaskDefinition, TaskResults>> taskResultsMap;
 
     @Override
     public String toString() {
@@ -31,7 +31,7 @@ public class BenchResults {
                                 sb.append("    - Skipped: ").append(String.join(", ", results.getSkipReasons())).append("\n");
                             } else {
                                 for (TaskResults.TaskResult result : results.getTaskResults()) {
-                                    sb.append("    - Name: ").append(result.getLlmName()).append("\n");
+                                    sb.append("    - Name: ").append(result.getModelName()).append("\n");
                                     sb.append("    - Language: ").append(result.getLanguage()).append("\n");
                                     List<TaskResults.LlmResponseEvaluationsResult> testExecutionResult = result.getEvaluationResult();
                                     if (testExecutionResult != null && !testExecutionResult.isEmpty()) {
@@ -40,7 +40,7 @@ public class BenchResults {
                                             if (evaluationResult instanceof TaskResults.TestExecutionResult testResult) {
                                                 sb.append("      - Test ").append(testResult.getEvaluationNumber())
                                                         .append(": Score = ").append(testResult.getScore()).append("\n");
-                                                sb.append("        - Type: ").append(testResult.getEvaluationType()).append("\n");
+                                                sb.append("        - Type: ").append(testResult.getCriteria()).append("\n");
                                             } else {
                                                 sb.append("      - Evaluation ").append(evaluationResult.getEvaluationNumber())
                                                         .append(": Score = ").append(evaluationResult.getScore()).append("\n");
