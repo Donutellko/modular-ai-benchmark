@@ -11,8 +11,8 @@ public class CodeExecutionResult {
     private final String output;
     private final String error;
     private final int exitCode;
-    private final double executionTime;
-    private final double solutionTime;
-    private final double memoryUsage;
+    private final Double executionTime;
+    private final Double solutionTime;
+    private final Double memoryUsage;
     private final String preparedCode;
 }

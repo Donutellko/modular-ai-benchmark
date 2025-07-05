@@ -36,14 +36,15 @@ public class BenchResults {
                                     List<TaskResults.LlmResponseEvaluationsResult> testExecutionResult = result.getEvaluationResult();
                                     if (testExecutionResult != null && !testExecutionResult.isEmpty()) {
                                         sb.append("    - Code Executor Results:\n");
-                                        for (TaskResults.LlmResponseEvaluationsResult evaluationResult : testExecutionResult) {
-                                            if (evaluationResult instanceof TaskResults.TestExecutionResult testResult) {
-                                                sb.append("      - Test ").append(testResult.getExecutorClass())
-                                                        .append(": Score = ").append(testResult.getScore()).append("\n");
-                                                sb.append("        - Type: ").append(testResult.getCriteria()).append("\n");
+                                        for (TaskResults.LlmResponseEvaluationsResult eval : testExecutionResult) {
+                                            sb.append("      - ").append(eval.getCriteria()).append(": Score = ").append(eval.getScore()).append("\t\t\t").append(eval.getExecutionId()).append("\n");
+                                            if (eval instanceof TaskResults.TestExecutionResult test) {
+                                                //
                                             } else {
-                                                sb.append("      - Evaluation ").append(evaluationResult.getExecutorClass())
-                                                        .append(": Score = ").append(evaluationResult.getScore()).append(evaluationResult.getUnit()).append("\n");
+                                                //
+                                            }
+                                            if (eval.getError() != null && !eval.getError().isEmpty()) {
+                                                sb.append("        - error: ").append(eval.getError()).append("\n");
                                             }
                                         }
                                     }

@@ -33,7 +33,7 @@ class JavaExecutorTest {
 
         CodeExecutionResult result = executor.execute(code, testCode);
 
-        assertThat(result.getError()).isEmpty();
+        assertThat(result.getError()).withFailMessage(result.getPreparedCode()).isEmpty();
         assertEquals(0, result.getExitCode(), "Execution should succeed");
         assertTrue(result.getOutput().contains("Test passed"), "Output should indicate the test passed");
     }
@@ -50,7 +50,7 @@ class JavaExecutorTest {
 
         String testCode = """
                 void test() {
-                    int result = Main.add(2, 3);
+                    int result = ${solution.function_name}(2, 3);
                     if (result != 5) {
                         throw new AssertionError("Test failed: Expected 5 but got " + result);
                     }
@@ -60,7 +60,7 @@ class JavaExecutorTest {
 
         CodeExecutionResult result = executor.execute(code, testCode);
 
-        assertThat(result.getError()).isEmpty();
+        assertThat(result.getError()).withFailMessage(result.getPreparedCode()).isEmpty();
         assertEquals(0, result.getExitCode(), "Execution should succeed");
         assertTrue(result.getOutput().contains("Test passed"), "Output should indicate the test passed");
     }

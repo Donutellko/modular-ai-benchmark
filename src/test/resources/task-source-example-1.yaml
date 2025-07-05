@@ -79,10 +79,24 @@ tasks:
 
           public_tests:
             - code: |
-                // to do
+                void test() {
+                    int expected = 5;
+                    int result = ${solution.function_name}(10, 15);
+                    if (result != expected) {
+                        throw new AssertionError("Test failed: Expected " + expected + " but got " + result);
+                    }
+                    System.out.println("Test passed");
+                }
           hidden_tests:
             - code: |
-                // to do
+                void test() {
+                    int expected = 1;
+                    int result = ${solution.function_name}(2, 5);
+                    if (result != expected) {
+                        throw new AssertionError("Test failed: Expected " + expected + " but got " + result);
+                    }
+                    System.out.println("Test passed");
+                }
 
     golden_solution:
       java: |

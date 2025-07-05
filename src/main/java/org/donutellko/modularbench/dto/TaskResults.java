@@ -28,7 +28,8 @@ public class TaskResults {
         private final String providerName;
         private final String modelName;
         private LlmGenerationResult llmResponse;
-        private final List<LlmResponseEvaluationsResult> evaluationResult;
+        @Builder.Default
+        private final List<LlmResponseEvaluationsResult> evaluationResult = new ArrayList<>();
     }
 
     @Data
@@ -53,11 +54,11 @@ public class TaskResults {
         private String executorClass;
         private String executionId; // unique ID for the execution (shared between metrics calculated for a test run)
         private String criteria; // required
-        private double score;    // evaluation result, 0 or 1 for tests, value for metrics
+        private Double score;    // evaluation result, 0 or 1 for tests, value for metrics
         private String unit;     // units for score, e.g. "success" for tests, "ms" for time, "bytes" for memory, etc.
         private String output;   // if applicable
         private String error;    // if the evaluation failed
-        private double timeMillis; // time to execute the evaluation
+        private Double timeMillis; // time to execute the evaluation
     }
 
     @Data

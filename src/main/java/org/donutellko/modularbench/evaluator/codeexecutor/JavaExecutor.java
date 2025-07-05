@@ -17,14 +17,16 @@ public class JavaExecutor implements CodeExecutor {
         String output = "";
         String error = "";
         int exitCode = -1;
-        double executionTime = 0;
-        long cpuTime = -1;
-        long memoryUsage = -1;
+        Double executionTime = null;
+        Double solutionTime = null;
+        Double memoryUsage = null;
 
-        String mainClassName = "Main";
+        long startTime = System.nanoTime();
+
+        String solutionClassName = "Main";
         String testClassName = "Test";
-        String preparedCode = prepareCode(code, mainClassName);
-        String preparedTestCode = prepareTestCode(testCode, mainClassName, testClassName);
+        String preparedCode = prepareCode(code, solutionClassName);
+        String preparedTestCode = prepareTestCode(testCode, solutionClassName, testClassName);
 
         try {
             // In-memory Java file manager
@@ -34,7 +36,7 @@ public class JavaExecutor implements CodeExecutor {
             InMemoryJavaFileManager fileManager = new InMemoryJavaFileManager(standardFileManager);
 
             // Prepare source files
-            fileManager.addSource(mainClassName, preparedCode);
+            fileManager.addSource(solutionClassName, preparedCode);
             fileManager.addSource(testClassName, preparedTestCode);
 
             // Compile source files
@@ -46,12 +48,13 @@ public class JavaExecutor implements CodeExecutor {
                 for (Diagnostic<?> diagnostic : diagnostics.getDiagnostics()) {
                     errorBuilder.append(diagnostic.toString()).append("\n");
                 }
+                error = errorBuilder.toString();
                 return CodeExecutionResult.builder()
-                        .output("")
-                        .error(errorBuilder.toString())
+                        .output("Error")
+                        .error(error)
                         .exitCode(1)
-                        .executionTime(-1)
-                        .memoryUsage(-1)
+                        .executionTime(null)
+                        .memoryUsage(null)
                         .preparedCode(preparedCode + "\n/**********/\n" + preparedTestCode)
                         .build();
             }
@@ -60,7 +63,6 @@ public class JavaExecutor implements CodeExecutor {
             ClassLoader classLoader = fileManager.getClassLoader(null);
             Class<?> testClass = classLoader.loadClass(testClassName);
 
-            long startTime = System.nanoTime();
             Method mainMethod = testClass.getMethod("main", String[].class);
             ByteArrayOutputStream outStream = new ByteArrayOutputStream();
             PrintStream originalOut = System.out;
@@ -68,6 +70,7 @@ public class JavaExecutor implements CodeExecutor {
             System.setOut(new PrintStream(outStream));
             System.setErr(new PrintStream(outStream));
 
+            long startSolutionTime = System.nanoTime();
             try {
                 mainMethod.invoke(null, (Object) new String[]{});
                 exitCode = 0;
@@ -78,40 +81,66 @@ public class JavaExecutor implements CodeExecutor {
                 System.setOut(originalOut);
                 System.setErr(originalErr);
             }
+            long stopSolutionTime = System.nanoTime();
+            solutionTime = (stopSolutionTime - startSolutionTime) / 1_000_000.0;
 
-            double endTime = System.nanoTime();
             output = outStream.toString();
-            executionTime = (endTime - startTime) / 1_000_000.0; // ms
 
         } catch (Exception e) {
 //            e.printStackTrace();
-            error = e.getMessage();
+            error = e.toString();
         }
+        double endTime = System.nanoTime();
+        executionTime = (endTime - startTime) / 1_000_000.0; // ms
 
         return CodeExecutionResult.builder()
                 .output(output)
                 .error(error)
                 .exitCode(exitCode)
                 .executionTime(executionTime)
-                .solutionTime(executionTime) // TODO
+                .solutionTime(solutionTime)
                 .memoryUsage(memoryUsage)
                 .preparedCode(preparedCode + "\n/**********/\n" + preparedTestCode)
                 .build();
     }
 
-    private static String prepareCode(String code, String mainClassName) {
+    private static String prepareCode(String code, String solutionClassName) {
+        String mainFunctionName = solutionClassName.toLowerCase();
+
+        if (code.contains("${solution.function_name}")) {
+            code = code.replaceAll("\\$\\{solution\\.function_name}", mainFunctionName);
+        } else if (code.contains("public static ")) {
+            code = code.replaceFirst("public static (\\S+) \\S+?\\(", "public static $1 " + mainFunctionName + "(");
+        }
+
         if (code.contains("public class")) {
             if (code.contains("public class Main")) {
                 return code;
             } else {
-                return code.replaceFirst("public class [\\w]+", "public class Main ");
+                return code.replaceFirst("public class \\w+", "public class Main ");
             }
         } else {
             return "public class Main {\n" + code + "\n}";
         }
     }
 
-    private static String prepareTestCode(String code, String mainClassName, String testClassName) {
+    private static String prepareTestCode(String code, String solutionClassName, String testClassName) {
+        String solutionFunctionName = solutionClassName.toLowerCase();
+
+        if (code.contains("${solution.function_name}")) {
+            code = code.replaceAll("\\$\\{solution\\.function_name}", solutionClassName + "." + solutionFunctionName);
+        } else if (code.contains("Main.")) {
+            code = code.replaceAll("Main\\.\\S+\\(", solutionClassName + "." + solutionFunctionName + "(");
+        }
+
+        if (code.contains("public static void main(String[] args)")) {
+            code = code;
+        } else if (code.contains("void")) {
+            code = code.replaceFirst(".*void[^{]+", "public static void main(String[] args)");
+        } else {
+            code = "public static void main(String[] args) {\n" + code + "\n}";
+        }
+
         if (code.contains("public class")) {
             if (code.contains("public class " + testClassName)) {
                 code = code;
@@ -121,11 +150,8 @@ public class JavaExecutor implements CodeExecutor {
         } else {
             code = "public class " + testClassName + " {\n" + code + "\n}";
         }
-        if (code.contains("public static void main(String[] args)")) {
-            return code;
-        } else {
-            return code.replaceFirst(".+void[^{]+", "public static void main(String[] args)");
-        }
+
+        return code;
     }
 
     // In-memory Java file manager and file object

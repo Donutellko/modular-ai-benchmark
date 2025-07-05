@@ -38,19 +38,21 @@ public class UnitTestExecutor implements Evaluator {
         CodeExecutor codeExecutor = CodeExecutorRegistry.getExecutor(language);
 
         List<TaskResults.LlmResponseEvaluationsResult> results = new ArrayList<>();
+        String executionPrefix = taskDefinition.getSource() + "/" + taskDefinition.getName().hashCode() + "/" + language;
+
         for (int i = 0; i < tests.size(); i++) {
             TaskSource.TestDefinition test = tests.get(i);
-            String executionId = taskDefinition.getSource() + "/" + taskDefinition.getName() + "/" + language
-                    + "/test-" + i + test.hashCode() + "/" + System.nanoTime();
+            String executionId = executionPrefix + "/test-" + i + test.hashCode() + "/" + System.nanoTime();
             try {
-                CodeExecutionResult execute = codeExecutor.execute(llmResponse.getResponseCode(), test.getCode());
+                CodeExecutionResult execute = codeExecutor.execute(llmResponse.getResponseText(), test.getCode());
 
                 results.add(TaskResults.TestExecutionResult.builder()
                         .executionId(executionId)
                         .executorClass(codeExecutor.getClass().getName())
-                        .score(execute.getExitCode() == 0 ? 1 : 0)
+                        .score(execute.getExitCode() == 0 ? 1.0 : 0.0)
                         .unit("success")
                         .output(execute.getOutput())
+                        .error(execute.getError())
                         .timeMillis(execute.getExecutionTime())
                         .exitCode(execute.getExitCode())
                         .preparedCode(execute.getPreparedCode())
@@ -60,8 +62,9 @@ public class UnitTestExecutor implements Evaluator {
                         .executionId(executionId)
                         .executorClass(codeExecutor.getClass().getName())
                         .criteria("cpu-usage")
-                        .score(execute.getSolutionTime())
+                        .score(execute.getSolutionTime() == null ? -1 : execute.getSolutionTime())
                         .unit("ms")
+                        .error(execute.getError())
                         .timeMillis(execute.getExecutionTime())
                         .build());
 
@@ -69,16 +72,18 @@ public class UnitTestExecutor implements Evaluator {
                         .executionId(executionId)
                         .executorClass(codeExecutor.getClass().getName())
                         .criteria("ram-usage")
-                        .score(execute.getMemoryUsage())
+                        .score(execute.getMemoryUsage() == null ? -1 : execute.getMemoryUsage() / 1024.0)
                         .unit("Kb")
+                        .error(execute.getError())
                         .build());
 
             } catch (Exception e) {
+                e.printStackTrace();
                 TaskResults.TestExecutionResult executeResult = TaskResults.TestExecutionResult.builder()
                         .executionId(executionId)
                         .executorClass(codeExecutor.getClass().getName())
                         .error("Error executing test: " + e.getMessage())
-                        .score(0)
+                        .score(0.0)
                         .build();
                 results.add(executeResult);
             }
