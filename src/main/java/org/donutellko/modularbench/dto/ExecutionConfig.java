@@ -19,6 +19,7 @@ public class ExecutionConfig {
     private Set<ExecutionParameter> parameters;
     private Set<ExecutionParameter> criteria;
     private Set<String> llms;
+    private Integer maxTokens;
 
     @Data
     @Builder
