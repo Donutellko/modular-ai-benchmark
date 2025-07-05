@@ -1,6 +1,7 @@
 package org.donutellko.modularbench.dto;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,35 +46,44 @@ public class TaskResults {
     }
 
     @Data
+    @SuperBuilder
+    @AllArgsConstructor
+    @RequiredArgsConstructor
     public static abstract class LlmResponseEvaluationsResult {
-        private String criteria;
-        private int evaluationNumber;
-        private double score;
+        private String executorClass;
+        private String criteria; // required
+        private double score;    // evaluation result, 0 or 1 for tests, value for metrics
+        private String unit;     // units for score, e.g. "success" for tests, "ms" for time, "bytes" for memory, etc.
+        private String output;   // if applicable
+        private String error;    // if the evaluation failed
+        private double timeMillis; // time to execute the evaluation
     }
 
     @Data
-    @Builder
+    @SuperBuilder
     @AllArgsConstructor
     @RequiredArgsConstructor
     @EqualsAndHashCode(callSuper = true)
     public static class TestExecutionResult extends LlmResponseEvaluationsResult {
         @Builder.Default
         private String criteria = "unit-test";
-        private String executorClass;
-        private boolean success;
-        private String output;
-        private String error;
+        private int testNumber; // number of unit test
         private int exitCode;
-        private long timeMillis;
+        private String code;
+        private String testCode;
     }
 
     @Data
-    @Builder
+    @SuperBuilder
     @AllArgsConstructor
-    @RequiredArgsConstructor
+    @EqualsAndHashCode(callSuper = true)
+    public static class MetricExecutionResult extends LlmResponseEvaluationsResult {
+    }
+
+    @Data
+    @SuperBuilder
+    @AllArgsConstructor
     @EqualsAndHashCode(callSuper = true)
     public static class CodeQualityResult extends LlmResponseEvaluationsResult {
-        private String output;
-        private long timeMillis;
     }
 }

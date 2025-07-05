@@ -33,8 +33,9 @@ public class ParseExecutionConfigTest {
                         new ExecutionParameter("all-tests-hidden", true)
                 ))
                 .criteria(Set.of(
-                        new ExecutionParameter("ram_usage", true),
-                        new ExecutionParameter("cpu_usage", true),
+                        new ExecutionParameter("unit-test", true),
+                        new ExecutionParameter("ram-usage", true),
+                        new ExecutionParameter("cpu-usage", true),
                         new ExecutionParameter("sonarqube", true),
                         new ExecutionParameter("llm-judge-code-quality", true),
                         new ExecutionParameter("llm-judge-comment-quality", true),

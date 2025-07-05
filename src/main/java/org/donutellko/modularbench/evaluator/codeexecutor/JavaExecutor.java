@@ -17,9 +17,14 @@ public class JavaExecutor implements CodeExecutor {
         String output = "";
         String error = "";
         int exitCode = -1;
-        long executionTime = 0;
-        long cpuTime = 0;
-        long memoryUsage = 0;
+        double executionTime = 0;
+        long cpuTime = -1;
+        long memoryUsage = -1;
+
+        String mainClassName = "Main";
+        String testClassName = "Test";
+        String preparedCode = prepareCode(code, mainClassName);
+        String preparedTestCode = prepareTestCode(testCode, mainClassName, testClassName);
 
         try {
             // In-memory Java file manager
@@ -29,10 +34,8 @@ public class JavaExecutor implements CodeExecutor {
             InMemoryJavaFileManager fileManager = new InMemoryJavaFileManager(standardFileManager);
 
             // Prepare source files
-            String mainClassName = "Main";
-            String testClassName = "Test";
-            fileManager.addSource(mainClassName, code);
-            fileManager.addSource(testClassName, testCode.replace("Main", mainClassName));
+            fileManager.addSource(mainClassName, preparedCode);
+            fileManager.addSource(testClassName, preparedTestCode);
 
             // Compile source files
             JavaCompiler.CompilationTask task = compiler.getTask(null, fileManager, diagnostics, null, null, fileManager.getJavaFileObjects());
@@ -47,9 +50,9 @@ public class JavaExecutor implements CodeExecutor {
                         .output("")
                         .error(errorBuilder.toString())
                         .exitCode(1)
-                        .executionTime(0)
-                        .cpuTime(0)
-                        .memoryUsage(0)
+                        .executionTime(-1)
+                        .memoryUsage(-1)
+                        .preparedCode(preparedCode + "\n/**********/\n" + preparedTestCode)
                         .build();
             }
 
@@ -76,12 +79,12 @@ public class JavaExecutor implements CodeExecutor {
                 System.setErr(originalErr);
             }
 
-            long endTime = System.nanoTime();
+            double endTime = System.nanoTime();
             output = outStream.toString();
-            executionTime = (endTime - startTime) / 1_000_000; // ms
+            executionTime = (endTime - startTime) / 1_000_000.0; // ms
 
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             error = e.getMessage();
         }
 
@@ -90,9 +93,39 @@ public class JavaExecutor implements CodeExecutor {
                 .error(error)
                 .exitCode(exitCode)
                 .executionTime(executionTime)
-                .cpuTime(cpuTime)
+                .solutionTime(executionTime) // TODO
                 .memoryUsage(memoryUsage)
+                .preparedCode(preparedCode + "\n/**********/\n" + preparedTestCode)
                 .build();
+    }
+
+    private static String prepareCode(String code, String mainClassName) {
+        if (code.contains("public class")) {
+            if (code.contains("public class Main")) {
+                return code;
+            } else {
+                return code.replaceFirst("public class [\\w]+", "public class Main ");
+            }
+        } else {
+            return "public class Main {\n" + code + "\n}";
+        }
+    }
+
+    private static String prepareTestCode(String code, String mainClassName, String testClassName) {
+        if (code.contains("public class")) {
+            if (code.contains("public class " + testClassName)) {
+                code = code;
+            } else {
+                code = code.replaceFirst("public class [\\w]+", "public class " + testClassName + " ");
+            }
+        } else {
+            code = "public class " + testClassName + " {\n" + code + "\n}";
+        }
+        if (code.contains("public static void main(String[] args)")) {
+            return code;
+        } else {
+            return code.replaceFirst(".+void[^{]+", "public static void main(String[] args)");
+        }
     }
 
     // In-memory Java file manager and file object

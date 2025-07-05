@@ -45,8 +45,9 @@ public class ParseTaskSourceTest {
                 "should-use-libraries"
         );
         assertThat(taskDefinition.getAvailableCriteria()).containsExactlyInAnyOrder(
-                "ram_usage",
-                "cpu_usage",
+                "unit-test",
+                "ram-usage",
+                "cpu-usage",
                 "sonarqube",
                 "llm-judge-code-quality",
                 "llm-judge-comment-quality",

@@ -36,12 +36,13 @@ public class TaskSource {
         private List<String> availableParameters = new ArrayList<String>();
         /*
         available_criteria:
-          - ram_usage         # only for languages that we can run in a sandbox
-          - cpu_usage         # only for languages that we can run in a sandbox
+          - unit-test         # only for languages that we can run in a sandbox
+          - ram-usage         # only for languages that we can run in a sandbox if unit-test is enabled
+          - cpu-usage         # only for languages that we can run in a sandbox if unit-test is enabled
           - sonarqube         # for all languages
           - llm-judge-code-quality    # for all languages
           - llm-judge-comment-quality # for all languages
-          - java-jacoco       # only for jvm languages
+          - java-jacoco       # only for jvm languages if unit-test is enabled
           - java-codestyle    # only for java
           - python-pyright    # only for python
           */

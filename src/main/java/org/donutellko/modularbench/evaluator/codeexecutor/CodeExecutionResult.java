@@ -12,6 +12,7 @@ public class CodeExecutionResult {
     private final String error;
     private final int exitCode;
     private final double executionTime;
-    private final double cpuTime;
+    private final double solutionTime;
     private final double memoryUsage;
+    private final String preparedCode;
 }

@@ -38,12 +38,12 @@ public class BenchResults {
                                         sb.append("    - Code Executor Results:\n");
                                         for (TaskResults.LlmResponseEvaluationsResult evaluationResult : testExecutionResult) {
                                             if (evaluationResult instanceof TaskResults.TestExecutionResult testResult) {
-                                                sb.append("      - Test ").append(testResult.getEvaluationNumber())
+                                                sb.append("      - Test ").append(testResult.getExecutorClass())
                                                         .append(": Score = ").append(testResult.getScore()).append("\n");
                                                 sb.append("        - Type: ").append(testResult.getCriteria()).append("\n");
                                             } else {
-                                                sb.append("      - Evaluation ").append(evaluationResult.getEvaluationNumber())
-                                                        .append(": Score = ").append(evaluationResult.getScore()).append("\n");
+                                                sb.append("      - Evaluation ").append(evaluationResult.getExecutorClass())
+                                                        .append(": Score = ").append(evaluationResult.getScore()).append(evaluationResult.getUnit()).append("\n");
                                             }
                                         }
                                     }
