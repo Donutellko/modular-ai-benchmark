@@ -12,6 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExecutionConfig {
+    private String version;
     private Set<TaskDifficulty> difficulties;
     private Set<String> areas;
     private Set<String> languages;

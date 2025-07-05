@@ -28,6 +28,7 @@ public class ParseTaskSourceTest {
         assertNotNull(inputStream);
         TaskSource config = mapper.readValue(inputStream, TaskSource.class);
         System.out.println(config);
+        assertThat(config.getVersion()).isEqualTo("1.0");
         assertThat(config.getTasks()).hasSize(1);
         TaskSource.TaskDefinition taskDefinition = config.getTasks().get(0);
         assertThat(taskDefinition.getName()).isEqualTo("highest common factor, implementation from zero");

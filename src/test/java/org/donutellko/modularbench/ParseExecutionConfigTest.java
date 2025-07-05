@@ -22,6 +22,7 @@ public class ParseExecutionConfigTest {
     @Test
     public void testParse() throws Exception {
         ExecutionConfig expected = ExecutionConfig.builder()
+                .version("1.0")
                 .difficulties(Set.of(TaskDifficulty.EASY, TaskDifficulty.HARD, TaskDifficulty.MEDIUM))
                 .languages(Set.of("java"))
                 .parameters(Set.of(

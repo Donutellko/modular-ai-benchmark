@@ -8,6 +8,7 @@ import java.util.List;
 
 @Data
 public class TaskSource {
+    private String version;
     private List<TaskDefinition> tasks = new ArrayList<>();
 
     @Data

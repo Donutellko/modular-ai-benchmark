@@ -1,3 +1,4 @@
+version: 1.0
 tasks:
   -
     name: highest common factor, implementation from zero
