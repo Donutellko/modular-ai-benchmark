@@ -70,6 +70,7 @@ public class Main implements CommandLineRunner {
                 }
                 BenchResults results = benchExecutorService.evaluate(executionConfig, taskSources);
                 System.out.println(results);
+                fileService.writeBenchResults("bench-results.yaml", results);
             } else {
                 HelpFormatter formatter = new HelpFormatter();
                 formatter.printHelp("java -jar modularbench.jar", options, true);

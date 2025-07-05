@@ -6,12 +6,12 @@ import org.donutellko.modularbench.dto.TaskSource;
 import org.donutellko.modularbench.evaluator.codeexecutor.CodeExecutionResult;
 import org.donutellko.modularbench.evaluator.codeexecutor.CodeExecutor;
 import org.donutellko.modularbench.evaluator.codeexecutor.CodeExecutorRegistry;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+@Component
 public class UnitTestExecutor implements Evaluator {
 
     public List<String> getSupportedCriteria() {
@@ -37,21 +37,27 @@ public class UnitTestExecutor implements Evaluator {
 
         CodeExecutor codeExecutor = CodeExecutorRegistry.getExecutor(language);
 
-        Map<TaskSource.TestDefinition, TaskResults.LlmResponseEvaluationsResult> results = new HashMap<>();
-        for (TaskSource.TestDefinition test: tests) {
-            ;
+        List<TaskResults.LlmResponseEvaluationsResult> results = new ArrayList<>();
+        for (int i = 0; i < tests.size(); i++) {
+            TaskSource.TestDefinition test = tests.get(i);
+            String executionId = taskDefinition.getSource() + "/" + taskDefinition.getName() + "/" + language
+                    + "/test-" + i + test.hashCode() + "/" + System.nanoTime();
             try {
                 CodeExecutionResult execute = codeExecutor.execute(llmResponse.getResponseCode(), test.getCode());
-                results.put(test, TaskResults.TestExecutionResult.builder()
+
+                results.add(TaskResults.TestExecutionResult.builder()
+                        .executionId(executionId)
                         .executorClass(codeExecutor.getClass().getName())
                         .score(execute.getExitCode() == 0 ? 1 : 0)
                         .unit("success")
                         .output(execute.getOutput())
                         .timeMillis(execute.getExecutionTime())
                         .exitCode(execute.getExitCode())
+                        .preparedCode(execute.getPreparedCode())
                         .build());
 
-                results.put(test, TaskResults.MetricExecutionResult.builder()
+                results.add(TaskResults.MetricExecutionResult.builder()
+                        .executionId(executionId)
                         .executorClass(codeExecutor.getClass().getName())
                         .criteria("cpu-usage")
                         .score(execute.getSolutionTime())
@@ -59,7 +65,8 @@ public class UnitTestExecutor implements Evaluator {
                         .timeMillis(execute.getExecutionTime())
                         .build());
 
-                results.put(test, TaskResults.MetricExecutionResult.builder()
+                results.add(TaskResults.MetricExecutionResult.builder()
+                        .executionId(executionId)
                         .executorClass(codeExecutor.getClass().getName())
                         .criteria("ram-usage")
                         .score(execute.getMemoryUsage())
@@ -68,14 +75,15 @@ public class UnitTestExecutor implements Evaluator {
 
             } catch (Exception e) {
                 TaskResults.TestExecutionResult executeResult = TaskResults.TestExecutionResult.builder()
+                        .executionId(executionId)
                         .executorClass(codeExecutor.getClass().getName())
                         .error("Error executing test: " + e.getMessage())
                         .score(0)
                         .build();
-                results.put(test, executeResult);
+                results.add(executeResult);
             }
         }
 
-        return results.values().stream().toList();
+        return results;
     }
 }

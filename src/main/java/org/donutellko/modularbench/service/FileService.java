@@ -3,6 +3,7 @@ package org.donutellko.modularbench.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.donutellko.modularbench.dto.BenchResults;
 import org.donutellko.modularbench.dto.ExecutionConfig;
 import org.donutellko.modularbench.dto.TaskSource;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,10 @@ public class FileService {
         return taskSource;
     }
 
+    public void writeBenchResults(String filePath, BenchResults benchResults) {
+        writeYaml(filePath, benchResults);
+    }
+
     @SneakyThrows
     public <T> T readYaml(String filePath, Class<T> clazz) {
         try (InputStream inputStream = Files.newInputStream(Paths.get(filePath))) {
@@ -41,5 +46,10 @@ public class FileService {
     public <T> T readYaml(InputStream inputStream, Class<T> clazz) {
         T obj = mapper.readValue(inputStream, clazz);
         return obj;
+    }
+
+    @SneakyThrows
+    public <T> void writeYaml(String filePath, T obj) {
+        mapper.writeValue(Files.newOutputStream(Paths.get(filePath)), obj);
     }
 }

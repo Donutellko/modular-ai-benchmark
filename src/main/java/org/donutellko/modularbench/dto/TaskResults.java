@@ -51,6 +51,7 @@ public class TaskResults {
     @RequiredArgsConstructor
     public static abstract class LlmResponseEvaluationsResult {
         private String executorClass;
+        private String executionId; // unique ID for the execution (shared between metrics calculated for a test run)
         private String criteria; // required
         private double score;    // evaluation result, 0 or 1 for tests, value for metrics
         private String unit;     // units for score, e.g. "success" for tests, "ms" for time, "bytes" for memory, etc.
@@ -69,8 +70,7 @@ public class TaskResults {
         private String criteria = "unit-test";
         private int testNumber; // number of unit test
         private int exitCode;
-        private String code;
-        private String testCode;
+        private String preparedCode;
     }
 
     @Data
