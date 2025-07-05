@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YAML Tree Visualizer</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    ul {
+        list-style-type: none;
+        padding-left: 20px;
+    }
+    .spoiler {
+        cursor: pointer;
+        color: blue;
+        text-decoration: underline;
+    }
+    .hidden {
+        display: none;
+    }
+    .tree-node {
+        margin: 5px 0;
+    }
+    .evaluation-button {
+        margin-left: 10px;
+        cursor: pointer;
+        color: green;
+        text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<h1>YAML Tree Visualizer</h1>
+<input type="file" id="fileInput" accept=".yaml,.yml">
+<div id="treeContainer"></div>
+
+<script>
+  document.getElementById('fileInput').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+              const yamlText = e.target.result;
+              localStorage.setItem('yamlText', yamlText);
+              try {
+                visualizeYaml(yamlText);
+              } catch (error) {
+                  alert('Error parsing YAML: ' + error.message);
+              }
+          };
+          reader.readAsText(file);
+      }
+  });
+  if (localStorage.getItem('yamlText')) {
+      visualizeYaml(localStorage.getItem('yamlText'));
+  }
+
+  function visualizeYaml(yamlText) {
+    const data = jsyaml.load(yamlText);
+    const treeContainer = document.getElementById('treeContainer');
+    treeContainer.innerHTML = '';
+    treeContainer.appendChild(createTree(data));
+  }
+
+  function createTree(data) {
+      const ul = document.createElement('ul');
+      for (const key in data) {
+          const li = document.createElement('li');
+          li.className = 'tree-node';
+          if (typeof data[key] === 'object' && data[key] !== null) {
+              if (key === 'llm_response') {
+                  const spoiler = document.createElement('span');
+                  spoiler.className = 'spoiler';
+                  spoiler.textContent = key + ' (click to toggle)';
+                  spoiler.addEventListener('click', function() {
+                      const hiddenContent = this.nextElementSibling;
+                      hiddenContent.classList.toggle('hidden');
+                  });
+                  li.appendChild(spoiler);
+
+                  const hiddenContent = document.createElement('div');
+                  hiddenContent.className = 'hidden';
+                  hiddenContent.appendChild(createTree(data[key]));
+                  li.appendChild(hiddenContent);
+              } else if (key === 'evaluation_result' && Array.isArray(data[key])) {
+                  li.textContent = key + ':';
+                  const resultsList = document.createElement('ul');
+                  data[key].forEach((result, index) => {
+                      const resultLi = document.createElement('li');
+                      const button = document.createElement('span');
+                      button.className = 'evaluation-button';
+                      button.textContent = `Result ${index + 1} (criteria: ${result.criteria}, score: ${result.score}) - click to toggle`;
+                      if (result.score <= 0) {
+                            button.style.color = 'orange';
+                      } else {
+                          button.style.color = 'green';
+                      }
+                      button.addEventListener('click', function() {
+                          const hiddenContent = this.nextElementSibling;
+                          hiddenContent.classList.toggle('hidden');
+                      });
+                      resultLi.appendChild(button);
+
+                      const hiddenContent = document.createElement('div');
+                      hiddenContent.className = 'hidden';
+                      hiddenContent.appendChild(createTree(result));
+                      resultLi.appendChild(hiddenContent);
+
+                      resultsList.appendChild(resultLi);
+                  });
+                  li.appendChild(resultsList);
+              } else {
+                  li.textContent = key + ':';
+                  li.appendChild(createTree(data[key]));
+              }
+          } else {
+              if (key === 'prepared_code') {
+                  li.innerHTML = `${key}: <pre>${data[key]}</pre>`;
+              } else {
+                  li.textContent = `${key}: ${data[key]}`;
+              }
+          }
+          ul.appendChild(li);
+      }
+      return ul;
+  }
+</script>
+</body>
+</html>
