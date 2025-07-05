@@ -9,6 +9,8 @@ import java.util.List;
 @Data
 public class TaskSource {
     private String version;
+    private String name;
+    private String path;
     private List<TaskDefinition> tasks = new ArrayList<>();
 
     @Data
