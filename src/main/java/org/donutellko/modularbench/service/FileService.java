@@ -32,7 +32,7 @@ public class FileService {
     }
 
     public void writeBenchResults(String filePath, BenchResults benchResults) {
-        writeYaml(filePath, benchResults);
+        writeYaml(filePath, benchResults.toObject());
     }
 
     @SneakyThrows

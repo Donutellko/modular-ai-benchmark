@@ -13,6 +13,19 @@ import java.util.Map;
 public class BenchResults {
     private final Map<TaskSource, Map<TaskSource.TaskDefinition, TaskResults>> taskResultsMap;
 
+    public Object toObject() {
+        return taskResultsMap.entrySet().stream().map(sources -> Map.of(
+            "task-source-name", sources.getKey().getName(),
+            "task-source-path", sources.getKey().getPath(),
+
+            "results", sources.getValue().entrySet().stream().map(tasks -> Map.of(
+                "name", tasks.getKey().getName(),
+                "area", tasks.getKey().getArea(),
+                "details", tasks.getValue()
+            )).toList()
+        )).toList();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
