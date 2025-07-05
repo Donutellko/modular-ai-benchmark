@@ -1,9 +1,32 @@
 package org.donutellko.modularbench;
 
 import org.apache.commons.cli.*;
+import org.donutellko.modularbench.dto.BenchResults;
+import org.donutellko.modularbench.dto.ExecutionConfig;
+import org.donutellko.modularbench.dto.TaskSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-public class Main {
+import java.util.ArrayList;
+import java.util.List;
+
+@SpringBootApplication
+public class Main implements CommandLineRunner {
+
+    @Autowired
+    private FileService fileService;
+
+    @Autowired
+    private BenchExecutorService benchExecutorService;
+
     public static void main(String[] args) {
+        SpringApplication.run(Main.class, args);
+    }
+
+    @Override
+    public void run(String... args) {
 
         Options options = new Options();
 
@@ -32,19 +55,25 @@ public class Main {
 
             if (line.hasOption("bench")) {
                 String configPath = line.getOptionValue("config");
+                ExecutionConfig executionConfig = fileService.readExecConfig(configPath);
                 String[] taskPaths = line.getOptionValues("tasks");
 
                 System.out.println("Running benchmark with config: " + configPath);
+                List<TaskSource> taskSources = new ArrayList<>();
                 System.out.println("Task files: ");
                 for (String task : taskPaths) {
                     System.out.println(" - " + task);
+                    TaskSource taskSource = fileService.readTaskSource(task);
+                    taskSources.add(taskSource);
                 }
+                BenchResults results = benchExecutorService.evaluate(executionConfig, taskSources);
+                System.out.println(results);
+            } else {
+                HelpFormatter formatter = new HelpFormatter();
+                formatter.printHelp("java -jar modularbench.jar", options, true);
             }
         } catch (ParseException exp) {
             System.err.println("Parsing failed. Reason: " + exp.getMessage());
         }
-
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp("java -jar modularbench.jar", options, true);
     }
 }
