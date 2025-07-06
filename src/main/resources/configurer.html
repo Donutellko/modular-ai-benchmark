@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Execution Config</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .section {
+      margin-bottom: 20px;
+    }
+    .disabled {
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+  <h1>Edit Execution Config</h1>
+  <input type="file" id="fileInput" accept=".yaml,.yml">
+  <div id="editor"></div>
+  <button id="exportButton" disabled>Export YAML</button>
+  <textarea id="output" rows="20" cols="80" readonly></textarea>
+
+  <script>
+    let configData = null;
+
+    document.getElementById('fileInput').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          try {
+            configData = jsyaml.load(e.target.result);
+            renderEditor(configData);
+            document.getElementById('exportButton').disabled = false;
+          } catch (error) {
+            alert('Error parsing YAML: ' + error.message);
+          }
+        };
+        reader.readAsText(file);
+      }
+    });
+
+    function renderEditor(data) {
+      const editor = document.getElementById('editor');
+      editor.innerHTML = '';
+
+      // Render parameters
+      const parametersSection = document.createElement('div');
+      parametersSection.className = 'section';
+      parametersSection.innerHTML = '<h2>Parameters</h2>';
+      data.parameters.forEach((param, index) => {
+        const paramDiv = document.createElement('div');
+        paramDiv.textContent = param.name + ': ';
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = param.enabled;
+        checkbox.addEventListener('change', () => {
+          param.enabled = checkbox.checked;
+          applyRules(data);
+        });
+        paramDiv.appendChild(checkbox);
+        parametersSection.appendChild(paramDiv);
+      });
+      editor.appendChild(parametersSection);
+
+      // Render criteria
+      const criteriaSection = document.createElement('div');
+      criteriaSection.className = 'section';
+      criteriaSection.innerHTML = '<h2>Criteria</h2>';
+      data.criteria.forEach((criterion, index) => {
+        const criterionDiv = document.createElement('div');
+        criterionDiv.textContent = criterion.name + ': ';
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = criterion.enabled;
+        checkbox.disabled = shouldDisableCriterion(data, criterion.name);
+        checkbox.addEventListener('change', () => {
+          criterion.enabled = checkbox.checked;
+          applyRules(data);
+        });
+        criterionDiv.appendChild(checkbox);
+        if (checkbox.disabled) {
+          criterionDiv.classList.add('disabled');
+        }
+        criteriaSection.appendChild(criterionDiv);
+      });
+      editor.appendChild(criteriaSection);
+    }
+
+    function shouldDisableCriterion(data, criterionName) {
+      const unitTestEnabled = data.criteria.find(c => c.name === 'unit-test')?.enabled;
+      if (!unitTestEnabled && ['ram-usage', 'cpu-usage', 'java-jacoco'].includes(criterionName)) {
+        return true;
+      }
+      return false;
+    }
+
+    function applyRules(data) {
+      const unitTestEnabled = data.criteria.find(c => c.name === 'unit-test')?.enabled;
+      if (!unitTestEnabled) {
+        ['ram-usage', 'cpu-usage', 'java-jacoco'].forEach(name => {
+          const criterion = data.criteria.find(c => c.name === name);
+          if (criterion) {
+            criterion.enabled = false;
+          }
+        });
+      }
+      renderEditor(data);
+    }
+
+    document.getElementById('exportButton').addEventListener('click', function() {
+      const yamlText = jsyaml.dump(configData);
+      document.getElementById('output').value = yamlText;
+    });
+  </script>
+</body>
+</html>
