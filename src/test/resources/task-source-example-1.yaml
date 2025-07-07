@@ -31,22 +31,23 @@ tasks:
       common_prompt: |
         Write a function in ${language} to calculate the 
         highest common factor of two numbers. 
+        In response, return only the code of the function. There should be no additional text, comments, or explanations, just the code.
         
         The generated code should only contain one function called `gcd()` 
         and accept two numbers as parameters.
-        %if parameters['should-use-libraries']
+        <#if parameters['should-use-libraries'] >
         You should use a numpy function to achieve the goal.
-        %else
+        <#else>
         You shouldn't use any foreign libraries to achieve the goal.
-        %endif
+        </#if>
         
-        %if !parameters['all-tests-hidden']
+        <#if !parameters['all-tests-hidden'] >
             Here are the tests:
-            ${public-tests}
-            % if parameters['all-tests-public']
-                ${hidden-tests}
-            % endif
-        %endif
+            ${public_tests}
+            <#if parameters['all-tests-public'] >
+                ${hidden_tests}
+            </#if>
+        </#if>
 
       languages_specific:
         python:
@@ -117,12 +118,12 @@ tasks:
       ${solution.code}
       ```
       
-      %if parameters['generate_tests']
+      <#if parameters['should-generate-tests'] >
           And also implemented the following tests:
           ```
           ${solution.tests}
           ```
-      %endif
+      </#if>
       
       Based on the provided task and candidate's solution, 
       respond with a YAML that contains numeric evaluations of the 
@@ -131,7 +132,7 @@ tasks:
       solution_correctness: int
       code_quality: int
       style_quality: int
-      %if parameters['generate_tests']
+      <#if parameters['should-generate-tests'] >
       test_quality: int
-      %end_if
+      </#if>
       ```

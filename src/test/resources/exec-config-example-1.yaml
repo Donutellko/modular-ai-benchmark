@@ -38,3 +38,4 @@ criteria: # list of criteria to evaluate the solutions
     enabled: false
 llms:
   - stub-llm
+  - mistralai/devstral-small:free

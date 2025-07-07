@@ -1,19 +1,25 @@
 package org.donutellko.modularbench.service;
 
+import freemarker.template.Template;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.donutellko.modularbench.dto.BenchResults;
 import org.donutellko.modularbench.dto.ExecutionConfig;
 import org.donutellko.modularbench.dto.TaskResults;
 import org.donutellko.modularbench.dto.TaskSource;
 import org.donutellko.modularbench.dto.TaskSource.TaskDefinition;
 import org.donutellko.modularbench.dto.TaskSource.TaskDescription;
-import org.donutellko.modularbench.evaluator.EvaluatorRegistry;
 import org.donutellko.modularbench.evaluator.Evaluator;
+import org.donutellko.modularbench.evaluator.EvaluatorRegistry;
 import org.donutellko.modularbench.llm.LLMClient;
 import org.donutellko.modularbench.llm.LLMClientRegistry;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
+import java.io.StringReader;
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +28,7 @@ public class BenchExecutorService {
     private static final boolean FILTER_BY_CRITERIA = true;
     private final LLMClientRegistry llmClientRegistry;
     private final EvaluatorRegistry evaluatorRegistry;
+    private final freemarker.template.Configuration freemarkerConfig;
 
     public BenchResults evaluate(ExecutionConfig config, Iterable<TaskSource> taskSourceList) {
         Map<TaskSource, Map<TaskDefinition, TaskResults>> results = new HashMap<>();
@@ -44,6 +51,7 @@ public class BenchExecutorService {
         return taskSourceResults;
     }
 
+    @SneakyThrows
     private TaskResults evaluateTask(TaskSource taskSource, TaskDefinition task, ExecutionConfig config) {
         TaskResults taskResults = TaskResults.builder()
                 .taskSourceName(taskSource.getName())
@@ -66,9 +74,27 @@ public class BenchExecutorService {
             }
             // Get prompt for this language
             TaskDescription desc = task.getTask();
-            String prompt = desc.getLanguagesSpecific() != null && desc.getLanguagesSpecific().containsKey(lang)
-                    ? desc.getLanguagesSpecific().get(lang).getDescription()
-                    : desc.getCommonPrompt();
+            TaskSource.LanguageSpecificTask descLang = desc.getLanguagesSpecific().getOrDefault(lang, null);
+
+            String promptTemplateStr = descLang != null ? descLang.getDescription() : desc.getCommonPrompt();
+
+            Map<String, Boolean> parameters = task.getAvailableParameters().stream()
+                    .collect(Collectors.toMap(Function.identity(), p -> getExecParam(config, p)));
+
+            Map<String, Object> templateModel = new HashMap();
+            templateModel.putAll(Map.<String, Object>of(
+                    "common_prompt", desc.getCommonPrompt(),
+                    "language", lang,
+                    "public_tests", descLang == null ? null : descLang.getPublicTests(),
+                    "hidden_tests", descLang == null ? null : descLang.getHiddenTests(),
+                    "parameters", parameters
+            ));
+
+            Template promptTemplate = new Template("taskPrompt", new StringReader(promptTemplateStr), freemarkerConfig);
+            String promptFirstRun = FreeMarkerTemplateUtils.processTemplateIntoString(promptTemplate, templateModel);
+            // Using second run in case the first used a "common_prompt" that in turn uses a template variable
+            promptTemplate = new Template("taskPrompt", new StringReader(promptFirstRun), freemarkerConfig);
+            String prompt = FreeMarkerTemplateUtils.processTemplateIntoString(promptTemplate, templateModel);
 
             // For each LLM, filter by config.llms if specified
             for (String modelName : config.getLlms()) {
@@ -99,6 +125,14 @@ public class BenchExecutorService {
             }
         }
         return taskResults;
+    }
+
+    private Boolean getExecParam(ExecutionConfig config, String paramName) {
+        return config.getParameters().stream()
+                .filter(ep -> paramName.equalsIgnoreCase(ep.getName()))
+                .findFirst()
+                .map(ExecutionConfig.ExecutionParameter::getEnabled)
+                .orElse(null);
     }
 
     /**
