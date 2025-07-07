@@ -41,19 +41,29 @@ public class SpringAiLLMClient implements LLMClient {
 
         Prompt springPrompt = new Prompt(List.of(userMessage), chatOptions.build());
 
+        long timeStart = System.currentTimeMillis();
         ChatClient.CallResponseSpec response = client.prompt(springPrompt).call();
+        long requestTime = System.currentTimeMillis() - timeStart;
         String responseText = response.content();
+        String processedResponse = processResponse(responseText);
         ChatResponseMetadata metadata = response.chatResponse().getMetadata();
 
         return TaskResults.LlmGenerationResult.builder()
                 .modelName(llmName)
                 .language(language)
                 .prompt(prompt)
-                .responseText(responseText)
+                .rawResponseText(processedResponse)
+                .responseText(processedResponse)
                 .responseCode("")
                 .tokenCount(metadata.getUsage().getTotalTokens())
                 .promptTokenCount(metadata.getUsage().getPromptTokens())
-                .timeMillis(0) // TODO: Implement timing if needed
+                .timeMillis(requestTime)
                 .build();
+    }
+
+    private String processResponse(String responseText) {
+        return responseText
+                .replaceAll("(^|\\n)`+.*($|\\n)", "") // get rid of "```programming-language"
+                .trim();
     }
 }

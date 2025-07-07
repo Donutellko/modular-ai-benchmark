@@ -39,6 +39,7 @@ public class TaskResults {
         private final String modelName;
         private final String prompt;
         private final String language;
+        private final String rawResponseText;
         private final String responseText;
         private final String responseCode;
         private final int tokenCount;
