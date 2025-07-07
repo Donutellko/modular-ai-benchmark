@@ -1,0 +1,17 @@
+spring:
+  ai:
+    openai:
+      endpoint: https://api.openai.com/v1/chat/completions
+      api_key: ${YOUR_OPENAI_API_KEY}
+
+client:
+  models:
+    - deepseek/deepseek-chat:free
+    - deepseek/deepseek-r1:free
+    - mistralai/mistral-nemo:free
+    - mistralai/devstral-small:free
+    - meta-llama/llama-4-maverick:free
+    - google/gemini-2.0-flash-exp:free
+    - google/gemma-3-27b-it:free
+    - microsoft/mai-ds-r1:free
+    - qwen/qwen3-14b:free

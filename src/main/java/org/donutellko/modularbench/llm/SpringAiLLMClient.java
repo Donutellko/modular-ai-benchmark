@@ -17,7 +17,7 @@ import java.util.Map;
 @Repository
 public class SpringAiLLMClient implements LLMClient {
 
-    @Autowired(required = false)
+    @Autowired(required = true)
     private Map<String, ChatClient> chatClients;
 
     @Override

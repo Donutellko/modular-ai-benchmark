@@ -1,0 +1,46 @@
+spring:
+  main:
+    web-application-type: NONE
+
+  application:
+    name: modular-ai-benchmark
+
+  config:
+    import: "${SPRING_CONFIG_IMPORT:optional:file:./config/creds.yaml}"
+
+  http:
+    client:
+      # https://docs.spring.io/spring-ai/reference/api/chatclient.html#_implementation_notes
+      # Due to a bug in Spring Boot 3.4, the "spring.http.client.factory=jdk" property must be set. Otherwise, it’s set to "reactor" by default, which breaks certain AI workflows like the ImageModel.
+      factory: jdk
+
+  ai:
+    chat:
+      client:
+#        enabled: false
+        enabled: true
+    openai:
+      base_url: ${OPENAI_BASE_URL:https://openrouter.ai/api}
+#      api_key: # set using creds.yaml
+      chat:
+        options:
+          model: ${CHAT_MODEL:deepseek/deepseek-chat}
+#    mcp:
+#      client:
+#        stdio:
+#          root-change-notification: true
+#          connections:
+#            server1:
+#              command: /path/to/server
+#              args:
+#                - --port=8080
+#                - --mode=production
+#              env:
+#                API_KEY: your-api-key
+#                DEBUG: "true"
+
+debug: true
+
+logging:
+  level:
+    org.springframework: DEBUG
