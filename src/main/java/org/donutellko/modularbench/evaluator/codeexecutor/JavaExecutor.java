@@ -107,7 +107,9 @@ public class JavaExecutor implements CodeExecutor {
     private static String prepareCode(String code, String solutionClassName) {
         String mainFunctionName = solutionClassName.toLowerCase();
 
-        if (code.contains("${solution.function_name}")) {
+        if (code.contains(" " + mainFunctionName + "(")) {
+            // already has a main function with the same name
+        } else if (code.contains("${solution.function_name}")) {
             code = code.replaceAll("\\$\\{solution\\.function_name}", mainFunctionName);
         } else if (code.contains("public static ")) {
             code = code.replaceFirst("public static (\\S+) \\S+?\\(", "public static $1 " + mainFunctionName + "(");
