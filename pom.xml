@@ -14,6 +14,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jackson.version>2.18.2</jackson.version>
         <spring-boot.version>3.4.2</spring-boot.version>
+        <pmd.version>7.15.0</pmd.version>
+        <junit-api.version>5.13.4</junit-api.version>
+        <junit-platform.version>1.13.4</junit-platform.version>
     </properties>
 
     <dependencyManagement>
@@ -29,6 +32,14 @@
                 <groupId>org.springframework.ai</groupId>
                 <artifactId>spring-ai-bom</artifactId>
                 <version>1.0.0-M6</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/net.sourceforge.pmd/pmd -->
+            <dependency>
+                <groupId>net.sourceforge.pmd</groupId>
+                <artifactId>pmd</artifactId>
+                <version>${pmd.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -77,6 +88,17 @@
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-core</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.antlr</groupId>
+                    <artifactId>antlr4-runtime</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.antlr</groupId>
+            <artifactId>antlr4-runtime</artifactId>
+            <version>4.13.2</version>
         </dependency>
 
         <dependency>
@@ -112,6 +134,11 @@
             <artifactId>checkstyle</artifactId>
             <version>10.26.1</version>
         </dependency>
+        <dependency>
+            <groupId>net.sourceforge.pmd</groupId>
+            <artifactId>pmd-java</artifactId>
+            <version>${pmd.version}</version>
+        </dependency>
 
         <!-- Test dependencies -->
 
@@ -119,13 +146,25 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.12.2</version>
+            <version>${junit-api.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-launcher</artifactId>
-            <version>1.12.2</version>
+            <version>${junit-platform.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-engine</artifactId>
+            <version>${junit-platform.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-commons</artifactId>
+            <version>${junit-platform.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

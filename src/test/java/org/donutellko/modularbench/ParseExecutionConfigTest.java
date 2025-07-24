@@ -41,9 +41,10 @@ public class ParseExecutionConfigTest {
                         new ExecutionParameter("llm-judge-comment-quality", true),
                         new ExecutionParameter("java-jacoco", true),
                         new ExecutionParameter("java-checkstyle", true),
+                        new ExecutionParameter("java-pmd", true),
                         new ExecutionParameter("python-pyright", false)
                 ))
-                .llms(Set.of("stub-llm"))
+                .llms(Set.of("stub-llm", "mistralai/devstral-small:free"))
                 .build();
         /*
 

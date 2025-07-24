@@ -1,7 +1,9 @@
 package org.donutellko.modularbench.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,6 +18,8 @@ public class TaskSource {
 
     @Data
     @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class TaskDefinition {
         private String name;
         private String type;

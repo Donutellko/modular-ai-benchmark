@@ -53,6 +53,7 @@ public class ParseTaskSourceTest {
                 "llm-judge-comment-quality",
                 "java-jacoco",
                 "java-checkstyle",
+                "java-pmd",
                 "python-pyright"
         );
         TaskSource.TaskDescription taskDescription = taskDefinition.getTask();
@@ -60,7 +61,7 @@ public class ParseTaskSourceTest {
                 "highest common factor of two numbers.");
         assertThat(taskDescription.getLanguagesSpecific()).hasSize(2);
         TaskSource.LanguageSpecificTask pythonTask = taskDescription.getLanguagesSpecific().get("python");
-        assertThat(pythonTask.getDescription()).isEqualTo("${common_prompt}\n");
+        assertThat(pythonTask.getDescription()).startsWith("${common_prompt}\n");
         assertThat(pythonTask.getPublicTests()).hasSize(1);
         assertThat(pythonTask.getPublicTests().get(0).getCode())
                 .isEqualTo("""

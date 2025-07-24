@@ -26,6 +26,7 @@ tasks:
       - llm-judge-comment-quality # for all languages
       - java-jacoco       # only for jvm languages if unit_test criteria is enabled
       - java-checkstyle    # only for java
+      - java-pmd          # pmd supports more languages
       - python-pyright    # only for python
     task:
       common_prompt: |

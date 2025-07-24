@@ -34,6 +34,8 @@ criteria: # list of criteria to evaluate the solutions
     enabled: true
   - name: java-checkstyle    # only for java
     enabled: true
+  - name: java-pmd          # pmd supports more languages
+    enabled: true
   - name: python-pyright    # only for python
     enabled: false
 llms:
