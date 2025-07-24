@@ -32,7 +32,7 @@ criteria: # list of criteria to evaluate the solutions
     enabled: true
   - name: java-jacoco       # only for jvm languages
     enabled: true
-  - name: java-codestyle    # only for java
+  - name: java-checkstyle    # only for java
     enabled: true
   - name: python-pyright    # only for python
     enabled: false

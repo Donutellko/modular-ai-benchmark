@@ -106,6 +106,13 @@
             <version>2.3.34</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.puppycrawl.tools/checkstyle -->
+        <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>10.26.1</version>
+        </dependency>
+
         <!-- Test dependencies -->
 
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->

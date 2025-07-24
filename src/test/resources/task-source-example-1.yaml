@@ -25,7 +25,7 @@ tasks:
       - llm-judge-code-quality    # for all languages
       - llm-judge-comment-quality # for all languages
       - java-jacoco       # only for jvm languages if unit_test criteria is enabled
-      - java-codestyle    # only for java
+      - java-checkstyle    # only for java
       - python-pyright    # only for python
     task:
       common_prompt: |
@@ -35,11 +35,6 @@ tasks:
         
         The generated code should only contain one function called `gcd()` 
         and accept two numbers as parameters.
-        <#if parameters['should-use-libraries'] >
-        You should use a numpy function to achieve the goal.
-        <#else>
-        You shouldn't use any foreign libraries to achieve the goal.
-        </#if>
         
         <#if !parameters['all-tests-hidden'] >
             Here are the tests:
@@ -53,6 +48,12 @@ tasks:
         python:
           description: |
             ${common_prompt}
+            
+            <#if parameters['should-use-libraries'] >
+            You should use a numpy function to achieve the goal.
+            <#else>
+            You shouldn't use any foreign libraries to achieve the goal.
+            </#if>
 
           public_tests:
             -

@@ -52,7 +52,7 @@ public class ParseTaskSourceTest {
                 "llm-judge-code-quality",
                 "llm-judge-comment-quality",
                 "java-jacoco",
-                "java-codestyle",
+                "java-checkstyle",
                 "python-pyright"
         );
         TaskSource.TaskDescription taskDescription = taskDefinition.getTask();

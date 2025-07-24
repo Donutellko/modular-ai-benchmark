@@ -40,14 +40,14 @@ public class ParseExecutionConfigTest {
                         new ExecutionParameter("llm-judge-code-quality", true),
                         new ExecutionParameter("llm-judge-comment-quality", true),
                         new ExecutionParameter("java-jacoco", true),
-                        new ExecutionParameter("java-codestyle", true),
+                        new ExecutionParameter("java-checkstyle", true),
                         new ExecutionParameter("python-pyright", false)
                 ))
                 .llms(Set.of("stub-llm"))
                 .build();
         /*
 
-        ExecutionConfig(difficulties=[EASY, HARD, MEDIUM], areas=null, languages=[java], parameters=[use-llm-judge], criteria=[llm-judge-code-quality, java-codestyle, ram_usage, sonarqube, java-jacoco, llm-judge-comment-quality, cpu_usage])
+        ExecutionConfig(difficulties=[EASY, HARD, MEDIUM], areas=null, languages=[java], parameters=[use-llm-judge], criteria=[llm-judge-code-quality, java-checkstyle, ram_usage, sonarqube, java-jacoco, llm-judge-comment-quality, cpu_usage])
 
          */
 

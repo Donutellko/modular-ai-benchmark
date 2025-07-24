@@ -1,5 +1,6 @@
 package org.donutellko.modularbench.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class TaskSource {
     private List<TaskDefinition> tasks = new ArrayList<>();
 
     @Data
+    @Builder
     public static class TaskDefinition {
         private String name;
         private String type;
@@ -43,7 +45,7 @@ public class TaskSource {
           - llm-judge-code-quality    # for all languages
           - llm-judge-comment-quality # for all languages
           - java-jacoco       # only for jvm languages if unit-test is enabled
-          - java-codestyle    # only for java
+          - java-checkstyle    # only for java
           - python-pyright    # only for python
           */
         private List<String> availableCriteria = new ArrayList<>();
