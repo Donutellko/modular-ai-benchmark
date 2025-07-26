@@ -7,11 +7,11 @@ interface YamlEditorProps {
   directory: string
   filename: string | null
   onModified: (filename: string, isModified: boolean) => void
+  isModified: boolean
 }
 
-export function YamlEditor({ directory, filename, onModified }: YamlEditorProps) {
+export function YamlEditor({ directory, filename, onModified, isModified }: YamlEditorProps) {
   const [content, setContent] = useState('')
-  const [isEditing, setIsEditing] = useState(false)
   const [originalContent, setOriginalContent] = useState('')
 
   useEffect(() => {
@@ -28,7 +28,6 @@ export function YamlEditor({ directory, filename, onModified }: YamlEditorProps)
     const content = await api.getFile(directory, filename)
     setContent(content)
     setOriginalContent(content)
-    setIsEditing(false)
   }
 
   const handleSave = async () => {
@@ -54,33 +53,43 @@ export function YamlEditor({ directory, filename, onModified }: YamlEditorProps)
     }
   }
 
-  if (!filename) {
-    return <div className="no-file">No file selected</div>
-  }
-
   return (
     <div className="yaml-editor">
-      <ButtonGroup>
-        <Button icon="floppy-disk" onClick={handleSave}>Save</Button>
-        <Button icon="duplicate" onClick={handleDuplicate}>Duplicate</Button>
-        <Button icon="history">History</Button>
-        {directory === 'exec_configs' && (
-          <Button icon="play" intent="success">Run Benchmark</Button>
-        )}
-      </ButtonGroup>
+      {filename && (
+        <div className="editor-header">
+          <span className="file-name">
+            {filename}
+            {isModified && <span className="modified-indicator">*</span>}
+          </span>
+        </div>
+      )}
+      {filename ? (
+        <>
+          <ButtonGroup>
+            <Button icon="floppy-disk" onClick={handleSave}>Save</Button>
+            <Button icon="duplicate" onClick={handleDuplicate}>Duplicate</Button>
+            <Button icon="history">History</Button>
+            {directory === 'exec_configs' && (
+              <Button icon="play" intent="success">Run Benchmark</Button>
+            )}
+          </ButtonGroup>
 
-      <Editor
-        height="90vh"
-        defaultLanguage="yaml"
-        value={content}
-        onChange={handleContentChange}
-        options={{
-          minimap: { enabled: false },
-          lineNumbers: 'on',
-          scrollBeyondLastLine: false,
-          wordWrap: 'on'
-        }}
-      />
+          <Editor
+            height="90vh"
+            defaultLanguage="yaml"
+            value={content}
+            onChange={handleContentChange}
+            options={{
+              minimap: { enabled: false },
+              lineNumbers: 'on',
+              scrollBeyondLastLine: false,
+              wordWrap: 'on'
+            }}
+          />
+        </>
+      ) : (
+        <div className="no-file">No file selected</div>
+      )}
     </div>
   )
 }

@@ -1,3 +1,76 @@
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.left-panel {
+  width: 300px;
+  min-width: 300px;
+  max-width: 33vw;
+  height: 100vh;
+  transition: width 0.3s;
+  background: #f5f8fa;
+  border-right: 1px solid #d8e1e8;
+  position: relative;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.left-panel.collapsed {
+  width: 30px;
+  min-width: 30px;
+}
+
+.collapse-button {
+  position: absolute;
+  right: -15px;
+  top: 20px;
+  z-index: 1;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.vertical-text-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 20px;
+  padding-top: 20px;
+}
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  cursor: pointer;
+  padding: 20px 0;
+  color: #106ba3;
+  user-select: none;
+}
+
+.vertical-text:hover {
+  color: #2b95d6;
+}
+
+.right-panel {
+  flex: 1;
+  overflow: auto;
+  padding: 20px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+}
+
 .file-list {
   padding: 10px;
 }
@@ -7,14 +80,60 @@
   align-items: center;
   padding: 5px;
   cursor: pointer;
+  border-radius: 3px;
+  margin: 2px 0;
 }
 
 .file-item:hover {
   background: #e1e8ed;
 }
 
-.file-item span.modified {
+.file-item.selected {
+  background: #d8e1e8;
+}
+
+.file-item.modified .file-name {
   color: #d13100;
+}
+
+.file-item .bp4-control {
+  margin-bottom: 0;
+  margin-right: 8px;
+}
+
+.file-name {
+  flex: 1;
+}
+
+.section-header {
+  padding: 10px;
+  font-weight: 600;
+  background: #ebebeb;
+  cursor: pointer;
+  user-select: none;
+}
+
+.section-header:hover {
+  background: #e1e8ed;
+}
+
+.editor-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #d8e1e8;
+}
+
+.editor-header .file-name {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.editor-header .modified-indicator {
+  color: #d13100;
+  font-weight: normal;
 }
 
 .yaml-editor {

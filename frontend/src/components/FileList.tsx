@@ -5,12 +5,13 @@ import { api } from '../services/api'
 interface FileListProps {
   directory: string
   onFileSelect: (filename: string) => void
+  selectedFile: string | null
+  modifiedFiles: Set<string>
 }
 
-export function FileList({ directory, onFileSelect }: FileListProps) {
+export function FileList({ directory, onFileSelect, selectedFile, modifiedFiles }: FileListProps) {
   const [files, setFiles] = useState<string[]>([])
-  const [selected, setSelected] = useState<Set<string>>(new Set())
-  const [modifiedFiles, setModifiedFiles] = useState<Set<string>>(new Set())
+  const [selectedForAction, setSelectedForAction] = useState<Set<string>>(new Set())
 
   useEffect(() => {
     loadFiles()
@@ -28,15 +29,15 @@ export function FileList({ directory, onFileSelect }: FileListProps) {
 
   const handleCheckboxChange = (filename: string, event: React.FormEvent<HTMLInputElement>) => {
     const isChecked = (event.target as HTMLInputElement).checked
-    const newSelected = new Set(selected)
-
-    if (isChecked) {
-      newSelected.add(filename)
-    } else {
-      newSelected.delete(filename)
-    }
-
-    setSelected(newSelected)
+    setSelectedForAction(prev => {
+      const next = new Set(prev)
+      if (isChecked) {
+        next.add(filename)
+      } else {
+        next.delete(filename)
+      }
+      return next
+    })
   }
 
   const handleCreateFile = async () => {
@@ -49,19 +50,19 @@ export function FileList({ directory, onFileSelect }: FileListProps) {
   }
 
   const handleDelete = async () => {
-    if (selected.size === 0) return
+    if (selectedForAction.size === 0) return
 
-    if (confirm(`Delete ${selected.size} file(s)?`)) {
-      for (const filename of selected) {
+    if (confirm(`Delete ${selectedForAction.size} file(s)?`)) {
+      for (const filename of selectedForAction) {
         await api.deleteFile(directory, filename)
       }
-      setSelected(new Set())
+      setSelectedForAction(new Set())
       await loadFiles()
     }
   }
 
   const handleDownload = () => {
-    selected.forEach(filename => {
+    selectedForAction.forEach(filename => {
       if (!modifiedFiles.has(filename)) {
         api.downloadFile(directory, filename)
       }
@@ -72,20 +73,31 @@ export function FileList({ directory, onFileSelect }: FileListProps) {
     <div className="file-list">
       <ButtonGroup fill>
         <Button icon="document" onClick={handleCreateFile}>Create</Button>
-        <Button icon="trash" onClick={handleDelete}>Delete</Button>
-        <Button icon="download" onClick={handleDownload}>Download</Button>
+        <Button
+          icon="trash"
+          onClick={handleDelete}
+          disabled={selectedForAction.size === 0}
+        >Delete</Button>
+        <Button
+          icon="download"
+          onClick={handleDownload}
+          disabled={Array.from(selectedForAction).some(f => modifiedFiles.has(f))}
+        >Download</Button>
         <Button icon="refresh" onClick={loadFiles}>Reload</Button>
       </ButtonGroup>
 
       <div className="files">
         {files.map(filename => (
-          <div key={filename} className="file-item">
+          <div
+            key={filename}
+            className={`file-item ${selectedFile === filename ? 'selected' : ''} ${modifiedFiles.has(filename) ? 'modified' : ''}`}
+          >
             <Checkbox
-              checked={selected.has(filename)}
+              checked={selectedForAction.has(filename)}
               onChange={(e) => handleCheckboxChange(filename, e)}
             />
             <span
-              className={modifiedFiles.has(filename) ? 'modified' : ''}
+              className="file-name"
               onClick={() => onFileSelect(filename)}
             >
               {filename}
