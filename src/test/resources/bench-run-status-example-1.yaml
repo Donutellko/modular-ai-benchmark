@@ -1,0 +1,17 @@
+status: running
+started: 2023-10-01T12:00:00Z
+results_filename: 2023-10-01T12:00:00Z-exec-config-example-1.yaml
+exec_config:
+  filename: exec-config-example-1.yaml
+  filepath: src/test/resources/exec-config-example-1.yaml
+task_sources:
+    - name:
+        filename: task-source-example-1.yaml
+        filepath: src/test/resources/task-source-example-1.yaml
+        tasks_status:
+          total: 10
+          completed: 2      # that have the results available
+          in_progress: 1    # currently only one task at a time, more if parallel execution is implemented
+          filtered_out: 2   # number of tasks that don't match the criteria
+          error: 1          # where the task failed to execute due to an exception
+                            # (it can be an invalid test, llm response timeout or incorrect response format)
