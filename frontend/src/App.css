@@ -6,28 +6,50 @@
 }
 
 .left-panel {
-  width: 300px;
-  min-width: 300px;
-  max-width: 33vw;
-  height: 100vh;
-  transition: width 0.2s ease-in-out;
-  background: #f5f8fa;
-  border-right: 1px solid #d8e1e8;
   position: relative;
-  overflow-y: auto;
+  flex: 0 0 auto;
+  width: 300px;
+  min-width: 200px;
+  max-width: 50vw;
+  height: 100vh;
+  transition: width 0.3s ease;
+  background: #f5f8fa;
+  border-right: 2px solid #d8e1e8;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+}
+
+.left-panel::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #d8e1e8;
+  cursor: ew-resize;
+}
+
+.left-panel-content {
+  overflow-y: auto;
+  height: 100%;
+  padding-bottom: 60px; /* Space for collapse button */
 }
 
 .left-panel.collapsed {
-  width: 30px;
+  width: 30px !important;
   min-width: 30px;
+}
+
+.left-panel.collapsed::after {
+  display: none;
 }
 
 .collapse-button {
   position: absolute;
-  right: -15px;
-  top: 20px;
+  right: 5px;
+  bottom: 20px;
   z-index: 1;
   border-radius: 50%;
   width: 30px;
@@ -38,6 +60,16 @@
   justify-content: center;
   background: white;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  transition: background-color 0.2s ease;
+}
+
+.collapse-button:hover {
+  background: #2b95d6 !important;
+}
+
+.collapse-button svg {
+  width: 20px;
+  height: 20px;
 }
 
 .vertical-text-container {
@@ -47,6 +79,7 @@
   justify-content: start;
   gap: 20px;
   padding-top: 20px;
+  padding-left: 10px;
 }
 
 .vertical-text {
@@ -73,6 +106,19 @@
 
 .file-list {
   padding: 10px;
+}
+
+.file-list .bp4-button-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 4px;
+  padding: 4px;
+}
+
+.file-list .bp4-button-group .bp4-button {
+  width: 100%;
+  margin: 0;
+  justify-content: center;
 }
 
 .file-item {
@@ -230,4 +276,39 @@
 
 .exec-config-form .bp4-switch {
   margin: 0;
+}
+
+.section-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.section-content.expanded {
+  max-height: 100vh;
+}
+
+.resize-handle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  cursor: ew-resize;
+  background: transparent;
+  transition: background 0.2s;
+}
+
+.resize-handle:hover,
+.resizing .resize-handle {
+  background: rgba(19, 124, 189, 0.2);
+}
+
+.resizing {
+  user-select: none;
+  cursor: ew-resize;
+}
+
+.resizing .left-panel-content {
+  pointer-events: none;
 }
