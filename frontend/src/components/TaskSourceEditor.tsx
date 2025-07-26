@@ -35,10 +35,25 @@ export function TaskSourceEditor({ content, onContentChange }: Props) {
     }
   }, [content]);
 
-  const updateTask = (index: number, updatedTask: any) => {
+  const updateTask = (index: number, field: keyof Task, value: any) => {
     if (!parsedContent) return;
 
     const newContent = {...parsedContent};
+    newContent.tasks = [...parsedContent.tasks];
+    newContent.tasks[index] = {
+      ...newContent.tasks[index],
+      [field]: value
+    };
+
+    setParsedContent(newContent);
+    onContentChange(stringify(newContent));
+  };
+
+  const handleTaskUpdate = (index: number, updatedTask: Task) => {
+    if (!parsedContent) return;
+
+    const newContent = {...parsedContent};
+    newContent.tasks = [...parsedContent.tasks];
     newContent.tasks[index] = updatedTask;
 
     setParsedContent(newContent);
@@ -128,7 +143,7 @@ export function TaskSourceEditor({ content, onContentChange }: Props) {
           onClose={() => setEditingTask(null)}
           task={editingTask.task}
           taskIndex={editingTask.index}
-          onTaskUpdate={updateTask}
+          onTaskUpdate={handleTaskUpdate}
         />
       )}
     </div>

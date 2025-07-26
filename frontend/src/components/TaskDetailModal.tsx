@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Dialog, Classes, Button, FormGroup, InputGroup, Card, Tabs, Tab } from '@blueprintjs/core';
 import Editor from '@monaco-editor/react';
 import { parse, stringify } from 'yaml';
@@ -13,16 +13,20 @@ interface Props {
 }
 
 export function TaskDetailModal({ isOpen, onClose, task, taskIndex, onTaskUpdate }: Props) {
-  const [localTask, setLocalTask] = useState(task);
+  const [localTask, setLocalTask] = useState({...task});  // Create a deep copy
   const [selectedTabId, setSelectedTabId] = useState('basic');
   const [showCodeEditor, setShowCodeEditor] = useState(false);
   const [codeEditorContent, setCodeEditorContent] = useState('');
   const [codeEditorPath, setCodeEditorPath] = useState<string[]>([]);
 
+  useEffect(() => {
+    setLocalTask({...task}); // Update local task when prop changes
+  }, [task]);
+
   const updateField = (path: string[], value: any) => {
     setLocalTask(prev => {
-      const newTask = { ...prev };
-      let current = newTask;
+      const result = {...prev};
+      let current = result;
       for (let i = 0; i < path.length - 1; i++) {
         if (!current[path[i]]) {
           current[path[i]] = {};
@@ -30,7 +34,7 @@ export function TaskDetailModal({ isOpen, onClose, task, taskIndex, onTaskUpdate
         current = current[path[i]];
       }
       current[path[path.length - 1]] = value;
-      return newTask;
+      return result;
     });
   };
 
