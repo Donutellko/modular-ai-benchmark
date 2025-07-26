@@ -1,7 +1,10 @@
 import axios from 'axios'
 
 const client = axios.create({
-  baseURL: '/api'
+  baseURL: '/api',
+  headers: {
+    'Content-Type': 'text/plain'  // Important for sending raw string content
+  }
 })
 
 export const api = {
@@ -22,7 +25,11 @@ export const api = {
   },
 
   async updateFile(directory: string, filename: string, content: string): Promise<void> {
-    await client.put(`/files/${directory}/${filename}`, content)
+    await client.put(`/files/${directory}/${filename}`, content, {
+      headers: {
+        'Content-Type': 'text/plain'
+      }
+    })
   },
 
   async deleteFile(directory: string, filename: string): Promise<void> {
@@ -30,7 +37,12 @@ export const api = {
   },
 
   async createFile(directory: string, filename: string): Promise<void> {
-    await client.put(`/files/${directory}/${filename}`, '')
+    await client.put(`/files/${directory}/${filename}`, ' ', {
+      headers: {
+        'Content-Type': 'text/plain'
+      },
+      transformRequest: [(data) => data]  // Prevent axios from JSON stringifying
+    })
   },
 
   downloadFile(directory: string, filename: string): void {

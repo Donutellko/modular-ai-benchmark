@@ -1,6 +1,7 @@
 package org.donutellko.modularbench.controller;
 
 import org.apache.commons.io.FileUtils;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +35,7 @@ public class FileController {
         });
     }
 
-    @GetMapping("/{directory}")
+    @GetMapping(value = "/{directory}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<String>> listFiles(@PathVariable String directory) {
         if (!DIRECTORIES.containsKey(directory)) {
             return ResponseEntity.badRequest().build();
@@ -45,15 +46,15 @@ public class FileController {
             return ResponseEntity.internalServerError().build();
         }
 
-        return ResponseEntity.ok(
-            FileUtils.listFiles(dir, new String[]{"yaml", "yml"}, false)
-                .stream()
-                .map(File::getName)
-                .toList()
-        );
+        List<String> files = FileUtils.listFiles(dir, new String[]{"yaml", "yml"}, false)
+            .stream()
+            .map(File::getName)
+            .toList();
+
+        return ResponseEntity.ok(files);
     }
 
-    @GetMapping("/{directory}/{filename}")
+    @GetMapping(value = "/{directory}/{filename}", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> getFile(
             @PathVariable String directory,
             @PathVariable String filename) throws IOException {
@@ -69,7 +70,9 @@ public class FileController {
         return ResponseEntity.ok(Files.readString(file.toPath()));
     }
 
-    @PutMapping("/{directory}/{filename}")
+    @PutMapping(value = "/{directory}/{filename}",
+                consumes = MediaType.TEXT_PLAIN_VALUE,
+                produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateFile(
             @PathVariable String directory,
             @PathVariable String filename,
