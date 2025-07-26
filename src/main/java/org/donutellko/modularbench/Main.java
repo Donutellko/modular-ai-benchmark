@@ -30,12 +30,16 @@ public class Main implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) {
+    public void run(String... args) throws Exception {
+        if (args.length == 0) {
+            // No arguments - run as web server
+            return;
+        }
 
         Options options = new Options();
 
         OptionGroup commands = new OptionGroup();
-        commands.addOption(new Option("bench", false, "Run the benchmark"));
+        commands.addOption(new Option("bench", "Run benchmark"));
         commands.setRequired(true);
         options.addOptionGroup(commands);
 

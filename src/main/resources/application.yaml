@@ -1,6 +1,6 @@
 spring:
   main:
-    web-application-type: NONE
+    web-application-type: SERVLET
 
   application:
     name: modular-ai-benchmark
@@ -44,3 +44,6 @@ debug: true
 logging:
   level:
     org.springframework: DEBUG
+
+server:
+  port: 8080
