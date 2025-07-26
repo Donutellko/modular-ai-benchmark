@@ -4,6 +4,7 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,6 +23,16 @@ public class FileController {
         "bench_status", "bench_status",
         "bench_results", "bench_results"
     );
+
+    @PostConstruct
+    public void init() {
+        DIRECTORIES.values().forEach(dir -> {
+            File directory = new File(dir);
+            if (!directory.exists() && !directory.mkdirs()) {
+                throw new RuntimeException("Failed to create directory: " + dir);
+            }
+        });
+    }
 
     @GetMapping("/{directory}")
     public ResponseEntity<List<String>> listFiles(@PathVariable String directory) {

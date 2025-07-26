@@ -6,8 +6,14 @@ const client = axios.create({
 
 export const api = {
   async listFiles(directory: string): Promise<string[]> {
-    const { data } = await client.get(`/files/${directory}`)
-    return data
+    try {
+      const response = await client.get(`/files/${directory}`)
+      console.log('API response:', response)
+      return Array.isArray(response.data) ? response.data : []
+    } catch (error) {
+      console.error('API error:', error)
+      return []
+    }
   },
 
   async getFile(directory: string, filename: string): Promise<string> {

@@ -17,8 +17,13 @@ export function FileList({ directory, onFileSelect }: FileListProps) {
   }, [directory])
 
   const loadFiles = async () => {
-    const fileList = await api.listFiles(directory)
-    setFiles(fileList)
+    try {
+      const fileList = await api.listFiles(directory)
+      setFiles(Array.isArray(fileList) ? fileList : [])
+    } catch (error) {
+      console.error('Error loading files:', error)
+      setFiles([])
+    }
   }
 
   const handleCheckboxChange = (filename: string, event: React.FormEvent<HTMLInputElement>) => {
