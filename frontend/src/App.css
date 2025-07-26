@@ -1,0 +1,62 @@
+.file-list {
+  padding: 10px;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.file-item:hover {
+  background: #e1e8ed;
+}
+
+.file-item span.modified {
+  color: #d13100;
+}
+
+.yaml-editor {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.benchmark-modal {
+  width: 80vw;
+  max-width: 800px;
+}
+
+.progress-item {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  gap: 10px;
+}
+
+.task-name {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.progress-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.progress-label {
+  min-width: 70px;
+}
+
+.setup-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px;
+}
