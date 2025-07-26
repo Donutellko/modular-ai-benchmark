@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Button, ButtonGroup } from '@blueprintjs/core'
 import Editor from '@monaco-editor/react'
 import { ExecConfigForm } from './ExecConfigForm'
+import { TaskSourceEditor } from './TaskSourceEditor'
 import { useModifiedFiles } from '../context/ModifiedFilesContext'
 import { api } from '../services/api'
 
@@ -65,55 +66,55 @@ export function YamlEditor({ directory, filename, onModified, isModified }: Yaml
   }
 
   const editorHeight = '100px' // Height for 5 lines approximately
+  const isTaskSource = directory === 'task_sources'
 
   return (
     <div className="yaml-editor">
-      {filename && (
-        <>
-          <div className="editor-header">
-            <span className="file-name">
-              {filename}
-              {isModified && <span className="modified-indicator">*</span>}
-            </span>
-            <ButtonGroup>
-              <Button icon="floppy-disk" onClick={handleSave}>Save</Button>
-              <Button icon="duplicate" onClick={handleDuplicate}>Duplicate</Button>
-              <Button icon="history">History</Button>
-              {directory === 'exec_configs' && (
-                <>
-                  <Button
-                    icon={isFormView ? 'code' : 'properties'}
-                    onClick={() => setIsFormView(!isFormView)}
-                  >
-                    {isFormView ? 'Show YAML' : 'Show Form'}
-                  </Button>
-                  <Button icon="play" intent="success">Run Benchmark</Button>
-                </>
-              )}
-            </ButtonGroup>
-          </div>
+      <ButtonGroup>
+        <Button
+          icon={isFormView ? "code" : "form"}
+          text={isFormView ? "View as YAML" : "View as Form"}
+          onClick={() => setIsFormView(!isFormView)}
+        />
+        <Button icon="floppy-disk" text="Save" onClick={handleSave} disabled={!isModified} />
+        <Button icon="history" text="History" onClick={() => {/* TODO */}} />
+      </ButtonGroup>
 
-          {directory === 'exec_configs' && isFormView ? (
-            <ExecConfigForm
-              content={content}
-              onChange={handleContentChange}
-            />
-          ) : (
-            <Editor
-              height="90vh"
-              defaultLanguage="yaml"
-              value={content}
-              onChange={handleContentChange}
-              options={{
-                minimap: { enabled: false },
-                lineNumbers: 'on',
-                scrollBeyondLastLine: false,
-                wordWrap: 'on',
-                automaticLayout: true
-              }}
-            />
-          )}
-        </>
+      {isFormView ? (
+        isTaskSource ? (
+          <TaskSourceEditor
+            content={content}
+            onContentChange={(newContent) => {
+              setContent(newContent)
+              setModifiedContent(directory, filename!, newContent)
+              onModified(filename!, true)
+            }}
+          />
+        ) : (
+          <ExecConfigForm
+            content={content}
+            onContentChange={(newContent) => {
+              setContent(newContent)
+              setModifiedContent(directory, filename!, newContent)
+              onModified(filename!, true)
+            }}
+          />
+        )
+      ) : (
+        <Editor
+          height="90vh"
+          defaultLanguage="yaml"
+          value={content}
+          onChange={(value) => {
+            if (!value) return
+            setContent(value)
+            setModifiedContent(directory, filename!, value)
+            onModified(filename!, value !== originalContent)
+          }}
+          options={{
+            minimap: { enabled: false }
+          }}
+        />
       )}
     </div>
   )
