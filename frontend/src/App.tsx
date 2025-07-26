@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Button } from '@blueprintjs/core'
 import { FileList } from './components/FileList'
 import { YamlEditor } from './components/YamlEditor'
+import { ModifiedFilesProvider } from './context/ModifiedFilesContext'
 import '@blueprintjs/core/lib/css/blueprint.css'
 import './App.css'
 
@@ -26,103 +27,105 @@ export default function App() {
   }
 
   return (
-    <div className="app-container">
-      <div className={`left-panel ${isCollapsed ? 'collapsed' : ''}`}>
-        <Button
-          icon={isCollapsed ? 'chevron-right' : 'chevron-left'}
-          minimal
-          className="collapse-button"
-          onClick={() => setCollapsed(!isCollapsed)}
-        />
+    <ModifiedFilesProvider>
+      <div className="app-container">
+        <div className={`left-panel ${isCollapsed ? 'collapsed' : ''}`}>
+          <Button
+            icon={isCollapsed ? 'chevron-right' : 'chevron-left'}
+            minimal
+            className="collapse-button"
+            onClick={() => setCollapsed(!isCollapsed)}
+          />
 
-        {isCollapsed ? (
-          <div className="vertical-text-container">
-            <div
-              className="vertical-text"
-              onClick={() => {
-                setActiveSection('exec_configs')
-                setCollapsed(false)
-              }}
-            >
-              Execution Configurations
+          {isCollapsed ? (
+            <div className="vertical-text-container">
+              <div
+                className="vertical-text"
+                onClick={() => {
+                  setActiveSection('exec_configs')
+                  setCollapsed(false)
+                }}
+              >
+                Execution Configurations
+              </div>
+              <div
+                className="vertical-text"
+                onClick={() => {
+                  setActiveSection('task_sources')
+                  setCollapsed(false)
+                }}
+              >
+                Task Sources
+              </div>
+              <div
+                className="vertical-text"
+                onClick={() => {
+                  setActiveSection('bench_results')
+                  setCollapsed(false)
+                }}
+              >
+                Benchmark Runs
+              </div>
             </div>
-            <div
-              className="vertical-text"
-              onClick={() => {
-                setActiveSection('task_sources')
-                setCollapsed(false)
-              }}
-            >
-              Task Sources
-            </div>
-            <div
-              className="vertical-text"
-              onClick={() => {
-                setActiveSection('bench_results')
-                setCollapsed(false)
-              }}
-            >
-              Benchmark Runs
-            </div>
-          </div>
-        ) : (
-          <div>
-            <div
-              className="section-header"
-              onClick={() => setActiveSection('exec_configs')}
-            >
-              Execution Configurations
-            </div>
-            {activeSection === 'exec_configs' && (
-              <FileList
-                directory="exec_configs"
-                onFileSelect={setSelectedFile}
-                selectedFile={selectedFile}
-                modifiedFiles={modifiedFiles}
-              />
-            )}
+          ) : (
+            <div>
+              <div
+                className="section-header"
+                onClick={() => setActiveSection('exec_configs')}
+              >
+                Execution Configurations
+              </div>
+              {activeSection === 'exec_configs' && (
+                <FileList
+                  directory="exec_configs"
+                  onFileSelect={setSelectedFile}
+                  selectedFile={selectedFile}
+                  modifiedFiles={modifiedFiles}
+                />
+              )}
 
-            <div
-              className="section-header"
-              onClick={() => setActiveSection('task_sources')}
-            >
-              Task Sources
-            </div>
-            {activeSection === 'task_sources' && (
-              <FileList
-                directory="task_sources"
-                onFileSelect={setSelectedFile}
-                selectedFile={selectedFile}
-                modifiedFiles={modifiedFiles}
-              />
-            )}
+              <div
+                className="section-header"
+                onClick={() => setActiveSection('task_sources')}
+              >
+                Task Sources
+              </div>
+              {activeSection === 'task_sources' && (
+                <FileList
+                  directory="task_sources"
+                  onFileSelect={setSelectedFile}
+                  selectedFile={selectedFile}
+                  modifiedFiles={modifiedFiles}
+                />
+              )}
 
-            <div
-              className="section-header"
-              onClick={() => setActiveSection('bench_results')}
-            >
-              Benchmark Runs
+              <div
+                className="section-header"
+                onClick={() => setActiveSection('bench_results')}
+              >
+                Benchmark Runs
+              </div>
+              {activeSection === 'bench_results' && (
+                <FileList
+                  directory="bench_results"
+                  onFileSelect={setSelectedFile}
+                  selectedFile={selectedFile}
+                  modifiedFiles={modifiedFiles}
+                />
+              )}
             </div>
-            {activeSection === 'bench_results' && (
-              <FileList
-                directory="bench_results"
-                onFileSelect={setSelectedFile}
-                selectedFile={selectedFile}
-                modifiedFiles={modifiedFiles}
-              />
-            )}
-          </div>
-        )}
+          )}
+        </div>
+
+        <div className="right-panel">
+          <YamlEditor
+            directory={activeSection}
+            filename={selectedFile}
+            onModified={handleFileModified}
+            isModified={selectedFile ? modifiedFiles.has(selectedFile) : false}
+          />
+        </div>
       </div>
-
-      <div className="right-panel">
-        <YamlEditor
-          directory={activeSection}
-          filename={selectedFile}
-          onModified={handleFileModified}
-          isModified={selectedFile ? modifiedFiles.has(selectedFile) : false}
-        />
-      </div>
-    </div>
+    </ModifiedFilesProvider>
   )
 }

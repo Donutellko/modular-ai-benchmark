@@ -12,6 +12,7 @@ interface FileListProps {
 export function FileList({ directory, onFileSelect, selectedFile, modifiedFiles }: FileListProps) {
   const [files, setFiles] = useState<string[]>([])
   const [selectedForAction, setSelectedForAction] = useState<Set<string>>(new Set())
+  const [lastSelected, setLastSelected] = useState<string | null>(null)
 
   useEffect(() => {
     loadFiles()
@@ -27,17 +28,34 @@ export function FileList({ directory, onFileSelect, selectedFile, modifiedFiles 
     }
   }
 
-  const handleCheckboxChange = (filename: string, event: React.FormEvent<HTMLInputElement>) => {
-    const isChecked = (event.target as HTMLInputElement).checked
-    setSelectedForAction(prev => {
-      const next = new Set(prev)
-      if (isChecked) {
-        next.add(filename)
+  const handleClick = (filename: string, event: React.MouseEvent) => {
+    onFileSelect(filename)
+
+    // Handle multi-select only for exec_configs
+    if (directory === 'exec_configs') {
+      if (event.shiftKey && lastSelected) {
+        const startIndex = files.indexOf(lastSelected)
+        const endIndex = files.indexOf(filename)
+        const filesToSelect = files.slice(
+          Math.min(startIndex, endIndex),
+          Math.max(startIndex, endIndex) + 1
+        )
+        setSelectedForAction(new Set([...selectedForAction, ...filesToSelect]))
+      } else if (event.ctrlKey || event.metaKey) {
+        const newSelected = new Set(selectedForAction)
+        if (newSelected.has(filename)) {
+          newSelected.delete(filename)
+        } else {
+          newSelected.add(filename)
+        }
+        setSelectedForAction(newSelected)
       } else {
-        next.delete(filename)
+        setSelectedForAction(new Set([filename]))
       }
-      return next
-    })
+      setLastSelected(filename)
+    } else {
+      setSelectedForAction(new Set([filename]))
+    }
   }
 
   const handleCreateFile = async () => {
@@ -69,6 +87,14 @@ export function FileList({ directory, onFileSelect, selectedFile, modifiedFiles 
     })
   }
 
+  const handleSaveAll = async () => {
+    const modifiedInDir = files.filter(f => modifiedFiles.has(f))
+    for (const filename of modifiedInDir) {
+      // Note: We'll need to implement this in the YamlEditor
+      // by exposing its save functionality
+    }
+  }
+
   return (
     <div className="file-list">
       <ButtonGroup fill>
@@ -83,6 +109,11 @@ export function FileList({ directory, onFileSelect, selectedFile, modifiedFiles 
           onClick={handleDownload}
           disabled={Array.from(selectedForAction).some(f => modifiedFiles.has(f))}
         >Download</Button>
+        <Button
+          icon="floppy-disk"
+          onClick={handleSaveAll}
+          disabled={!files.some(f => modifiedFiles.has(f))}
+        >Save All</Button>
         <Button icon="refresh" onClick={loadFiles}>Reload</Button>
       </ButtonGroup>
 
@@ -91,15 +122,13 @@ export function FileList({ directory, onFileSelect, selectedFile, modifiedFiles 
           <div
             key={filename}
             className={`file-item ${selectedFile === filename ? 'selected' : ''} ${modifiedFiles.has(filename) ? 'modified' : ''}`}
+            onClick={(e) => handleClick(filename, e)}
           >
             <Checkbox
               checked={selectedForAction.has(filename)}
-              onChange={(e) => handleCheckboxChange(filename, e)}
+              onChange={() => {}} // Handled by div click
             />
-            <span
-              className="file-name"
-              onClick={() => onFileSelect(filename)}
-            >
+            <span className="file-name">
               {filename}
               {modifiedFiles.has(filename) && '*'}
             </span>

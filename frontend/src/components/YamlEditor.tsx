@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Button, ButtonGroup } from '@blueprintjs/core'
 import Editor from '@monaco-editor/react'
+import { ExecConfigForm } from './ExecConfigForm'
+import { useModifiedFiles } from '../context/ModifiedFilesContext'
 import { api } from '../services/api'
 
 interface YamlEditorProps {
@@ -13,15 +15,22 @@ interface YamlEditorProps {
 export function YamlEditor({ directory, filename, onModified, isModified }: YamlEditorProps) {
   const [content, setContent] = useState('')
   const [originalContent, setOriginalContent] = useState('')
+  const [isFormView, setIsFormView] = useState(false)
+  const { getModifiedContent, setModifiedContent, clearModifiedContent } = useModifiedFiles()
 
   useEffect(() => {
     if (filename) {
-      loadFile()
+      const modifiedContent = getModifiedContent(directory, filename)
+      if (modifiedContent !== null) {
+        setContent(modifiedContent)
+      } else {
+        loadFile()
+      }
     } else {
       setContent('')
       setOriginalContent('')
     }
-  }, [filename])
+  }, [directory, filename])
 
   const loadFile = async () => {
     if (!filename) return
@@ -34,12 +43,14 @@ export function YamlEditor({ directory, filename, onModified, isModified }: Yaml
     if (!filename) return
     await api.updateFile(directory, filename, content)
     setOriginalContent(content)
+    clearModifiedContent(directory, filename)
     onModified(filename, false)
   }
 
   const handleContentChange = (value: string = '') => {
     setContent(value)
     if (filename) {
+      setModifiedContent(directory, filename, value)
       onModified(filename, value !== originalContent)
     }
   }
@@ -53,42 +64,56 @@ export function YamlEditor({ directory, filename, onModified, isModified }: Yaml
     }
   }
 
+  const editorHeight = '100px' // Height for 5 lines approximately
+
   return (
     <div className="yaml-editor">
       {filename && (
-        <div className="editor-header">
-          <span className="file-name">
-            {filename}
-            {isModified && <span className="modified-indicator">*</span>}
-          </span>
-        </div>
-      )}
-      {filename ? (
         <>
-          <ButtonGroup>
-            <Button icon="floppy-disk" onClick={handleSave}>Save</Button>
-            <Button icon="duplicate" onClick={handleDuplicate}>Duplicate</Button>
-            <Button icon="history">History</Button>
-            {directory === 'exec_configs' && (
-              <Button icon="play" intent="success">Run Benchmark</Button>
-            )}
-          </ButtonGroup>
+          <div className="editor-header">
+            <span className="file-name">
+              {filename}
+              {isModified && <span className="modified-indicator">*</span>}
+            </span>
+            <ButtonGroup>
+              <Button icon="floppy-disk" onClick={handleSave}>Save</Button>
+              <Button icon="duplicate" onClick={handleDuplicate}>Duplicate</Button>
+              <Button icon="history">History</Button>
+              {directory === 'exec_configs' && (
+                <>
+                  <Button
+                    icon={isFormView ? 'code' : 'properties'}
+                    onClick={() => setIsFormView(!isFormView)}
+                  >
+                    {isFormView ? 'Show YAML' : 'Show Form'}
+                  </Button>
+                  <Button icon="play" intent="success">Run Benchmark</Button>
+                </>
+              )}
+            </ButtonGroup>
+          </div>
 
-          <Editor
-            height="90vh"
-            defaultLanguage="yaml"
-            value={content}
-            onChange={handleContentChange}
-            options={{
-              minimap: { enabled: false },
-              lineNumbers: 'on',
-              scrollBeyondLastLine: false,
-              wordWrap: 'on'
-            }}
-          />
+          {directory === 'exec_configs' && isFormView ? (
+            <ExecConfigForm
+              content={content}
+              onChange={handleContentChange}
+            />
+          ) : (
+            <Editor
+              height="90vh"
+              defaultLanguage="yaml"
+              value={content}
+              onChange={handleContentChange}
+              options={{
+                minimap: { enabled: false },
+                lineNumbers: 'on',
+                scrollBeyondLastLine: false,
+                wordWrap: 'on',
+                automaticLayout: true
+              }}
+            />
+          )}
         </>
-      ) : (
-        <div className="no-file">No file selected</div>
       )}
     </div>
   )
