@@ -7,6 +7,12 @@ const client = axios.create({
   }
 })
 
+interface StartBenchmarkParams {
+  execConfig: string;
+  taskSources: string[];
+  resultFilename: string;
+}
+
 export const api = {
   async listFiles(directory: string): Promise<string[]> {
     try {
@@ -54,8 +60,13 @@ export const api = {
     return data.id
   },
 
-  async getBenchmarkStatus(id: string): Promise<any> {
-    const { data } = await client.get(`/benchmark/status/${id}`)
-    return data
+  async startBenchmark(params: StartBenchmarkParams): Promise<string> {
+    const { data } = await client.post('/benchmark/start', params);
+    return data.statusFile;
+  },
+
+  async getBenchmarkStatus(statusFile: string): Promise<any> {
+    const { data } = await client.get(`/benchmark/status/${statusFile}`);
+    return data;
   }
 }

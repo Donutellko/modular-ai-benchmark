@@ -364,3 +364,55 @@
   font-size: 16px;
   font-style: italic;
 }
+
+.task-sources-list {
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 10px;
+  background: #f5f8fa;
+  border-radius: 3px;
+}
+
+.task-sources-list .bp4-checkbox {
+  margin-bottom: 5px;
+}
+
+.status-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.status-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.status-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-count {
+  color: #5c7080;
+  font-size: 12px;
+}
+
+.progress-container {
+  position: relative;
+  height: 20px;
+}
+
+.progress-container .bp4-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.filtered-progress {
+  opacity: 0.2;
+}
