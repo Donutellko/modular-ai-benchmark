@@ -74,7 +74,7 @@ public class Main implements CommandLineRunner {
                     TaskSource taskSource = fileService.readTaskSource(task);
                     taskSources.add(taskSource);
                 }
-                BenchResults results = benchExecutorService.evaluate(executionConfig, taskSources);
+                BenchResults results = benchExecutorService.evaluate(executionConfig, taskSources, "bench-results.yaml");
                 System.out.println(results);
                 fileService.writeBenchResults("bench-results.yaml", results);
             } else {

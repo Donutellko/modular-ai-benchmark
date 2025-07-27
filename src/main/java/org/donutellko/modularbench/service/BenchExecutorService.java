@@ -29,24 +29,52 @@ public class BenchExecutorService {
     private final LLMClientRegistry llmClientRegistry;
     private final EvaluatorRegistry evaluatorRegistry;
     private final freemarker.template.Configuration freemarkerConfig;
+    private final BenchmarkProgressTracker progressTracker;
 
-    public BenchResults evaluate(ExecutionConfig config, Iterable<TaskSource> taskSourceList) {
-        Map<TaskSource, Map<TaskDefinition, TaskResults>> results = new HashMap<>();
+    public BenchResults evaluate(ExecutionConfig config, Iterable<TaskSource> taskSourceList, String resultFilename) {
+        try {
+            BenchmarkProgressTracker.BenchmarkStatus benchmarkStatus =
+                    progressTracker.createStatus(config, taskSourceList, resultFilename);
 
-        for (TaskSource taskSource : taskSourceList) {
-            Map<TaskDefinition, TaskResults> taskResults = evaluateTaskSource(config, taskSource);
-            results.put(taskSource, taskResults);
+            Map<TaskSource, Map<TaskDefinition, TaskResults>> results = new HashMap<>();
+
+            for (TaskSource taskSource : taskSourceList) {
+                BenchmarkProgressTracker.TaskSourceStatus taskSourceStatus = benchmarkStatus.getTaskSourceStatus(taskSource);
+                Map<TaskDefinition, TaskResults> taskResults = evaluateTaskSource(config, taskSource, taskSourceStatus);
+                results.put(taskSource, taskResults);
+            }
+
+            progressTracker.completeRun(resultFilename);
+            return BenchResults.builder()
+                    .taskResultsMap(results)
+                    .build();
+        } catch (Exception e) {
+            progressTracker.completeRun(resultFilename);
+            throw new RuntimeException("Failed to evaluate benchmark", e);
         }
-        return BenchResults.builder()
-                .taskResultsMap(results)
-                .build();
     }
 
-    private Map<TaskDefinition, TaskResults> evaluateTaskSource(ExecutionConfig config, TaskSource taskSource) {
+    private Map<TaskDefinition, TaskResults> evaluateTaskSource(ExecutionConfig config, TaskSource taskSource,
+                                                                BenchmarkProgressTracker.TaskSourceStatus status) {
         Map<TaskDefinition, TaskResults> taskSourceResults = new HashMap<>();
+
         for (TaskDefinition task : taskSource.getTasks()) {
             TaskResults taskResultsList = evaluateTask(taskSource, task, config);
             taskSourceResults.put(task, taskResultsList);
+
+            int errorsCount = taskResultsList.getTaskResults().stream()
+                    .mapToInt(tr -> Math.toIntExact(tr.getEvaluationResult().stream()
+                            .filter(er -> er.getError() != null).count()))
+                    .sum();
+
+            // Update progress based on task results
+            if (!taskResultsList.getSkipReasons().isEmpty()) {
+                status.incrementFilteredOut();
+            } else if (errorsCount > 0) {
+                status.incrementError();
+            } else {
+                status.incrementCompleted();
+            }
         }
         return taskSourceResults;
     }

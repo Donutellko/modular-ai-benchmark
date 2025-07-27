@@ -23,7 +23,9 @@ public class FileService {
     }
 
     public ExecutionConfig readExecConfig(String filePath) {
-        return readYaml(filePath, ExecutionConfig.class);
+        ExecutionConfig config = readYaml(filePath, ExecutionConfig.class);
+        config.setFilepath(filePath);
+        return config;
     }
 
     public TaskSource readTaskSource(String filePath) {

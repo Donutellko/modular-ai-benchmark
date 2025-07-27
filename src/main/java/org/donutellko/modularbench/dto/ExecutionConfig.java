@@ -20,6 +20,7 @@ public class ExecutionConfig {
     private Set<ExecutionParameter> criteria;
     private Set<String> llms;
     private Integer maxTokens;
+    private String filepath;
 
     @Data
     @Builder

@@ -1,8 +1,9 @@
-package org.donutellko.modularbench;
+package org.donutellko.modularbench.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import lombok.RequiredArgsConstructor;
+import org.donutellko.modularbench.dto.ExecutionConfig;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class BenchmarkService {
     private final ObjectMapper yamlMapper = new ObjectMapper(new YAMLFactory());
     private final ConcurrentHashMap<String, BenchmarkStatus> activeRuns = new ConcurrentHashMap<>();
+    private final BenchExecutorService benchmarkExecutorService;
+    private final FileService fileService;
 
     public String startBenchmark(String execConfigFile, List<String> taskSourceFiles, String resultFilename) throws IOException {
         // Read the execution config
@@ -69,17 +72,15 @@ public class BenchmarkService {
             // Add to active runs
             activeRuns.put(status.resultFilename(), status);
 
+            ExecutionConfig executionConfig = fileService.readExecConfig(execConfigPath.toString());
+
             for (String taskSource : status.taskSourceFiles()) {
                 TaskSourceStatus sourceStatus = status.taskSourceStatuses().get(taskSource);
                 sourceStatus.inProgress(sourceStatus.total());
                 saveStatus(status, statusFilePath);
 
-                // TODO: Execute actual benchmark logic here using your existing benchmark execution code
-                // This is just a simulation for now
-                Thread.sleep(2000);
+                benchmarkExecutorService.evaluate(executionConfig, taskSource);
 
-                sourceStatus.completed(sourceStatus.total());
-                sourceStatus.inProgress(0);
                 saveStatus(status, statusFilePath);
             }
 
