@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { parse } from 'yaml'
 
 const client = axios.create({
   baseURL: '/api',
@@ -68,5 +69,15 @@ export const api = {
   async getBenchmarkStatus(statusFile: string): Promise<any> {
     const { data } = await client.get(`/benchmark/status/${statusFile}`);
     return data;
-  }
-}
+  },
+
+  async parseYaml(content: string): Promise<any> {
+    try {
+      return parse(content);
+    } catch (error) {
+      console.error('YAML parsing error:', error);
+      throw error;
+    }
+  },
+
+};
