@@ -3,7 +3,7 @@ import axios from 'axios'
 const client = axios.create({
   baseURL: '/api',
   headers: {
-    'Content-Type': 'text/plain'  // Important for sending raw string content
+//     'Content-Type': 'text/plain'  // Important for sending raw string content
   }
 })
 

@@ -48,12 +48,13 @@ public class BenchmarkController {
 
         return ResponseEntity.ok(new RunResponse(id));
     }
-
+/*
     @GetMapping("/status/{id}")
     public ResponseEntity<RunStatus> getStatus(@PathVariable String id) {
         RunStatus status = activeRuns.get(id);
         return status != null ? ResponseEntity.ok(status) : ResponseEntity.notFound().build();
     }
+    */
 
     // Temporary simulation
     private void simulateProgress(String id) {

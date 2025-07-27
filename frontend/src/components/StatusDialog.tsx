@@ -2,13 +2,19 @@ import { useState, useEffect } from 'react';
 import { Dialog, Classes, ProgressBar, Intent } from '@blueprintjs/core';
 import { api } from '../services/api';
 
-interface Status {
-  task_source: string;
+interface TaskSourceStatus {
   total: number;
   completed: number;
-  in_progress: number;
-  filtered_out: number;
+  inProgress: number;
+  filteredOut: number;
   error: number;
+}
+
+interface Status {
+  execConfigFile: string;
+  taskSourceFiles: string[];
+  resultFilename: string;
+  taskSourceStatuses: { [key: string]: TaskSourceStatus };
 }
 
 interface StatusDialogProps {
@@ -18,24 +24,25 @@ interface StatusDialogProps {
 }
 
 export function StatusDialog({ isOpen, onClose, statusFile }: StatusDialogProps) {
-  const [status, setStatus] = useState<Status[]>([]);
+  const [status, setStatus] = useState<Status | null>(null);
   const [isCompleted, setIsCompleted] = useState(false);
 
   useEffect(() => {
     if (isOpen && !isCompleted) {
       const interval = setInterval(async () => {
         try {
-          const content = await api.getFile('bench_status', statusFile);
-          const status = JSON.parse(content);
-          setStatus(status.task_sources || []);
+          const data = await api.getBenchmarkStatus(statusFile);
+          setStatus(data);
 
-          // Check if all tasks are completed or errored
-          const allDone = status.task_sources?.every(
-            (s: Status) => s.completed + s.error + s.filtered_out === s.total
-          );
-          if (allDone) {
-            setIsCompleted(true);
-            clearInterval(interval);
+          // Check if all tasks are completed
+          if (data.taskSourceStatuses) {
+            const allDone = Object.values(data.taskSourceStatuses).every(
+              (s: TaskSourceStatus) => s.completed + s.error + s.filteredOut === s.total
+            );
+            if (allDone) {
+              setIsCompleted(true);
+              clearInterval(interval);
+            }
           }
         } catch (e) {
           console.error('Failed to fetch status:', e);
@@ -46,8 +53,8 @@ export function StatusDialog({ isOpen, onClose, statusFile }: StatusDialogProps)
     }
   }, [isOpen, statusFile, isCompleted]);
 
-  const renderProgressBar = (status: Status) => {
-    const total = status.total - status.filtered_out;
+  const renderProgressBar = (taskSourceName: string, status: TaskSourceStatus) => {
+    const total = status.total - status.filteredOut;
     if (total === 0) return null;
 
     const segments = [
@@ -56,7 +63,7 @@ export function StatusDialog({ isOpen, onClose, statusFile }: StatusDialogProps)
         intent: Intent.SUCCESS,
       },
       {
-        ratio: status.in_progress / total,
+        ratio: status.inProgress / total,
         intent: Intent.PRIMARY,
       },
       {
@@ -66,21 +73,23 @@ export function StatusDialog({ isOpen, onClose, statusFile }: StatusDialogProps)
     ].filter(s => s.ratio > 0);
 
     return (
-      <div className="status-row" key={status.task_source}>
+      <div className="status-row" key={taskSourceName}>
         <div className="status-label">
-          {status.task_source}
+          {taskSourceName}
           <span className="task-count">
             ({status.completed + status.error}/{total})
           </span>
         </div>
         <div className="progress-container">
-          <ProgressBar
-            animate={!isCompleted}
-            stripes={!isCompleted}
-            intent={segments[0]?.intent}
-            value={1}
-            className="filtered-progress"
-          />
+          {status.filteredOut > 0 && (
+            <ProgressBar
+              animate={!isCompleted}
+              stripes={!isCompleted}
+              intent={Intent.NONE}
+              value={1}
+              className="filtered-progress"
+            />
+          )}
           {segments.map((segment, i) => (
             <ProgressBar
               key={i}
@@ -104,7 +113,10 @@ export function StatusDialog({ isOpen, onClose, statusFile }: StatusDialogProps)
     >
       <div className={Classes.DIALOG_BODY}>
         <div className="status-container">
-          {status.map(renderProgressBar)}
+          {status?.taskSourceStatuses &&
+            Object.entries(status.taskSourceStatuses).map(([name, status]) =>
+              renderProgressBar(name, status)
+            )}
         </div>
       </div>
     </Dialog>
