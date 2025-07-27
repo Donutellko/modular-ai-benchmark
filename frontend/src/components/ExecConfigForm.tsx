@@ -4,7 +4,7 @@ import { ExecConfig, parseYaml, updateYamlField } from '../services/yaml'
 
 interface ExecConfigFormProps {
   content: string
-  onChange: (content: string) => void
+  onContentChange: (content: string) => void  // Changed from onChange to onContentChange
 }
 
 const defaultConfig: ExecConfig = {
@@ -30,7 +30,7 @@ const defaultConfig: ExecConfig = {
   ]
 };
 
-export function ExecConfigForm({ content, onChange }: ExecConfigFormProps) {
+export function ExecConfigForm({ content, onContentChange }: ExecConfigFormProps) {
   const [config, setConfig] = useState<ExecConfig>(defaultConfig)
 
   useEffect(() => {
@@ -60,7 +60,7 @@ export function ExecConfigForm({ content, onChange }: ExecConfigFormProps) {
 
   const handleArrayChange = (field: keyof ExecConfig, values: string[]) => {
     const newContent = updateYamlField(content, field, values)
-    onChange(newContent)
+    onContentChange(newContent)  // Changed from onChange to onContentChange
   }
 
   const handleSwitchChange = (
@@ -73,7 +73,7 @@ export function ExecConfigForm({ content, onChange }: ExecConfigFormProps) {
     if (index !== -1) {
       items[index] = { ...items[index], enabled }
       const newContent = updateYamlField(content, section, items)
-      onChange(newContent)
+      onContentChange(newContent)
     }
   }
 

@@ -3,7 +3,9 @@ package org.donutellko.modularbench.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import lombok.RequiredArgsConstructor;
+import org.donutellko.modularbench.dto.BenchResults;
 import org.donutellko.modularbench.dto.ExecutionConfig;
+import org.donutellko.modularbench.dto.TaskSource;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +19,10 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 @RequiredArgsConstructor
 public class BenchmarkService {
-    private final ObjectMapper yamlMapper = new ObjectMapper(new YAMLFactory());
-    private final ConcurrentHashMap<String, BenchmarkStatus> activeRuns = new ConcurrentHashMap<>();
-    private final BenchExecutorService benchmarkExecutorService;
+    private final BenchExecutorService benchExecutorService;
     private final FileService fileService;
+    private final ConcurrentHashMap<String, BenchmarkStatus> activeRuns = new ConcurrentHashMap<>();
+    private final ObjectMapper yamlMapper = new ObjectMapper(new YAMLFactory());
 
     public String startBenchmark(String execConfigFile, List<String> taskSourceFiles, String resultFilename) throws IOException {
         // Read the execution config
@@ -73,21 +75,27 @@ public class BenchmarkService {
             activeRuns.put(status.resultFilename(), status);
 
             ExecutionConfig executionConfig = fileService.readExecConfig(execConfigPath.toString());
+            List<TaskSource> taskSources = new ArrayList<>();
 
-            for (String taskSource : status.taskSourceFiles()) {
-                TaskSourceStatus sourceStatus = status.taskSourceStatuses().get(taskSource);
+            // Load all task sources
+            for (String taskSourceFile : status.taskSourceFiles()) {
+                TaskSource taskSource = fileService.readTaskSource("task_sources/" + taskSourceFile);
+                taskSource.setPath(taskSourceFile);
+                taskSource.setName(taskSourceFile);
+                taskSources.add(taskSource);
+
+                TaskSourceStatus sourceStatus = status.taskSourceStatuses().get(taskSourceFile);
                 sourceStatus.inProgress(sourceStatus.total());
-                saveStatus(status, statusFilePath);
-
-                benchmarkExecutorService.evaluate(executionConfig, taskSource);
-
                 saveStatus(status, statusFilePath);
             }
 
-            // Create final results file
+            // Run the benchmark
+            BenchResults results = benchExecutorService.evaluate(executionConfig, taskSources, status.resultFilename());
+
+            // Save results
             Path resultsPath = Paths.get("bench_results", status.resultFilename());
             Files.createDirectories(resultsPath.getParent());
-            Files.writeString(resultsPath, "TODO: Add actual benchmark results here");
+            fileService.writeBenchResults(resultsPath.toString(), results);
 
         } catch (Exception e) {
             e.printStackTrace();

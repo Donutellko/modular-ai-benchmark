@@ -32,10 +32,10 @@ public class BenchExecutorService {
     private final BenchmarkProgressTracker progressTracker;
 
     public BenchResults evaluate(ExecutionConfig config, Iterable<TaskSource> taskSourceList, String resultFilename) {
-        try {
-            BenchmarkProgressTracker.BenchmarkStatus benchmarkStatus =
-                    progressTracker.createStatus(config, taskSourceList, resultFilename);
+        BenchmarkProgressTracker.BenchmarkStatus benchmarkStatus =
+                progressTracker.createStatus(config, taskSourceList, resultFilename);
 
+        try {
             Map<TaskSource, Map<TaskDefinition, TaskResults>> results = new HashMap<>();
 
             for (TaskSource taskSource : taskSourceList) {
@@ -113,8 +113,8 @@ public class BenchExecutorService {
             templateModel.putAll(Map.<String, Object>of(
                     "common_prompt", desc.getCommonPrompt(),
                     "language", lang,
-                    "public_tests", descLang == null ? null : descLang.getPublicTests(),
-                    "hidden_tests", descLang == null ? null : descLang.getHiddenTests(),
+                    "public_tests", descLang == null ? null : stringifyTests(descLang.getPublicTests()),
+                    "hidden_tests", descLang == null ? null : stringifyTests(descLang.getHiddenTests()),
                     "parameters", parameters
             ));
 
@@ -153,6 +153,12 @@ public class BenchExecutorService {
             }
         }
         return taskResults;
+    }
+
+    private Object stringifyTests(List<TaskSource.TestDefinition> tests) {
+        return tests.stream()
+                .map(TaskSource.TestDefinition::getCode)
+                .collect(Collectors.joining("\n"));
     }
 
     private Boolean getExecParam(ExecutionConfig config, String paramName) {

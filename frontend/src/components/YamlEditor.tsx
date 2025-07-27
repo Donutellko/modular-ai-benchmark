@@ -135,20 +135,12 @@ export function YamlEditor({ directory, filename, onModified, isModified }: Yaml
         isTaskSource ? (
           <TaskSourceEditor
             content={content}
-            onContentChange={(newContent) => {
-              setContent(newContent)
-              setModifiedContent(directory, filename!, newContent)
-              onModified(filename!, true)
-            }}
+            onContentChange={handleContentChange}
           />
         ) : (
           <ExecConfigForm
             content={content}
-            onContentChange={(newContent) => {
-              setContent(newContent)
-              setModifiedContent(directory, filename!, newContent)
-              onModified(filename!, true)
-            }}
+            onContentChange={handleContentChange} // Changed from onChange to onContentChange
           />
         )
       ) : (
@@ -158,9 +150,7 @@ export function YamlEditor({ directory, filename, onModified, isModified }: Yaml
           value={content}
           onChange={(value) => {
             if (!value) return
-            setContent(value)
-            setModifiedContent(directory, filename!, value)
-            onModified(filename!, value !== originalContent)
+            handleContentChange(value)
           }}
           options={{
             minimap: { enabled: false }
