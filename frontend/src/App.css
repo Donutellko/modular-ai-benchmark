@@ -34,7 +34,14 @@
 .left-panel-content {
   overflow-y: auto;
   height: 100%;
-  padding-bottom: 60px; /* Space for collapse button */
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.left-panel-content .bp4-button {
+  justify-content: flex-start;
+  text-align: left;
 }
 
 .left-panel.collapsed {
@@ -279,13 +286,19 @@
 }
 
 .section-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 10px;
+  padding: 10px;
+  background: white;
 }
 
 .section-content.expanded {
   max-height: 100vh;
+}
+
+.left-panel.collapsed .section-content {
+  display: none;
 }
 
 .resize-handle {
@@ -311,4 +324,43 @@
 
 .resizing .left-panel-content {
   pointer-events: none;
+}
+
+.sections-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-bottom: 60px; /* Space for collapse button */
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
+.section .bp4-button {
+  justify-content: space-between;
+  text-align: left;
+  padding: 15px;
+  border-radius: 0;
+}
+
+.section .bp4-button[class*="active"] {
+  background: rgba(19, 124, 189, 0.1);
+}
+
+.section-content {
+  padding: 10px;
+  background: white;
+  overflow-y: auto;
+}
+
+.empty-editor-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #5c7080;
+  font-size: 16px;
+  font-style: italic;
 }

@@ -29,9 +29,19 @@ export function TaskSourceEditor({ content, onContentChange }: Props) {
 
   useEffect(() => {
     try {
-      setParsedContent(parse(content));
+      const parsed = parse(content);
+      setParsedContent({
+        version: parsed.version || '1.0',
+        name: parsed.name || '',
+        tasks: Array.isArray(parsed.tasks) ? parsed.tasks : []
+      });
     } catch (e) {
       console.error('Failed to parse YAML:', e);
+      setParsedContent({
+        version: '1.0',
+        name: '',
+        tasks: []
+      });
     }
   }, [content]);
 
@@ -60,7 +70,9 @@ export function TaskSourceEditor({ content, onContentChange }: Props) {
     onContentChange(stringify(newContent));
   };
 
-  if (!parsedContent) return null;
+  if (!parsedContent) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="task-source-editor">

@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback } from 'react'
-import { Button } from '@blueprintjs/core'
+import { Button, Collapse } from '@blueprintjs/core'
 import { FileList } from './components/FileList'
 import { YamlEditor } from './components/YamlEditor'
 import { ModifiedFilesProvider } from './context/ModifiedFilesContext'
@@ -13,6 +13,7 @@ export default function App() {
   const [activeSection, setActiveSection] = useState<Section>('exec_configs')
   const [selectedFile, setSelectedFile] = useState<string | null>(null)
   const [modifiedFiles, setModifiedFiles] = useState<Set<string>>(new Set())
+  const [expandedSection, setExpandedSection] = useState<Section>('exec_configs');
   const leftPanelRef = useRef<HTMLDivElement>(null)
   const [isResizing, setIsResizing] = useState(false)
 
@@ -50,6 +51,13 @@ export default function App() {
     }
   }, [])
 
+  const switchSection = (section: Section) => {
+    setActiveSection(section);
+    setExpandedSection(section);
+    setSelectedFile(null);
+    setCollapsed(false);
+  };
+
   return (
     <ModifiedFilesProvider>
       <div className="app-container">
@@ -71,7 +79,7 @@ export default function App() {
                 <div
                   className="vertical-text"
                   onClick={() => {
-                    setActiveSection('exec_configs')
+                    switchSection('exec_configs')
                     setCollapsed(false)
                   }}
                 >
@@ -80,7 +88,7 @@ export default function App() {
                 <div
                   className="vertical-text"
                   onClick={() => {
-                    setActiveSection('task_sources')
+                    switchSection('task_sources')
                     setCollapsed(false)
                   }}
                 >
@@ -89,7 +97,7 @@ export default function App() {
                 <div
                   className="vertical-text"
                   onClick={() => {
-                    setActiveSection('bench_results')
+                    switchSection('bench_results')
                     setCollapsed(false)
                   }}
                 >
@@ -97,50 +105,77 @@ export default function App() {
                 </div>
               </div>
             ) : (
-              <div>
-                <div
-                  className="section-header"
-                  onClick={() => setActiveSection('exec_configs')}
-                >
-                  Execution Configurations
-                </div>
-                <div className={`section-content ${activeSection === 'exec_configs' ? 'expanded' : ''}`}>
-                  <FileList
-                    directory="exec_configs"
-                    onFileSelect={setSelectedFile}
-                    selectedFile={selectedFile}
-                    modifiedFiles={modifiedFiles}
-                  />
-                </div>
-
-                <div
-                  className="section-header"
-                  onClick={() => setActiveSection('task_sources')}
-                >
-                  Task Sources
-                </div>
-                <div className={`section-content ${activeSection === 'task_sources' ? 'expanded' : ''}`}>
-                  <FileList
-                    directory="task_sources"
-                    onFileSelect={setSelectedFile}
-                    selectedFile={selectedFile}
-                    modifiedFiles={modifiedFiles}
-                  />
+              <div className="sections-container">
+                <div className="section">
+                  <Button
+                    fill
+                    large
+                    minimal
+                    alignText="left"
+                    rightIcon={expandedSection === 'exec_configs' ? 'chevron-down' : 'chevron-right'}
+                    active={activeSection === 'exec_configs'}
+                    onClick={() => switchSection('exec_configs')}
+                  >
+                    Execution Configurations
+                  </Button>
+                  <Collapse isOpen={expandedSection === 'exec_configs'}>
+                    <div className="section-content">
+                      <FileList
+                        directory="exec_configs"
+                        onFileSelect={setSelectedFile}
+                        selectedFile={selectedFile}
+                        modifiedFiles={modifiedFiles}
+                      />
+                    </div>
+                  </Collapse>
                 </div>
 
-                <div
-                  className="section-header"
-                  onClick={() => setActiveSection('bench_results')}
-                >
-                  Benchmark Runs
+                <div className="section">
+                  <Button
+                    fill
+                    large
+                    minimal
+                    alignText="left"
+                    rightIcon={expandedSection === 'task_sources' ? 'chevron-down' : 'chevron-right'}
+                    active={activeSection === 'task_sources'}
+                    onClick={() => switchSection('task_sources')}
+                  >
+                    Task Sources
+                  </Button>
+                  <Collapse isOpen={expandedSection === 'task_sources'}>
+                    <div className="section-content">
+                      <FileList
+                        directory="task_sources"
+                        onFileSelect={setSelectedFile}
+                        selectedFile={selectedFile}
+                        modifiedFiles={modifiedFiles}
+                      />
+                    </div>
+                  </Collapse>
                 </div>
-                <div className={`section-content ${activeSection === 'bench_results' ? 'expanded' : ''}`}>
-                  <FileList
-                    directory="bench_results"
-                    onFileSelect={setSelectedFile}
-                    selectedFile={selectedFile}
-                    modifiedFiles={modifiedFiles}
-                  />
+
+                <div className="section">
+                  <Button
+                    fill
+                    large
+                    minimal
+                    alignText="left"
+                    rightIcon={expandedSection === 'bench_results' ? 'chevron-down' : 'chevron-right'}
+                    active={activeSection === 'bench_results'}
+                    onClick={() => switchSection('bench_results')}
+                  >
+                    Benchmark Runs
+                  </Button>
+                  <Collapse isOpen={expandedSection === 'bench_results'}>
+                    <div className="section-content">
+                      <FileList
+                        directory="bench_results"
+                        onFileSelect={setSelectedFile}
+                        selectedFile={selectedFile}
+                        modifiedFiles={modifiedFiles}
+                      />
+                    </div>
+                  </Collapse>
                 </div>
               </div>
             )}

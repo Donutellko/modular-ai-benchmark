@@ -7,21 +7,56 @@ interface ExecConfigFormProps {
   onChange: (content: string) => void
 }
 
-// Default config moved to yaml.ts
+const defaultConfig: ExecConfig = {
+  version: '1.0',
+  difficulties: [],
+  areas: [],
+  languages: [],
+  llms: [],
+  parameters: [
+    { name: 'should-generate-tests', enabled: true },
+    { name: 'use-llm-judge', enabled: true },
+    { name: 'all-tests-public', enabled: false },
+    { name: 'all-tests-hidden', enabled: false },
+    { name: 'should-use-libraries', enabled: true }
+  ],
+  criteria: [
+    { name: 'unit-test', enabled: true },
+    { name: 'ram-usage', enabled: true },
+    { name: 'cpu-usage', enabled: true },
+    { name: 'sonarqube', enabled: true },
+    { name: 'llm-judge-code-quality', enabled: true },
+    { name: 'llm-judge-comment-quality', enabled: true }
+  ]
+};
 
 export function ExecConfigForm({ content, onChange }: ExecConfigFormProps) {
-  const [config, setConfig] = useState<ExecConfig | null>(null)
+  const [config, setConfig] = useState<ExecConfig>(defaultConfig)
 
   useEffect(() => {
+    if (!content) {
+      setConfig(defaultConfig);
+      return;
+    }
     try {
       const parsed = parseYaml(content)
-      setConfig(parsed)
+      // Ensure all arrays exist
+      const safeConfig = {
+        ...defaultConfig,
+        ...parsed,
+        difficulties: parsed.difficulties || [],
+        areas: parsed.areas || [],
+        languages: parsed.languages || [],
+        llms: parsed.llms || [],
+        parameters: parsed.parameters || defaultConfig.parameters,
+        criteria: parsed.criteria || defaultConfig.criteria
+      }
+      setConfig(safeConfig)
     } catch (e) {
       console.error('Failed to parse YAML:', e)
+      setConfig(defaultConfig)
     }
   }, [content])
-
-  if (!config) return null
 
   const handleArrayChange = (field: keyof ExecConfig, values: string[]) => {
     const newContent = updateYamlField(content, field, values)

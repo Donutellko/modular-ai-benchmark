@@ -16,7 +16,7 @@ interface YamlEditorProps {
 export function YamlEditor({ directory, filename, onModified, isModified }: YamlEditorProps) {
   const [content, setContent] = useState('')
   const [originalContent, setOriginalContent] = useState('')
-  const [isFormView, setIsFormView] = useState(false)
+  const [isFormView, setIsFormView] = useState(true)
   const { getModifiedContent, setModifiedContent, clearModifiedContent } = useModifiedFiles()
 
   useEffect(() => {
@@ -67,6 +67,14 @@ export function YamlEditor({ directory, filename, onModified, isModified }: Yaml
 
   const editorHeight = '100px' // Height for 5 lines approximately
   const isTaskSource = directory === 'task_sources'
+
+  if (!filename) {
+    return (
+      <div className="empty-editor-state">
+        Select a file to edit
+      </div>
+    );
+  }
 
   return (
     <div className="yaml-editor">
