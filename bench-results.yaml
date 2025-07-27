@@ -1,0 +1,217 @@
+---
+- task-source-name: "task-source-example-1"
+  task-source-path: "src/test/resources/task-source-example-1.yaml"
+  results:
+  - name: "highest common factor, implementation from zero"
+    details:
+      task_source_path: "src/test/resources/task-source-example-1.yaml"
+      task_source_name: "task-source-example-1"
+      task_definition_name: "highest common factor, implementation from zero"
+      skip_reasons: []
+      task_results:
+      - language: "java"
+        provider_name: "org.donutellko.modularbench.llm.StubLLMClient"
+        model_name: "stub-llm"
+        llm_response:
+          model_name: "[stub] stub-llm"
+          prompt: "Write a function in java to calculate the \nhighest common factor\
+            \ of two numbers. \nIn response, return only the code of the function.\
+            \ There should be no additional text, comments, or explanations, just\
+            \ the code.\n\nThe generated code should only contain one function called\
+            \ `gcd()` \nand accept two numbers as parameters.\nYou shouldn't use any\
+            \ foreign libraries to achieve the goal.\n\n\n"
+          language: "java"
+          raw_response_text: null
+          response_text: "/* LLM stub response for stub-llm (java): Write a function\
+            \ in java to calculate the \nhighest common factor of two numbers. \n\
+            In response, return only the code of the function. There should be no\
+            \ additional text, comments, or explanations, just the code.\n\nThe generated\
+            \ code should only contain one function called `gcd()` \nand accept two\
+            \ numbers as parameters.\nYou shouldn't use any foreign libraries to achieve\
+            \ the goal.\n\n\n */public static int solution(int a, int b) { return\
+            \ 1; }"
+          response_code: "200"
+          token_count: 0
+          prompt_token_count: 0
+          time_millis: 0
+        evaluation_result:
+        - executor_class: "org.donutellko.modularbench.evaluator.codeexecutor.JavaExecutor"
+          execution_id: "MBPP/2075431052/java/test-0351077404/1310376961000"
+          criteria: "unit-test"
+          score: 0.0
+          unit: "success"
+          output: ""
+          error: "java.lang.AssertionError: Test failed: Expected 5 but got 1"
+          time_millis: 317.595459
+          test_number: 0
+          exit_code: 1
+          prepared_code: "public class Main {\n/* LLM stub response for stub-llm (java):\
+            \ Write a function in java to calculate the \nhighest common factor of\
+            \ two numbers. \nIn response, return only the code of the function. There\
+            \ should be no additional text, comments, or explanations, just the code.\n\
+            \nThe generated code should only contain one function called `gcd()` \n\
+            and accept two numbers as parameters.\nYou shouldn't use any foreign libraries\
+            \ to achieve the goal.\n\n\n */public static int main(int a, int b) {\
+            \ return 1; }\n}\n/**********/\npublic class Test {\npublic static void\
+            \ main(String[] args){\n    int expected = 5;\n    int result = Main.main(10,\
+            \ 15);\n    if (result != expected) {\n        throw new AssertionError(\"\
+            Test failed: Expected \" + expected + \" but got \" + result);\n    }\n\
+            \    System.out.println(\"Test passed\");\n}\n\n}"
+        - executor_class: "org.donutellko.modularbench.evaluator.codeexecutor.JavaExecutor"
+          execution_id: "MBPP/2075431052/java/test-0351077404/1310376961000"
+          criteria: "cpu-usage"
+          score: 0.214292
+          unit: "ms"
+          output: null
+          error: "java.lang.AssertionError: Test failed: Expected 5 but got 1"
+          time_millis: 317.595459
+        - executor_class: "org.donutellko.modularbench.evaluator.codeexecutor.JavaExecutor"
+          execution_id: "MBPP/2075431052/java/test-0351077404/1310376961000"
+          criteria: "ram-usage"
+          score: -1.0
+          unit: "Kb"
+          output: null
+          error: "java.lang.AssertionError: Test failed: Expected 5 but got 1"
+          time_millis: null
+        - executor_class: "org.donutellko.modularbench.evaluator.codeexecutor.JavaExecutor"
+          execution_id: "MBPP/2075431052/java/test-11303295928/1310696344250"
+          criteria: "unit-test"
+          score: 1.0
+          unit: "success"
+          output: "Test passed\n"
+          error: ""
+          time_millis: 46.922333
+          test_number: 0
+          exit_code: 0
+          prepared_code: "public class Main {\n/* LLM stub response for stub-llm (java):\
+            \ Write a function in java to calculate the \nhighest common factor of\
+            \ two numbers. \nIn response, return only the code of the function. There\
+            \ should be no additional text, comments, or explanations, just the code.\n\
+            \nThe generated code should only contain one function called `gcd()` \n\
+            and accept two numbers as parameters.\nYou shouldn't use any foreign libraries\
+            \ to achieve the goal.\n\n\n */public static int main(int a, int b) {\
+            \ return 1; }\n}\n/**********/\npublic class Test {\npublic static void\
+            \ main(String[] args){\n    int expected = 1;\n    int result = Main.main(2,\
+            \ 5);\n    if (result != expected) {\n        throw new AssertionError(\"\
+            Test failed: Expected \" + expected + \" but got \" + result);\n    }\n\
+            \    System.out.println(\"Test passed\");\n}\n\n}"
+        - executor_class: "org.donutellko.modularbench.evaluator.codeexecutor.JavaExecutor"
+          execution_id: "MBPP/2075431052/java/test-11303295928/1310696344250"
+          criteria: "cpu-usage"
+          score: 0.094291
+          unit: "ms"
+          output: null
+          error: ""
+          time_millis: 46.922333
+        - executor_class: "org.donutellko.modularbench.evaluator.codeexecutor.JavaExecutor"
+          execution_id: "MBPP/2075431052/java/test-11303295928/1310696344250"
+          criteria: "ram-usage"
+          score: -1.0
+          unit: "Kb"
+          output: null
+          error: ""
+          time_millis: null
+      - language: "java"
+        provider_name: "org.donutellko.modularbench.llm.SpringAiLLMClient"
+        model_name: "mistralai/devstral-small:free"
+        llm_response:
+          model_name: "mistralai/devstral-small:free"
+          prompt: "Write a function in java to calculate the \nhighest common factor\
+            \ of two numbers. \nIn response, return only the code of the function.\
+            \ There should be no additional text, comments, or explanations, just\
+            \ the code.\n\nThe generated code should only contain one function called\
+            \ `gcd()` \nand accept two numbers as parameters.\nYou shouldn't use any\
+            \ foreign libraries to achieve the goal.\n\n\n"
+          language: "java"
+          raw_response_text: "public int gcd(int a, int b) {\n    while (b != 0) {\n\
+            \        int temp = b;\n        b = a % b;\n        a = temp;\n    }\n\
+            \    return a;\n}"
+          response_text: "public int gcd(int a, int b) {\n    while (b != 0) {\n \
+            \       int temp = b;\n        b = a % b;\n        a = temp;\n    }\n\
+            \    return a;\n}"
+          response_code: ""
+          token_count: 135
+          prompt_token_count: 84
+          time_millis: 2353
+        evaluation_result:
+        - executor_class: "org.donutellko.modularbench.evaluator.codeexecutor.JavaExecutor"
+          execution_id: "MBPP/2075431052/java/test-0351077404/1319033510916"
+          criteria: "unit-test"
+          score: 0.0
+          unit: "success"
+          output: "Error"
+          error: "/Test.java:4: error: cannot find symbol\n    int result = Main.main(10,\
+            \ 15);\n                     ^\n  symbol:   method main(int,int)\n  location:\
+            \ class Main\n"
+          time_millis: null
+          test_number: 0
+          exit_code: 1
+          prepared_code: "public class Main {\npublic int gcd(int a, int b) {\n  \
+            \  while (b != 0) {\n        int temp = b;\n        b = a % b;\n     \
+            \   a = temp;\n    }\n    return a;\n}\n}\n/**********/\npublic class\
+            \ Test {\npublic static void main(String[] args){\n    int expected =\
+            \ 5;\n    int result = Main.main(10, 15);\n    if (result != expected)\
+            \ {\n        throw new AssertionError(\"Test failed: Expected \" + expected\
+            \ + \" but got \" + result);\n    }\n    System.out.println(\"Test passed\"\
+            );\n}\n\n}"
+        - executor_class: "org.donutellko.modularbench.evaluator.codeexecutor.JavaExecutor"
+          execution_id: "MBPP/2075431052/java/test-0351077404/1319033510916"
+          criteria: "cpu-usage"
+          score: -1.0
+          unit: "ms"
+          output: null
+          error: "/Test.java:4: error: cannot find symbol\n    int result = Main.main(10,\
+            \ 15);\n                     ^\n  symbol:   method main(int,int)\n  location:\
+            \ class Main\n"
+          time_millis: null
+        - executor_class: "org.donutellko.modularbench.evaluator.codeexecutor.JavaExecutor"
+          execution_id: "MBPP/2075431052/java/test-0351077404/1319033510916"
+          criteria: "ram-usage"
+          score: -1.0
+          unit: "Kb"
+          output: null
+          error: "/Test.java:4: error: cannot find symbol\n    int result = Main.main(10,\
+            \ 15);\n                     ^\n  symbol:   method main(int,int)\n  location:\
+            \ class Main\n"
+          time_millis: null
+        - executor_class: "org.donutellko.modularbench.evaluator.codeexecutor.JavaExecutor"
+          execution_id: "MBPP/2075431052/java/test-11303295928/1320183492458"
+          criteria: "unit-test"
+          score: 0.0
+          unit: "success"
+          output: "Error"
+          error: "/Test.java:4: error: cannot find symbol\n    int result = Main.main(2,\
+            \ 5);\n                     ^\n  symbol:   method main(int,int)\n  location:\
+            \ class Main\n"
+          time_millis: null
+          test_number: 0
+          exit_code: 1
+          prepared_code: "public class Main {\npublic int gcd(int a, int b) {\n  \
+            \  while (b != 0) {\n        int temp = b;\n        b = a % b;\n     \
+            \   a = temp;\n    }\n    return a;\n}\n}\n/**********/\npublic class\
+            \ Test {\npublic static void main(String[] args){\n    int expected =\
+            \ 1;\n    int result = Main.main(2, 5);\n    if (result != expected) {\n\
+            \        throw new AssertionError(\"Test failed: Expected \" + expected\
+            \ + \" but got \" + result);\n    }\n    System.out.println(\"Test passed\"\
+            );\n}\n\n}"
+        - executor_class: "org.donutellko.modularbench.evaluator.codeexecutor.JavaExecutor"
+          execution_id: "MBPP/2075431052/java/test-11303295928/1320183492458"
+          criteria: "cpu-usage"
+          score: -1.0
+          unit: "ms"
+          output: null
+          error: "/Test.java:4: error: cannot find symbol\n    int result = Main.main(2,\
+            \ 5);\n                     ^\n  symbol:   method main(int,int)\n  location:\
+            \ class Main\n"
+          time_millis: null
+        - executor_class: "org.donutellko.modularbench.evaluator.codeexecutor.JavaExecutor"
+          execution_id: "MBPP/2075431052/java/test-11303295928/1320183492458"
+          criteria: "ram-usage"
+          score: -1.0
+          unit: "Kb"
+          output: null
+          error: "/Test.java:4: error: cannot find symbol\n    int result = Main.main(2,\
+            \ 5);\n                     ^\n  symbol:   method main(int,int)\n  location:\
+            \ class Main\n"
+          time_millis: null
+    area: "math"
