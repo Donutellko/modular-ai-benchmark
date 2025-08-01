@@ -117,22 +117,42 @@ export function TaskDetailModal({ isOpen, onClose, task, taskIndex, onTaskUpdate
     </Card>
   );
 
-  const renderPrompt = () => (
+  const renderPromptTab = () => (
     <Card>
-      <Button
-        text="Edit Common Prompt"
-        onClick={() => openCodeEditor(['task', 'common_prompt'], localTask.task?.common_prompt || '')}
-      />
-      {Object.entries(localTask.task || {}).map(([key, value]) => {
-        if (key === 'common_prompt') return null;
-        return (
-          <Button
-            key={key}
-            text={`Edit ${key}`}
-            onClick={() => openCodeEditor(['task', key], stringify(value))}
-          />
-        );
-      })}
+      <div style={{ marginBottom: '20px' }}>
+        <h4>Common Prompt Template</h4>
+        <Button
+          icon="edit"
+          text="Edit Common Prompt"
+          onClick={() => openCodeEditor(['task', 'common_prompt'], localTask.task?.common_prompt || '')}
+          style={{ marginBottom: '10px' }}
+        />
+
+        <h4 style={{ marginTop: '20px' }}>Language-Specific Additions</h4>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          {Object.entries(localTask.task?.languages_specific || {}).map(([lang, config]: [string, any]) => (
+            <Card key={lang}>
+              <h5>{lang}</h5>
+              <Button
+                icon="edit"
+                text="Edit Language-Specific Prompt"
+                onClick={() => openCodeEditor(['task', 'languages_specific', lang, 'description'], config.description || '')}
+              />
+            </Card>
+          ))}
+        </div>
+
+        <div style={{ marginTop: '20px', color: '#5C7080' }}>
+          <p>Available template variables:</p>
+          <ul>
+            <li>${'{language}'} - will be replaced with the target programming language</li>
+            <li>${'{common_prompt}'} - will be replaced with the common prompt (in language-specific sections)</li>
+            <li>${'{public_tests}'} - will be replaced with public test cases</li>
+            <li>${'{hidden_tests}'} - will be replaced with hidden test cases (if enabled)</li>
+            <li>${'parameters[\'parameter-name\']'} - will be replaced with parameter values</li>
+          </ul>
+        </div>
+      </div>
     </Card>
   );
 
@@ -141,18 +161,18 @@ export function TaskDetailModal({ isOpen, onClose, task, taskIndex, onTaskUpdate
       <Dialog
         isOpen={isOpen}
         onClose={onClose}
-        title="Edit Task"
-        style={{ width: '90vw', maxHeight: '90vh' }}
+        title={`Edit Task: ${localTask.name}`}
+        style={{ width: '90vw', maxWidth: '1200px' }}
       >
         <div className={Classes.DIALOG_BODY}>
           <Tabs
-            id="taskTabs"
+            id="task-tabs"
             selectedTabId={selectedTabId}
-            onChange={setSelectedTabId as any}
+            onChange={(newTabId) => setSelectedTabId(newTabId.toString())}
           >
             <Tab id="basic" title="Basic Info" panel={renderBasicInfo()} />
+            <Tab id="prompt" title="Task Prompt" panel={renderPromptTab()} />
             <Tab id="languages" title="Languages" panel={renderLanguages()} />
-            <Tab id="prompt" title="Task Prompt" panel={renderPrompt()} />
           </Tabs>
         </div>
         <div className={Classes.DIALOG_FOOTER}>
@@ -166,15 +186,15 @@ export function TaskDetailModal({ isOpen, onClose, task, taskIndex, onTaskUpdate
       <Dialog
         isOpen={showCodeEditor}
         onClose={() => setShowCodeEditor(false)}
-        title="Code Editor"
-        style={{ width: '90vw', height: '90vh' }}
+        title="Edit Code"
+        style={{ width: '90vw', height: '80vh' }}
       >
-        <div className={Classes.DIALOG_BODY} style={{ height: 'calc(90vh - 120px)' }}>
+        <div className={Classes.DIALOG_BODY} style={{ height: 'calc(100% - 100px)' }}>
           <Editor
             height="100%"
-            defaultLanguage={codeEditorPath.includes('tests') ? 'yaml' : 'plaintext'}
+            defaultLanguage="yaml"
             value={codeEditorContent}
-            onChange={value => setCodeEditorContent(value || '')}
+            onChange={(value) => setCodeEditorContent(value || '')}
             options={{ minimap: { enabled: false } }}
           />
         </div>
