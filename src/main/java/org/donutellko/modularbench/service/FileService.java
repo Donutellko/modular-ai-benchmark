@@ -1,11 +1,10 @@
 package org.donutellko.modularbench.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import lombok.SneakyThrows;
 import org.donutellko.modularbench.dto.BenchResults;
 import org.donutellko.modularbench.dto.ExecutionConfig;
 import org.donutellko.modularbench.dto.TaskSource;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
@@ -16,9 +15,9 @@ import java.nio.file.Paths;
 public class FileService {
 
 
-    private final ObjectMapper mapper;
+    private final YAMLMapper mapper;
 
-    public FileService(@Qualifier("yamlMapper") ObjectMapper mapper) {
+    public FileService(YAMLMapper mapper) {
         this.mapper = mapper;
     }
 

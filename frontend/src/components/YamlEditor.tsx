@@ -16,10 +16,9 @@ interface YamlEditorProps {
   directory: string
   filename: string | null
   onModified: (filename: string, isModified: boolean) => void
-  isModified: boolean
 }
 
-export function YamlEditor({ directory, filename, onModified, isModified }: YamlEditorProps) {
+export function YamlEditor({ directory, filename, onModified }: YamlEditorProps) {
   const [content, setContent] = useState('')
   const [originalContent, setOriginalContent] = useState('')
   const [isFormView, setIsFormView] = useState(true)
@@ -27,6 +26,9 @@ export function YamlEditor({ directory, filename, onModified, isModified }: Yaml
   const [showStatusDialog, setShowStatusDialog] = useState(false);
   const [statusFile, setStatusFile] = useState<string>('');
   const { getModifiedContent, setModifiedContent, clearModifiedContent } = useModifiedFiles()
+
+  // Compute isModified based on content comparison
+  const isModified = content !== originalContent;
 
   useEffect(() => {
     if (filename) {

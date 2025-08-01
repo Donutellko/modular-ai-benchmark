@@ -1,6 +1,7 @@
 import { Button, Checkbox, ButtonGroup } from '@blueprintjs/core'
 import { useState, useEffect } from 'react'
 import { api } from '../services/api'
+import { useModifiedFiles } from '../context/ModifiedFilesContext'
 
 interface FileListProps {
   directory: string
@@ -13,6 +14,7 @@ export function FileList({ directory, onFileSelect, selectedFile, modifiedFiles 
   const [files, setFiles] = useState<string[]>([])
   const [selectedForAction, setSelectedForAction] = useState<Set<string>>(new Set())
   const [lastSelected, setLastSelected] = useState<string | null>(null)
+  const { getModifiedContent, clearModifiedContent } = useModifiedFiles()
 
   useEffect(() => {
     loadFiles()
@@ -90,9 +92,13 @@ export function FileList({ directory, onFileSelect, selectedFile, modifiedFiles 
   const handleSaveAll = async () => {
     const modifiedInDir = files.filter(f => modifiedFiles.has(f))
     for (const filename of modifiedInDir) {
-      // Note: We'll need to implement this in the YamlEditor
-      // by exposing its save functionality
+      const content = getModifiedContent(directory, filename)
+      if (content !== null) {
+        await api.updateFile(directory, filename, content)
+        clearModifiedContent(directory, filename)
+      }
     }
+    await loadFiles()
   }
 
   return (
