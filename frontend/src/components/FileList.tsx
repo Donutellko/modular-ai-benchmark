@@ -31,6 +31,7 @@ export function FileList({ directory, onFileSelect, selectedFile, modifiedFiles 
   }
 
   const handleClick = (filename: string, event: React.MouseEvent) => {
+    event.stopPropagation(); // Stop event from reaching parent elements
     onFileSelect(filename)
 
     // Handle multi-select only for exec_configs

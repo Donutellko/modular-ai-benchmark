@@ -49,6 +49,7 @@ public class FileController {
         List<String> files = FileUtils.listFiles(dir, new String[]{"yaml", "yml"}, false)
             .stream()
             .map(File::getName)
+            .sorted()
             .toList();
 
         return ResponseEntity.ok(files);
