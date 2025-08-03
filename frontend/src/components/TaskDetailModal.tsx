@@ -117,6 +117,92 @@ export function TaskDetailModal({ isOpen, onClose, task, taskIndex, onTaskUpdate
     </Card>
   );
 
+  const renderLanguageTests = (lang: string, config: any) => {
+    const publicTests = config.public_tests || [];
+    const hiddenTests = config.hidden_tests || [];
+    const allTests = [...publicTests.map(t => ({ ...t, isPublic: true })),
+                     ...hiddenTests.map(t => ({ ...t, isPublic: false }))];
+
+    const updateTest = (testIndex: number, isPublic: boolean, newCode?: string) => {
+      const updatedPublicTests = [...publicTests];
+      const updatedHiddenTests = [...hiddenTests];
+
+      // Remove from both arrays first
+      const combinedIndex = testIndex;
+      if (combinedIndex < publicTests.length) {
+        updatedPublicTests.splice(combinedIndex, 1);
+      } else {
+        updatedHiddenTests.splice(combinedIndex - publicTests.length, 1);
+      }
+
+      // Add to the appropriate array if not deleting
+      if (newCode !== undefined) {
+        const test = { code: newCode };
+        if (isPublic) {
+          updatedPublicTests.push(test);
+        } else {
+          updatedHiddenTests.push(test);
+        }
+      }
+
+      updateField(['task', 'languages_specific', lang, 'public_tests'], updatedPublicTests);
+      updateField(['task', 'languages_specific', lang, 'hidden_tests'], updatedHiddenTests);
+    };
+
+    const addNewTest = () => {
+      const newTest = { code: '# New test\nresult = ${solution.function_name}(arg1, arg2)\nassert result == expected' };
+      updateField(
+        ['task', 'languages_specific', lang, 'public_tests'],
+        [...publicTests, newTest]
+      );
+    };
+
+    return (
+      <Card style={{ marginTop: '10px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+          <h5 style={{ margin: 0 }}>Test Cases</h5>
+          <Button icon="plus" text="Add Test" onClick={addNewTest} />
+        </div>
+        {allTests.map((test, index) => (
+          <Card key={index} style={{ marginBottom: '10px' }}>
+            <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
+              <Button
+                icon="edit"
+                text="Edit Test"
+                onClick={() => {
+                  const path = ['task', 'languages_specific', lang,
+                              test.isPublic ? 'public_tests' : 'hidden_tests',
+                              test.isPublic ? index : index - publicTests.length,
+                              'code'];
+                  openCodeEditor(path, test.code);
+                }}
+              />
+              <Button
+                icon="trash"
+                intent="danger"
+                onClick={() => updateTest(index, test.isPublic)}
+              />
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <label className={Classes.LABEL} style={{ marginBottom: 0, marginRight: '10px' }}>
+                  <input
+                    type="checkbox"
+                    checked={test.isPublic}
+                    onChange={() => updateTest(index, !test.isPublic, test.code)}
+                    style={{ marginRight: '5px' }}
+                  />
+                  Public Test
+                </label>
+              </div>
+            </div>
+            <pre style={{ margin: 0, padding: '10px', background: '#f5f8fa', borderRadius: '3px' }}>
+              {test.code}
+            </pre>
+          </Card>
+        ))}
+      </Card>
+    );
+  };
+
   const renderPromptTab = () => (
     <Card>
       <div style={{ marginBottom: '20px' }}>
@@ -127,9 +213,20 @@ export function TaskDetailModal({ isOpen, onClose, task, taskIndex, onTaskUpdate
           onClick={() => openCodeEditor(['task', 'common_prompt'], localTask.task?.common_prompt || '')}
           style={{ marginBottom: '10px' }}
         />
+        <pre style={{
+          margin: '10px 0',
+          padding: '10px',
+          background: '#f5f8fa',
+          borderRadius: '3px',
+          whiteSpace: 'pre-wrap',
+          maxHeight: '200px',
+          overflow: 'auto'
+        }}>
+          {localTask.task?.common_prompt || 'No common prompt defined'}
+        </pre>
 
-        <h4 style={{ marginTop: '20px' }}>Language-Specific Additions</h4>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <h4 style={{ marginTop: '20px' }}>Language-Specific Settings</h4>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           {Object.entries(localTask.task?.languages_specific || {}).map(([lang, config]: [string, any]) => (
             <Card key={lang}>
               <h5>{lang}</h5>
@@ -137,19 +234,30 @@ export function TaskDetailModal({ isOpen, onClose, task, taskIndex, onTaskUpdate
                 icon="edit"
                 text="Edit Language-Specific Prompt"
                 onClick={() => openCodeEditor(['task', 'languages_specific', lang, 'description'], config.description || '')}
+                style={{ marginBottom: '10px' }}
               />
+              <pre style={{
+                margin: '10px 0',
+                padding: '10px',
+                background: '#f5f8fa',
+                borderRadius: '3px',
+                whiteSpace: 'pre-wrap',
+                maxHeight: '200px',
+                overflow: 'auto'
+              }}>
+                {config.description || 'No language-specific prompt defined'}
+              </pre>
+              {renderLanguageTests(lang, config)}
             </Card>
           ))}
         </div>
 
         <div style={{ marginTop: '20px', color: '#5C7080' }}>
-          <p>Available template variables:</p>
+          <p>Available template variables in tests:</p>
           <ul>
-            <li>${'{language}'} - will be replaced with the target programming language</li>
-            <li>${'{common_prompt}'} - will be replaced with the common prompt (in language-specific sections)</li>
-            <li>${'{public_tests}'} - will be replaced with public test cases</li>
-            <li>${'{hidden_tests}'} - will be replaced with hidden test cases (if enabled)</li>
-            <li>${'parameters[\'parameter-name\']'} - will be replaced with parameter values</li>
+            <li>${'${solution.function_name}'} - name of the solution function</li>
+            <li>${'${solution.code}'} - full solution code</li>
+            <li>${'parameters[\'parameter-name\']'} - parameter values</li>
           </ul>
         </div>
       </div>
