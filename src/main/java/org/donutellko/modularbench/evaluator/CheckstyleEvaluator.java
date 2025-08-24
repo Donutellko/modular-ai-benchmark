@@ -35,7 +35,7 @@ public class CheckstyleEvaluator implements Evaluator {
 
     @SneakyThrows
     @Override
-    public List<TaskResults.LlmResponseEvaluationsResult> execute(TaskSource.TaskDefinition taskDefinition, TaskResults.LlmGenerationResult llmResponse) {
+    public List<TaskResults.LlmResponseEvaluationsResult> execute(ExecutionConfig config, TaskSource.TaskDefinition taskDefinition, TaskResults.LlmGenerationResult llmResponse) {
         long startTime = System.nanoTime();
 
         Path tempDir = Files.createTempDirectory("ai_benchmark_checkstyle-");
@@ -44,14 +44,14 @@ public class CheckstyleEvaluator implements Evaluator {
 
         // Load Checkstyle configuration (use Google style as example)
         File configFile = new File(getClass().getClassLoader().getResource("checkstyle_google_config.xml").getFile());
-        Configuration config = ConfigurationLoader.loadConfiguration(
+        Configuration checkerConfig = ConfigurationLoader.loadConfiguration(
                 configFile.getAbsolutePath(),
                 new PropertiesExpander(new Properties())
         );
 
         Checker checker = new Checker();
         checker.setModuleClassLoader(Checker.class.getClassLoader());
-        checker.configure(config);
+        checker.configure(checkerConfig);
 
         Map<SeverityLevel, SeverityLevelCounter> counters = Arrays.stream(SeverityLevel.values())
                 .collect(Collectors.toMap(Function.identity(), SeverityLevelCounter::new));

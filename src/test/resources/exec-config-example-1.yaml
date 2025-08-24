@@ -38,6 +38,7 @@ criteria: # list of criteria to evaluate the solutions
     enabled: true
   - name: python-pyright    # only for python
     enabled: false
+llm-judge: mistralai/devstral-small:free
 llms:
   - stub-llm
   - mistralai/devstral-small:free

@@ -18,6 +18,7 @@ public class ExecutionConfig {
     private Set<String> languages;
     private Set<ExecutionParameter> parameters;
     private Set<ExecutionParameter> criteria;
+    private String llmJudge;
     private Set<String> llms;
     private Integer maxTokens;
     private String filepath;

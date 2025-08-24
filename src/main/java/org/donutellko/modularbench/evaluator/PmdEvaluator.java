@@ -9,6 +9,7 @@ import net.sourceforge.pmd.reporting.Report;
 import org.donutellko.modularbench.dto.ExecutionConfig;
 import org.donutellko.modularbench.dto.TaskResults;
 import org.donutellko.modularbench.dto.TaskSource;
+import org.springframework.stereotype.Component;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,6 +19,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+@Component
 public class PmdEvaluator implements Evaluator {
 
     @Override
@@ -31,7 +33,7 @@ public class PmdEvaluator implements Evaluator {
 
     @SneakyThrows
     @Override
-    public List<TaskResults.LlmResponseEvaluationsResult> execute(TaskSource.TaskDefinition taskDefinition, TaskResults.LlmGenerationResult llmResponse) {
+    public List<TaskResults.LlmResponseEvaluationsResult> execute(ExecutionConfig config, TaskSource.TaskDefinition taskDefinition, TaskResults.LlmGenerationResult llmResponse) {
         long startTime = System.nanoTime();
 
         Path tempDir = Files.createTempDirectory("ai_benchmark_checkstyle-");

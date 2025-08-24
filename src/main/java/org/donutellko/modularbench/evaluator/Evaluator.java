@@ -9,5 +9,5 @@ import java.util.List;
 public interface Evaluator {
     boolean matches(ExecutionConfig config, TaskSource.TaskDefinition task);
 
-    List<TaskResults.LlmResponseEvaluationsResult> execute(TaskSource.TaskDefinition taskDefinition, TaskResults.LlmGenerationResult llmResponse);
+    List<TaskResults.LlmResponseEvaluationsResult> execute(ExecutionConfig config, TaskSource.TaskDefinition taskDefinition, TaskResults.LlmGenerationResult llmResponse);
 }

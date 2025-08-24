@@ -26,7 +26,7 @@ public class UnitTestExecutor implements Evaluator {
     }
 
     @Override
-    public List<TaskResults.LlmResponseEvaluationsResult> execute(TaskSource.TaskDefinition taskDefinition, TaskResults.LlmGenerationResult llmResponse) {
+    public List<TaskResults.LlmResponseEvaluationsResult> execute(ExecutionConfig config, TaskSource.TaskDefinition taskDefinition, TaskResults.LlmGenerationResult llmResponse) {
         String language = llmResponse.getLanguage();
 
         TaskSource.LanguageSpecificTask languageSpecificTask = taskDefinition.getTask().getLanguagesSpecific().get(language);

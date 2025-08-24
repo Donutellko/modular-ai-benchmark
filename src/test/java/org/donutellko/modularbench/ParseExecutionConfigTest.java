@@ -44,6 +44,7 @@ public class ParseExecutionConfigTest {
                         new ExecutionParameter("java-pmd", true),
                         new ExecutionParameter("python-pyright", false)
                 ))
+                .llmJudge("mistralai/devstral-small:free")
                 .llms(Set.of("stub-llm", "mistralai/devstral-small:free"))
                 .build();
         /*

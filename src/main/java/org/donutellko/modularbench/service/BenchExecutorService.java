@@ -145,7 +145,7 @@ public class BenchExecutorService {
 
                 List<Evaluator> evaluators = evaluatorRegistry.getEvaluators(config, task);
                 for (Evaluator evaluator : evaluators) {
-                    List<TaskResults.LlmResponseEvaluationsResult> evaluationResult = evaluator.execute(task, llmResponse);
+                    List<TaskResults.LlmResponseEvaluationsResult> evaluationResult = evaluator.execute(config, task, llmResponse);
                     taskResult.getEvaluationResult().addAll(evaluationResult);
                 }
 
