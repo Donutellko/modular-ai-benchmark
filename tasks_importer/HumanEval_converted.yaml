@@ -5,7 +5,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/0
+  source: openai/human-eval/0
   languages:
   - python
   available_parameters:
@@ -92,7 +92,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/1
+  source: openai/human-eval/1
   languages:
   - python
   available_parameters:
@@ -190,7 +190,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/2
+  source: openai/human-eval/2
   languages:
   - python
   available_parameters:
@@ -265,7 +265,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/3
+  source: openai/human-eval/3
   languages:
   - python
   available_parameters:
@@ -351,7 +351,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/4
+  source: openai/human-eval/4
   languages:
   - python
   available_parameters:
@@ -429,7 +429,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/5
+  source: openai/human-eval/5
   languages:
   - python
   available_parameters:
@@ -514,7 +514,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/6
+  source: openai/human-eval/6
   languages:
   - python
   available_parameters:
@@ -601,7 +601,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/7
+  source: openai/human-eval/7
   languages:
   - python
   available_parameters:
@@ -676,7 +676,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/8
+  source: openai/human-eval/8
   languages:
   - python
   available_parameters:
@@ -759,7 +759,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/9
+  source: openai/human-eval/9
   languages:
   - python
   available_parameters:
@@ -844,7 +844,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/10
+  source: openai/human-eval/10
   languages:
   - python
   available_parameters:
@@ -937,7 +937,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/11
+  source: openai/human-eval/11
   languages:
   - python
   available_parameters:
@@ -1016,7 +1016,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/12
+  source: openai/human-eval/12
   languages:
   - python
   available_parameters:
@@ -1099,7 +1099,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/13
+  source: openai/human-eval/13
   languages:
   - python
   available_parameters:
@@ -1175,7 +1175,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/14
+  source: openai/human-eval/14
   languages:
   - python
   available_parameters:
@@ -1251,7 +1251,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/15
+  source: openai/human-eval/15
   languages:
   - python
   available_parameters:
@@ -1324,7 +1324,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/16
+  source: openai/human-eval/16
   languages:
   - python
   available_parameters:
@@ -1399,7 +1399,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/17
+  source: openai/human-eval/17
   languages:
   - python
   available_parameters:
@@ -1482,7 +1482,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/18
+  source: openai/human-eval/18
   languages:
   - python
   available_parameters:
@@ -1564,7 +1564,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/19
+  source: openai/human-eval/19
   languages:
   - python
   available_parameters:
@@ -1652,7 +1652,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/20
+  source: openai/human-eval/20
   languages:
   - python
   available_parameters:
@@ -1745,7 +1745,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/21
+  source: openai/human-eval/21
   languages:
   - python
   available_parameters:
@@ -1822,7 +1822,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/22
+  source: openai/human-eval/22
   languages:
   - python
   available_parameters:
@@ -1896,7 +1896,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/23
+  source: openai/human-eval/23
   languages:
   - python
   available_parameters:
@@ -1969,7 +1969,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/24
+  source: openai/human-eval/24
   languages:
   - python
   available_parameters:
@@ -2044,7 +2044,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/25
+  source: openai/human-eval/25
   languages:
   - python
   available_parameters:
@@ -2139,7 +2139,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/26
+  source: openai/human-eval/26
   languages:
   - python
   available_parameters:
@@ -2214,7 +2214,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/27
+  source: openai/human-eval/27
   languages:
   - python
   available_parameters:
@@ -2285,7 +2285,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/28
+  source: openai/human-eval/28
   languages:
   - python
   available_parameters:
@@ -2359,7 +2359,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/29
+  source: openai/human-eval/29
   languages:
   - python
   available_parameters:
@@ -2432,7 +2432,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/30
+  source: openai/human-eval/30
   languages:
   - python
   available_parameters:
@@ -2504,7 +2504,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/31
+  source: openai/human-eval/31
   languages:
   - python
   available_parameters:
@@ -2600,7 +2600,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/32
+  source: openai/human-eval/32
   languages:
   - python
   available_parameters:
@@ -2706,7 +2706,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/33
+  source: openai/human-eval/33
   languages:
   - python
   available_parameters:
@@ -2785,7 +2785,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/34
+  source: openai/human-eval/34
   languages:
   - python
   available_parameters:
@@ -2852,7 +2852,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/35
+  source: openai/human-eval/35
   languages:
   - python
   available_parameters:
@@ -2925,7 +2925,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/36
+  source: openai/human-eval/36
   languages:
   - python
   available_parameters:
@@ -3011,7 +3011,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/37
+  source: openai/human-eval/37
   languages:
   - python
   available_parameters:
@@ -3092,7 +3092,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/38
+  source: openai/human-eval/38
   languages:
   - python
   available_parameters:
@@ -3176,7 +3176,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/39
+  source: openai/human-eval/39
   languages:
   - python
   available_parameters:
@@ -3276,7 +3276,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/40
+  source: openai/human-eval/40
   languages:
   - python
   available_parameters:
@@ -3368,7 +3368,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/41
+  source: openai/human-eval/41
   languages:
   - python
   available_parameters:
@@ -3446,7 +3446,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/42
+  source: openai/human-eval/42
   languages:
   - python
   available_parameters:
@@ -3517,7 +3517,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/43
+  source: openai/human-eval/43
   languages:
   - python
   available_parameters:
@@ -3608,7 +3608,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/44
+  source: openai/human-eval/44
   languages:
   - python
   available_parameters:
@@ -3692,7 +3692,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/45
+  source: openai/human-eval/45
   languages:
   - python
   available_parameters:
@@ -3761,7 +3761,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/46
+  source: openai/human-eval/46
   languages:
   - python
   available_parameters:
@@ -3849,7 +3849,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/47
+  source: openai/human-eval/47
   languages:
   - python
   available_parameters:
@@ -3926,7 +3926,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/48
+  source: openai/human-eval/48
   languages:
   - python
   available_parameters:
@@ -4009,7 +4009,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/49
+  source: openai/human-eval/49
   languages:
   - python
   available_parameters:
@@ -4093,7 +4093,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/50
+  source: openai/human-eval/50
   languages:
   - python
   available_parameters:
@@ -4174,7 +4174,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/51
+  source: openai/human-eval/51
   languages:
   - python
   available_parameters:
@@ -4258,7 +4258,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/52
+  source: openai/human-eval/52
   languages:
   - python
   available_parameters:
@@ -4335,7 +4335,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/53
+  source: openai/human-eval/53
   languages:
   - python
   available_parameters:
@@ -4414,7 +4414,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/54
+  source: openai/human-eval/54
   languages:
   - python
   available_parameters:
@@ -4498,7 +4498,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/55
+  source: openai/human-eval/55
   languages:
   - python
   available_parameters:
@@ -4577,7 +4577,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/56
+  source: openai/human-eval/56
   languages:
   - python
   available_parameters:
@@ -4671,7 +4671,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/57
+  source: openai/human-eval/57
   languages:
   - python
   available_parameters:
@@ -4751,7 +4751,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/58
+  source: openai/human-eval/58
   languages:
   - python
   available_parameters:
@@ -4829,7 +4829,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/59
+  source: openai/human-eval/59
   languages:
   - python
   available_parameters:
@@ -4913,7 +4913,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/60
+  source: openai/human-eval/60
   languages:
   - python
   available_parameters:
@@ -4992,7 +4992,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/61
+  source: openai/human-eval/61
   languages:
   - python
   available_parameters:
@@ -5086,7 +5086,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/62
+  source: openai/human-eval/62
   languages:
   - python
   available_parameters:
@@ -5161,7 +5161,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/63
+  source: openai/human-eval/63
   languages:
   - python
   available_parameters:
@@ -5249,7 +5249,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/64
+  source: openai/human-eval/64
   languages:
   - python
   available_parameters:
@@ -5336,7 +5336,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/65
+  source: openai/human-eval/65
   languages:
   - python
   available_parameters:
@@ -5413,7 +5413,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/66
+  source: openai/human-eval/66
   languages:
   - python
   available_parameters:
@@ -5496,7 +5496,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/67
+  source: openai/human-eval/67
   languages:
   - python
   available_parameters:
@@ -5576,7 +5576,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/68
+  source: openai/human-eval/68
   languages:
   - python
   available_parameters:
@@ -5682,7 +5682,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/69
+  source: openai/human-eval/69
   languages:
   - python
   available_parameters:
@@ -5786,7 +5786,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/70
+  source: openai/human-eval/70
   languages:
   - python
   available_parameters:
@@ -5871,7 +5871,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/71
+  source: openai/human-eval/71
   languages:
   - python
   available_parameters:
@@ -5955,7 +5955,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/72
+  source: openai/human-eval/72
   languages:
   - python
   available_parameters:
@@ -6048,7 +6048,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/73
+  source: openai/human-eval/73
   languages:
   - python
   available_parameters:
@@ -6130,7 +6130,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/74
+  source: openai/human-eval/74
   languages:
   - python
   available_parameters:
@@ -6226,7 +6226,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/75
+  source: openai/human-eval/75
   languages:
   - python
   available_parameters:
@@ -6313,7 +6313,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/76
+  source: openai/human-eval/76
   languages:
   - python
   available_parameters:
@@ -6399,7 +6399,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/77
+  source: openai/human-eval/77
   languages:
   - python
   available_parameters:
@@ -6481,7 +6481,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/78
+  source: openai/human-eval/78
   languages:
   - python
   available_parameters:
@@ -6571,7 +6571,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/79
+  source: openai/human-eval/79
   languages:
   - python
   available_parameters:
@@ -6647,7 +6647,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/80
+  source: openai/human-eval/80
   languages:
   - python
   available_parameters:
@@ -6730,7 +6730,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/81
+  source: openai/human-eval/81
   languages:
   - python
   available_parameters:
@@ -6851,7 +6851,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/82
+  source: openai/human-eval/82
   languages:
   - python
   available_parameters:
@@ -6941,7 +6941,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/83
+  source: openai/human-eval/83
   languages:
   - python
   available_parameters:
@@ -7013,7 +7013,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/84
+  source: openai/human-eval/84
   languages:
   - python
   available_parameters:
@@ -7093,7 +7093,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/85
+  source: openai/human-eval/85
   languages:
   - python
   available_parameters:
@@ -7163,7 +7163,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/86
+  source: openai/human-eval/86
   languages:
   - python
   available_parameters:
@@ -7242,7 +7242,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/87
+  source: openai/human-eval/87
   languages:
   - python
   available_parameters:
@@ -7348,7 +7348,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/88
+  source: openai/human-eval/88
   languages:
   - python
   available_parameters:
@@ -7431,7 +7431,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/89
+  source: openai/human-eval/89
   languages:
   - python
   available_parameters:
@@ -7517,7 +7517,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/90
+  source: openai/human-eval/90
   languages:
   - python
   available_parameters:
@@ -7596,7 +7596,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/91
+  source: openai/human-eval/91
   languages:
   - python
   available_parameters:
@@ -7676,7 +7676,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/92
+  source: openai/human-eval/92
   languages:
   - python
   available_parameters:
@@ -7768,7 +7768,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/93
+  source: openai/human-eval/93
   languages:
   - python
   available_parameters:
@@ -7849,7 +7849,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/94
+  source: openai/human-eval/94
   languages:
   - python
   available_parameters:
@@ -7952,7 +7952,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/95
+  source: openai/human-eval/95
   languages:
   - python
   available_parameters:
@@ -8052,7 +8052,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/96
+  source: openai/human-eval/96
   languages:
   - python
   available_parameters:
@@ -8139,7 +8139,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/97
+  source: openai/human-eval/97
   languages:
   - python
   available_parameters:
@@ -8217,7 +8217,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/98
+  source: openai/human-eval/98
   languages:
   - python
   available_parameters:
@@ -8297,7 +8297,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/99
+  source: openai/human-eval/99
   languages:
   - python
   available_parameters:
@@ -8398,7 +8398,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/100
+  source: openai/human-eval/100
   languages:
   - python
   available_parameters:
@@ -8477,7 +8477,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/101
+  source: openai/human-eval/101
   languages:
   - python
   available_parameters:
@@ -8565,7 +8565,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/102
+  source: openai/human-eval/102
   languages:
   - python
   available_parameters:
@@ -8647,7 +8647,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/103
+  source: openai/human-eval/103
   languages:
   - python
   available_parameters:
@@ -8735,7 +8735,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/104
+  source: openai/human-eval/104
   languages:
   - python
   available_parameters:
@@ -8815,7 +8815,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/105
+  source: openai/human-eval/105
   languages:
   - python
   available_parameters:
@@ -8921,7 +8921,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/106
+  source: openai/human-eval/106
   languages:
   - python
   available_parameters:
@@ -8999,7 +8999,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/107
+  source: openai/human-eval/107
   languages:
   - python
   available_parameters:
@@ -9100,7 +9100,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/108
+  source: openai/human-eval/108
   languages:
   - python
   available_parameters:
@@ -9184,7 +9184,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/109
+  source: openai/human-eval/109
   languages:
   - python
   available_parameters:
@@ -9284,7 +9284,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/110
+  source: openai/human-eval/110
   languages:
   - python
   available_parameters:
@@ -9374,7 +9374,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/111
+  source: openai/human-eval/111
   languages:
   - python
   available_parameters:
@@ -9467,7 +9467,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/112
+  source: openai/human-eval/112
   languages:
   - python
   available_parameters:
@@ -9543,7 +9543,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/113
+  source: openai/human-eval/113
   languages:
   - python
   available_parameters:
@@ -9626,7 +9626,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/114
+  source: openai/human-eval/114
   languages:
   - python
   available_parameters:
@@ -9714,7 +9714,7 @@ tasks:
   type: implementation from zero
   difficulty: easy
   area: math
-  source: HumanEval/115
+  source: openai/human-eval/115
   languages:
   - python
   available_parameters:
@@ -9816,7 +9816,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/116
+  source: openai/human-eval/116
   languages:
   - python
   available_parameters:
@@ -9896,7 +9896,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/117
+  source: openai/human-eval/117
   languages:
   - python
   available_parameters:
@@ -9985,7 +9985,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/118
+  source: openai/human-eval/118
   languages:
   - python
   available_parameters:
@@ -10081,7 +10081,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/119
+  source: openai/human-eval/119
   languages:
   - python
   available_parameters:
@@ -10181,7 +10181,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/120
+  source: openai/human-eval/120
   languages:
   - python
   available_parameters:
@@ -10280,7 +10280,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/121
+  source: openai/human-eval/121
   languages:
   - python
   available_parameters:
@@ -10355,7 +10355,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/122
+  source: openai/human-eval/122
   languages:
   - python
   available_parameters:
@@ -10433,7 +10433,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/123
+  source: openai/human-eval/123
   languages:
   - python
   available_parameters:
@@ -10526,7 +10526,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/124
+  source: openai/human-eval/124
   languages:
   - python
   available_parameters:
@@ -10648,7 +10648,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/125
+  source: openai/human-eval/125
   languages:
   - python
   available_parameters:
@@ -10726,7 +10726,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/126
+  source: openai/human-eval/126
   languages:
   - python
   available_parameters:
@@ -10824,7 +10824,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/127
+  source: openai/human-eval/127
   languages:
   - python
   available_parameters:
@@ -10926,7 +10926,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/128
+  source: openai/human-eval/128
   languages:
   - python
   available_parameters:
@@ -11009,7 +11009,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/129
+  source: openai/human-eval/129
   languages:
   - python
   available_parameters:
@@ -11136,7 +11136,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/130
+  source: openai/human-eval/130
   languages:
   - python
   available_parameters:
@@ -11230,7 +11230,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/131
+  source: openai/human-eval/131
   languages:
   - python
   available_parameters:
@@ -11314,7 +11314,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/132
+  source: openai/human-eval/132
   languages:
   - python
   available_parameters:
@@ -11417,7 +11417,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/133
+  source: openai/human-eval/133
   languages:
   - python
   available_parameters:
@@ -11508,7 +11508,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/134
+  source: openai/human-eval/134
   languages:
   - python
   available_parameters:
@@ -11593,7 +11593,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/135
+  source: openai/human-eval/135
   languages:
   - python
   available_parameters:
@@ -11673,7 +11673,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/136
+  source: openai/human-eval/136
   languages:
   - python
   available_parameters:
@@ -11757,7 +11757,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/137
+  source: openai/human-eval/137
   languages:
   - python
   available_parameters:
@@ -11841,7 +11841,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/138
+  source: openai/human-eval/138
   languages:
   - python
   available_parameters:
@@ -11910,7 +11910,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/139
+  source: openai/human-eval/139
   languages:
   - python
   available_parameters:
@@ -11990,7 +11990,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/140
+  source: openai/human-eval/140
   languages:
   - python
   available_parameters:
@@ -12084,7 +12084,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/141
+  source: openai/human-eval/141
   languages:
   - python
   available_parameters:
@@ -12198,7 +12198,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/142
+  source: openai/human-eval/142
   languages:
   - python
   available_parameters:
@@ -12290,7 +12290,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/143
+  source: openai/human-eval/143
   languages:
   - python
   available_parameters:
@@ -12386,7 +12386,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/144
+  source: openai/human-eval/144
   languages:
   - python
   available_parameters:
@@ -12477,7 +12477,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/145
+  source: openai/human-eval/145
   languages:
   - python
   available_parameters:
@@ -12560,7 +12560,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/146
+  source: openai/human-eval/146
   languages:
   - python
   available_parameters:
@@ -12644,7 +12644,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/147
+  source: openai/human-eval/147
   languages:
   - python
   available_parameters:
@@ -12724,7 +12724,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/148
+  source: openai/human-eval/148
   languages:
   - python
   available_parameters:
@@ -12815,7 +12815,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/149
+  source: openai/human-eval/149
   languages:
   - python
   available_parameters:
@@ -12901,7 +12901,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/150
+  source: openai/human-eval/150
   languages:
   - python
   available_parameters:
@@ -12987,7 +12987,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/151
+  source: openai/human-eval/151
   languages:
   - python
   available_parameters:
@@ -13068,7 +13068,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/152
+  source: openai/human-eval/152
   languages:
   - python
   available_parameters:
@@ -13147,7 +13147,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/153
+  source: openai/human-eval/153
   languages:
   - python
   available_parameters:
@@ -13242,7 +13242,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/154
+  source: openai/human-eval/154
   languages:
   - python
   available_parameters:
@@ -13325,7 +13325,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/155
+  source: openai/human-eval/155
   languages:
   - python
   available_parameters:
@@ -13408,7 +13408,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/156
+  source: openai/human-eval/156
   languages:
   - python
   available_parameters:
@@ -13506,7 +13506,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/157
+  source: openai/human-eval/157
   languages:
   - python
   available_parameters:
@@ -13586,7 +13586,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/158
+  source: openai/human-eval/158
   languages:
   - python
   available_parameters:
@@ -13665,7 +13665,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/159
+  source: openai/human-eval/159
   languages:
   - python
   available_parameters:
@@ -13764,7 +13764,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/160
+  source: openai/human-eval/160
   languages:
   - python
   available_parameters:
@@ -13855,7 +13855,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/161
+  source: openai/human-eval/161
   languages:
   - python
   available_parameters:
@@ -13947,7 +13947,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/162
+  source: openai/human-eval/162
   languages:
   - python
   available_parameters:
@@ -14019,7 +14019,7 @@ tasks:
   type: implementation from zero
   difficulty: medium
   area: math
-  source: HumanEval/163
+  source: openai/human-eval/163
   languages:
   - python
   available_parameters:

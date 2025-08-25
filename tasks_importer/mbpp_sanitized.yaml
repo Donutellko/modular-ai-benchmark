@@ -1,3 +1,5 @@
+# taken from
+# https://github.com/google-research/google-research/blob/master/mbpp/sanitized-mbpp.json
 - source_file: Benchmark Questions Verification V2.ipynb
   task_id: 2
   prompt: Write a function to find the shared elements from the given two lists.
