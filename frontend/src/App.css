@@ -437,3 +437,7 @@ html, body, #root {
 .filtered-progress {
   opacity: 0.2;
 }
+
+.bp5-button-group.bp5-fill {
+  display: unset;
+}
