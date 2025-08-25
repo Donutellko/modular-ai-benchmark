@@ -1,5 +1,5 @@
 version: 1
-name: mbpp-sanitized
+name: google-research/mbpp-sanitized
 tasks:
 - name: mbpp-sanitized/2
   type: implementation from zero

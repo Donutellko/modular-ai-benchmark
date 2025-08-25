@@ -1,5 +1,5 @@
 version: 1
-name: task-source-example-1
+name: HumanEval Java by zai-org/CodeGeeX
 tasks:
 - name: HumanEval/Java/0
   type: implementation from zero
