@@ -61,6 +61,14 @@ export const StatusBrowserModal: React.FC<Props> = ({
         </Button>
     );
 
+    // Helper function to format score based on criteria type
+    const formatScore = (score: number, criteria: string) => {
+        if (criteria === 'unit-test') {
+            return `${(score * 100).toFixed(0)}%`;
+        }
+        return score.toFixed(2);
+    };
+
     return (
         <>
             <Dialog
@@ -90,7 +98,7 @@ export const StatusBrowserModal: React.FC<Props> = ({
                                     {completeEntries.map((entry, index) => (
                                         <tr key={index}>
                                             <td>{renderTaskButton(entry)}</td>
-                                            <td>{entry.result.score.toFixed(2)}</td>
+                                            <td>{formatScore(entry.result.score, entry.result.criteria)}</td>
                                             <td>{entry.result.unit}</td>
                                             <td>{entry.result.time_millis?.toFixed(2) || 'N/A'}</td>
                                             <td>
@@ -127,7 +135,7 @@ export const StatusBrowserModal: React.FC<Props> = ({
                                     {skippedEntries.map((entry, index) => (
                                         <tr key={index}>
                                             <td>{renderTaskButton(entry)}</td>
-                                            <td>{entry.result.score.toFixed(2)}</td>
+                                            <td>{formatScore(entry.result.score, entry.result.criteria)}</td>
                                             <td>{entry.result.unit}</td>
                                             <td>{entry.result.time_millis?.toFixed(2) || 'N/A'}</td>
                                             <td>

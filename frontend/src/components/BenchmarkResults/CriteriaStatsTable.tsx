@@ -136,6 +136,14 @@ export const CriteriaStatsTable: React.FC<Props> = ({ results, modelName, taskSo
         setSelectedCriteriaEntry(null);
     };
 
+    // Helper function to format score based on criteria type
+    const formatScore = (score: number, criteria: string) => {
+        if (criteria === 'unit-test') {
+            return `${(score * 100).toFixed(0)}%`;
+        }
+        return score.toFixed(2);
+    };
+
     return (
         <div className="criteria-stats-table">
             <HTMLTable striped>
@@ -153,7 +161,7 @@ export const CriteriaStatsTable: React.FC<Props> = ({ results, modelName, taskSo
                     {criteriaStats.map((stats) => (
                         <tr key={stats.criteria}>
                             <td>{stats.criteria}</td>
-                            <td>{stats.avgScore.toFixed(2)}</td>
+                            <td>{formatScore(stats.avgScore, stats.criteria)}</td>
                             <td>{stats.unit}</td>
                             <td>
                                 <Button

@@ -83,6 +83,14 @@ export const TaskResultModal: React.FC<Props> = ({
         return <div className="status-icons">{icons}</div>;
     };
 
+    // Helper function to format score based on criteria type
+    const formatScore = (score: number, criteria: string) => {
+        if (criteria === 'unit-test') {
+            return `${(score * 100).toFixed(0)}%`;
+        }
+        return score.toFixed(2);
+    };
+
     return (
         <Dialog
             isOpen={isOpen}
@@ -166,7 +174,7 @@ export const TaskResultModal: React.FC<Props> = ({
                                             {criteria.criteria}
                                         </Button>
                                     </td>
-                                    <td>{criteria.score}</td>
+                                    <td>{formatScore(criteria.score, criteria.criteria)}</td>
                                     <td>{criteria.unit}</td>
                                     <td>{renderStatusIcons(criteria)}</td>
                                 </tr>

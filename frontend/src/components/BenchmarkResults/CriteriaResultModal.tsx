@@ -55,6 +55,14 @@ export const CriteriaResultModal: React.FC<Props> = ({
         return langMap[lang.toLowerCase()] || 'plaintext';
     };
 
+    // Helper function to format score based on criteria type
+    const formatScore = (score: number, criteria: string) => {
+        if (criteria === 'unit-test') {
+            return `${(score * 100).toFixed(0)}%`;
+        }
+        return score.toFixed(2);
+    };
+
     return (
         <>
             <Dialog
@@ -106,7 +114,7 @@ export const CriteriaResultModal: React.FC<Props> = ({
                             <tbody>
                                 <tr>
                                     <td><strong>Score</strong></td>
-                                    <td>{entry.result.score}</td>
+                                    <td>{formatScore(entry.result.score, entry.result.criteria)}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Unit of Measure</strong></td>
@@ -206,4 +214,3 @@ export const CriteriaResultModal: React.FC<Props> = ({
         </>
     );
 };
-
