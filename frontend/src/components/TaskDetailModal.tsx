@@ -256,7 +256,7 @@ export function TaskDetailModal({ isOpen, onClose, task, taskIndex, onTaskUpdate
           <p>Available template variables in tests:</p>
           <ul>
             <li>${'${solution.function_name}'} - name of the solution function</li>
-            <li>${'${solution.code}'} - full solution code</li>
+            <li>${'${solution_code}'} - full solution code</li>
             <li>${'parameters[\'parameter-name\']'} - parameter values</li>
           </ul>
         </div>

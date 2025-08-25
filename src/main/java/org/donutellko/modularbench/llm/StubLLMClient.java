@@ -21,7 +21,9 @@ public class StubLLMClient implements LLMClient {
                 .prompt(prompt)
                 .language(language)
                 .responseText(
-                        "/* LLM stub response for " + llmName + " (" + language + "): " + prompt + " */"
+                        "/* LLM stub response for " + llmName + " (" + language + "): "
+                                + prompt.replace("*/", "#/").replace("/*", "/#")
+                                + " */"
                                 + "public static int solution(int a, int b) { return 1; }")
                 .responseCode("200")
                 .tokenCount(0)

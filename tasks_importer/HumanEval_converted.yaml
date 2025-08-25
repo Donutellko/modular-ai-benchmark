@@ -74,7 +74,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -84,9 +84,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/1
   type: implementation from zero
@@ -172,7 +169,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -182,9 +179,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/2
   type: implementation from zero
@@ -247,7 +241,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -257,9 +251,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/3
   type: implementation from zero
@@ -333,7 +324,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -343,9 +334,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/4
   type: implementation from zero
@@ -411,7 +399,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -421,9 +409,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/5
   type: implementation from zero
@@ -496,7 +481,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -506,9 +491,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/6
   type: implementation from zero
@@ -583,7 +565,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -593,9 +575,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/7
   type: implementation from zero
@@ -658,7 +637,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -668,9 +647,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/8
   type: implementation from zero
@@ -741,7 +717,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -751,9 +727,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/9
   type: implementation from zero
@@ -826,7 +799,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -836,9 +809,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/10
   type: implementation from zero
@@ -919,7 +889,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -929,9 +899,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/11
   type: implementation from zero
@@ -998,7 +965,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -1008,9 +975,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/12
   type: implementation from zero
@@ -1081,7 +1045,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -1091,9 +1055,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/13
   type: implementation from zero
@@ -1157,7 +1118,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -1167,9 +1128,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/14
   type: implementation from zero
@@ -1233,7 +1191,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -1243,9 +1201,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/15
   type: implementation from zero
@@ -1306,7 +1261,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -1316,9 +1271,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/16
   type: implementation from zero
@@ -1381,7 +1333,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -1391,9 +1343,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/17
   type: implementation from zero
@@ -1464,7 +1413,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -1474,9 +1423,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/18
   type: implementation from zero
@@ -1546,7 +1492,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -1556,9 +1502,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/19
   type: implementation from zero
@@ -1634,7 +1577,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -1644,9 +1587,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/20
   type: implementation from zero
@@ -1727,7 +1667,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -1737,9 +1677,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/21
   type: implementation from zero
@@ -1804,7 +1741,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -1814,9 +1751,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/22
   type: implementation from zero
@@ -1878,7 +1812,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -1888,9 +1822,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/23
   type: implementation from zero
@@ -1951,7 +1882,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -1961,9 +1892,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/24
   type: implementation from zero
@@ -2026,7 +1954,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -2036,9 +1964,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/25
   type: implementation from zero
@@ -2121,7 +2046,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -2131,9 +2056,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/26
   type: implementation from zero
@@ -2196,7 +2118,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -2206,9 +2128,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/27
   type: implementation from zero
@@ -2267,7 +2186,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -2277,9 +2196,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/28
   type: implementation from zero
@@ -2341,7 +2257,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -2351,9 +2267,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/29
   type: implementation from zero
@@ -2414,7 +2327,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -2424,9 +2337,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/30
   type: implementation from zero
@@ -2486,7 +2396,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -2496,9 +2406,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/31
   type: implementation from zero
@@ -2582,7 +2489,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -2592,9 +2499,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/32
   type: implementation from zero
@@ -2688,7 +2592,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -2698,9 +2602,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/33
   type: implementation from zero
@@ -2767,7 +2668,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -2777,9 +2678,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/34
   type: implementation from zero
@@ -2834,7 +2732,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -2844,9 +2742,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/35
   type: implementation from zero
@@ -2907,7 +2802,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -2917,9 +2812,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/36
   type: implementation from zero
@@ -2993,7 +2885,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -3003,9 +2895,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/37
   type: implementation from zero
@@ -3074,7 +2963,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -3084,9 +2973,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/38
   type: implementation from zero
@@ -3158,7 +3044,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -3168,9 +3054,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/39
   type: implementation from zero
@@ -3258,7 +3141,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -3268,9 +3151,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/40
   type: implementation from zero
@@ -3350,7 +3230,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -3360,9 +3240,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/41
   type: implementation from zero
@@ -3428,7 +3305,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -3438,9 +3315,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/42
   type: implementation from zero
@@ -3499,7 +3373,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -3509,9 +3383,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/43
   type: implementation from zero
@@ -3590,7 +3461,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -3600,9 +3471,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/44
   type: implementation from zero
@@ -3674,7 +3542,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -3684,9 +3552,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/45
   type: implementation from zero
@@ -3743,7 +3608,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -3753,9 +3618,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/46
   type: implementation from zero
@@ -3831,7 +3693,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -3841,9 +3703,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/47
   type: implementation from zero
@@ -3908,7 +3767,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -3918,9 +3777,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/48
   type: implementation from zero
@@ -3991,7 +3847,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -4001,9 +3857,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/49
   type: implementation from zero
@@ -4075,7 +3928,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -4085,9 +3938,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/50
   type: implementation from zero
@@ -4156,7 +4006,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -4166,9 +4016,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/51
   type: implementation from zero
@@ -4240,7 +4087,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -4250,9 +4097,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/52
   type: implementation from zero
@@ -4317,7 +4161,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -4327,9 +4171,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/53
   type: implementation from zero
@@ -4396,7 +4237,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -4406,9 +4247,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/54
   type: implementation from zero
@@ -4480,7 +4318,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -4490,9 +4328,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/55
   type: implementation from zero
@@ -4559,7 +4394,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -4569,9 +4404,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/56
   type: implementation from zero
@@ -4653,7 +4485,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -4663,9 +4495,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/57
   type: implementation from zero
@@ -4733,7 +4562,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -4743,9 +4572,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/58
   type: implementation from zero
@@ -4811,7 +4637,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -4821,9 +4647,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/59
   type: implementation from zero
@@ -4895,7 +4718,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -4905,9 +4728,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/60
   type: implementation from zero
@@ -4974,7 +4794,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -4984,9 +4804,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/61
   type: implementation from zero
@@ -5068,7 +4885,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -5078,9 +4895,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/62
   type: implementation from zero
@@ -5143,7 +4957,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -5153,9 +4967,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/63
   type: implementation from zero
@@ -5231,7 +5042,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -5241,9 +5052,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/64
   type: implementation from zero
@@ -5318,7 +5126,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -5328,9 +5136,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/65
   type: implementation from zero
@@ -5395,7 +5200,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -5405,9 +5210,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/66
   type: implementation from zero
@@ -5478,7 +5280,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -5488,9 +5290,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/67
   type: implementation from zero
@@ -5558,7 +5357,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -5568,9 +5367,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/68
   type: implementation from zero
@@ -5664,7 +5460,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -5674,9 +5470,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/69
   type: implementation from zero
@@ -5768,7 +5561,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -5778,9 +5571,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/70
   type: implementation from zero
@@ -5853,7 +5643,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -5863,9 +5653,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/71
   type: implementation from zero
@@ -5937,7 +5724,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -5947,9 +5734,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/72
   type: implementation from zero
@@ -6030,7 +5814,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -6040,9 +5824,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/73
   type: implementation from zero
@@ -6112,7 +5893,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -6122,9 +5903,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/74
   type: implementation from zero
@@ -6208,7 +5986,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -6218,9 +5996,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/75
   type: implementation from zero
@@ -6295,7 +6070,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -6305,9 +6080,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/76
   type: implementation from zero
@@ -6381,7 +6153,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -6391,9 +6163,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/77
   type: implementation from zero
@@ -6463,7 +6232,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -6473,9 +6242,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/78
   type: implementation from zero
@@ -6553,7 +6319,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -6563,9 +6329,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/79
   type: implementation from zero
@@ -6629,7 +6392,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -6639,9 +6402,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/80
   type: implementation from zero
@@ -6712,7 +6472,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -6722,9 +6482,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/81
   type: implementation from zero
@@ -6833,7 +6590,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -6843,9 +6600,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/82
   type: implementation from zero
@@ -6923,7 +6677,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -6933,9 +6687,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/83
   type: implementation from zero
@@ -6995,7 +6746,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -7005,9 +6756,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/84
   type: implementation from zero
@@ -7075,7 +6823,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -7085,9 +6833,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/85
   type: implementation from zero
@@ -7145,7 +6890,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -7155,9 +6900,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/86
   type: implementation from zero
@@ -7224,7 +6966,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -7234,9 +6976,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/87
   type: implementation from zero
@@ -7330,7 +7069,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -7340,9 +7079,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/88
   type: implementation from zero
@@ -7413,7 +7149,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -7423,9 +7159,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/89
   type: implementation from zero
@@ -7499,7 +7232,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -7509,9 +7242,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/90
   type: implementation from zero
@@ -7578,7 +7308,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -7588,9 +7318,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/91
   type: implementation from zero
@@ -7658,7 +7385,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -7668,9 +7395,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/92
   type: implementation from zero
@@ -7750,7 +7474,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -7760,9 +7484,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/93
   type: implementation from zero
@@ -7831,7 +7552,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -7841,9 +7562,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/94
   type: implementation from zero
@@ -7934,7 +7652,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -7944,9 +7662,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/95
   type: implementation from zero
@@ -8034,7 +7749,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -8044,9 +7759,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/96
   type: implementation from zero
@@ -8121,7 +7833,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -8131,9 +7843,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/97
   type: implementation from zero
@@ -8199,7 +7908,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -8209,9 +7918,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/98
   type: implementation from zero
@@ -8279,7 +7985,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -8289,9 +7995,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/99
   type: implementation from zero
@@ -8380,7 +8083,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -8390,9 +8093,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/100
   type: implementation from zero
@@ -8459,7 +8159,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -8469,9 +8169,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/101
   type: implementation from zero
@@ -8547,7 +8244,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -8557,9 +8254,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/102
   type: implementation from zero
@@ -8629,7 +8323,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -8639,9 +8333,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/103
   type: implementation from zero
@@ -8717,7 +8408,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -8727,9 +8418,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/104
   type: implementation from zero
@@ -8797,7 +8485,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -8807,9 +8495,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/105
   type: implementation from zero
@@ -8903,7 +8588,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -8913,9 +8598,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/106
   type: implementation from zero
@@ -8981,7 +8663,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -8991,9 +8673,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/107
   type: implementation from zero
@@ -9082,7 +8761,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -9092,9 +8771,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/108
   type: implementation from zero
@@ -9166,7 +8842,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -9176,9 +8852,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/109
   type: implementation from zero
@@ -9266,7 +8939,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -9276,9 +8949,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/110
   type: implementation from zero
@@ -9356,7 +9026,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -9366,9 +9036,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/111
   type: implementation from zero
@@ -9449,7 +9116,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -9459,9 +9126,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/112
   type: implementation from zero
@@ -9525,7 +9189,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -9535,9 +9199,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/113
   type: implementation from zero
@@ -9608,7 +9269,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -9618,9 +9279,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/114
   type: implementation from zero
@@ -9696,7 +9354,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -9706,9 +9364,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/115
   type: implementation from zero
@@ -9798,7 +9453,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -9808,9 +9463,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/116
   type: implementation from zero
@@ -9878,7 +9530,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -9888,9 +9540,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/117
   type: implementation from zero
@@ -9967,7 +9616,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -9977,9 +9626,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/118
   type: implementation from zero
@@ -10063,7 +9709,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -10073,9 +9719,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/119
   type: implementation from zero
@@ -10163,7 +9806,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -10173,9 +9816,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/120
   type: implementation from zero
@@ -10262,7 +9902,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -10272,9 +9912,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/121
   type: implementation from zero
@@ -10337,7 +9974,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -10347,9 +9984,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/122
   type: implementation from zero
@@ -10415,7 +10049,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -10425,9 +10059,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/123
   type: implementation from zero
@@ -10508,7 +10139,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -10518,9 +10149,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/124
   type: implementation from zero
@@ -10630,7 +10258,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -10640,9 +10268,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/125
   type: implementation from zero
@@ -10708,7 +10333,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -10718,9 +10343,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/126
   type: implementation from zero
@@ -10806,7 +10428,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -10816,9 +10438,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/127
   type: implementation from zero
@@ -10908,7 +10527,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -10918,9 +10537,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/128
   type: implementation from zero
@@ -10991,7 +10607,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -11001,9 +10617,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/129
   type: implementation from zero
@@ -11118,7 +10731,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -11128,9 +10741,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/130
   type: implementation from zero
@@ -11212,7 +10822,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -11222,9 +10832,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/131
   type: implementation from zero
@@ -11296,7 +10903,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -11306,9 +10913,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/132
   type: implementation from zero
@@ -11399,7 +11003,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -11409,9 +11013,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/133
   type: implementation from zero
@@ -11490,7 +11091,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -11500,9 +11101,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/134
   type: implementation from zero
@@ -11575,7 +11173,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -11585,9 +11183,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/135
   type: implementation from zero
@@ -11655,7 +11250,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -11665,9 +11260,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/136
   type: implementation from zero
@@ -11739,7 +11331,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -11749,9 +11341,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/137
   type: implementation from zero
@@ -11823,7 +11412,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -11833,9 +11422,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/138
   type: implementation from zero
@@ -11892,7 +11478,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -11902,9 +11488,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/139
   type: implementation from zero
@@ -11972,7 +11555,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -11982,9 +11565,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/140
   type: implementation from zero
@@ -12066,7 +11646,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -12076,9 +11656,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/141
   type: implementation from zero
@@ -12180,7 +11757,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -12190,9 +11767,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/142
   type: implementation from zero
@@ -12272,7 +11846,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -12282,9 +11856,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/143
   type: implementation from zero
@@ -12368,7 +11939,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -12378,9 +11949,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/144
   type: implementation from zero
@@ -12459,7 +12027,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -12469,9 +12037,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/145
   type: implementation from zero
@@ -12542,7 +12107,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -12552,9 +12117,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/146
   type: implementation from zero
@@ -12626,7 +12188,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -12636,9 +12198,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/147
   type: implementation from zero
@@ -12706,7 +12265,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -12716,9 +12275,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/148
   type: implementation from zero
@@ -12797,7 +12353,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -12807,9 +12363,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/149
   type: implementation from zero
@@ -12883,7 +12436,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -12893,9 +12446,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/150
   type: implementation from zero
@@ -12969,7 +12519,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -12979,9 +12529,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/151
   type: implementation from zero
@@ -13050,7 +12597,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -13060,9 +12607,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/152
   type: implementation from zero
@@ -13129,7 +12673,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -13139,9 +12683,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/153
   type: implementation from zero
@@ -13224,7 +12765,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -13234,9 +12775,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/154
   type: implementation from zero
@@ -13307,7 +12845,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -13317,9 +12855,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/155
   type: implementation from zero
@@ -13390,7 +12925,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -13400,9 +12935,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/156
   type: implementation from zero
@@ -13488,7 +13020,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -13498,9 +13030,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/157
   type: implementation from zero
@@ -13568,7 +13097,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -13578,9 +13107,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/158
   type: implementation from zero
@@ -13647,7 +13173,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -13657,9 +13183,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/159
   type: implementation from zero
@@ -13746,7 +13269,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -13756,9 +13279,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/160
   type: implementation from zero
@@ -13837,7 +13357,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -13847,9 +13367,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/161
   type: implementation from zero
@@ -13929,7 +13446,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -13939,9 +13456,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/162
   type: implementation from zero
@@ -14001,7 +13515,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -14011,9 +13525,6 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```
 - name: HumanEval/163
   type: implementation from zero
@@ -14078,7 +13589,7 @@ tasks:
     ```
     Based on the given task, the candidate wrote the following solution:
     ```
-    ${solution.code}
+    ${solution_code}
     ```
 
     Based on the provided task and candidate's solution, 
@@ -14088,7 +13599,4 @@ tasks:
     solution_correctness: int
     code_quality: int
     style_quality: int
-    <#if parameters['should-generate-tests'] >
-    test_quality: int
-    </#if>
     ```

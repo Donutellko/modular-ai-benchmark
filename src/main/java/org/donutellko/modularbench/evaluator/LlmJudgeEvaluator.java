@@ -15,8 +15,10 @@ import java.io.StringReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -57,11 +59,15 @@ public class LlmJudgeEvaluator implements Evaluator {
             );
         }
 
+        Map<String, Boolean> parameters = taskDefinition.getAvailableParameters().stream()
+                .collect(Collectors.toMap(Function.identity(), p -> getExecParam(config, p)));
+
         Map<String, Object> templateModel = new HashMap();
         templateModel.putAll(Map.<String, Object>of(
                 "prompt", llmResponse.getPrompt(),
                 "solution", llmResponse.getResponseText(),
-                "solution.code", llmResponse.getResponseText(),
+                "solution_code", llmResponse.getResponseText(),
+                "parameters", parameters,
                 "language", llmResponse.getLanguage()
         ));
 
@@ -95,5 +101,13 @@ public class LlmJudgeEvaluator implements Evaluator {
                         .output(judgeResponse.getResponseText())
                         .build()
         );
+    }
+
+    private Boolean getExecParam(ExecutionConfig config, String paramName) {
+        return config.getParameters().stream()
+                .filter(ep -> paramName.equalsIgnoreCase(ep.getName()))
+                .findFirst()
+                .map(ExecutionConfig.ExecutionParameter::getEnabled)
+                .orElse(null);
     }
 }

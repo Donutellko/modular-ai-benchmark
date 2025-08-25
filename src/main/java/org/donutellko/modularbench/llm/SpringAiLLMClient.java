@@ -3,6 +3,7 @@ package org.donutellko.modularbench.llm;
 import org.donutellko.modularbench.dto.ExecutionConfig;
 import org.donutellko.modularbench.dto.TaskResults;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.metadata.ChatResponseMetadata;
 import org.springframework.ai.chat.prompt.ChatOptions;
@@ -32,6 +33,11 @@ public class SpringAiLLMClient implements LLMClient {
             throw new IllegalArgumentException("LLM not found: " + llmName);
         }
         ChatClient client = chatClients.get(llmName);
+        SystemMessage systemMessage = new SystemMessage(
+                "You are a helpful programming assistant. " +
+                        "Provide only the code as answer, no explanations. " +
+                        "The response should contain the whole solution file content: " +
+                        "if the prompt contains a beginning of a code block, repeat the imports, class declarations and the signature anyways. ");
         UserMessage userMessage = new UserMessage(prompt);
 
         ChatOptions.Builder chatOptions = ChatOptions.builder();
@@ -39,7 +45,7 @@ public class SpringAiLLMClient implements LLMClient {
             chatOptions.maxTokens(executionConfig.getMaxTokens());
         }
 
-        Prompt springPrompt = new Prompt(List.of(userMessage), chatOptions.build());
+        Prompt springPrompt = new Prompt(List.of(systemMessage, userMessage), chatOptions.build());
 
         long timeStart = System.currentTimeMillis();
         ChatClient.CallResponseSpec response = client.prompt(springPrompt).call();

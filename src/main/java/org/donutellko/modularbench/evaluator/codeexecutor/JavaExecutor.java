@@ -114,16 +114,12 @@ public class JavaExecutor implements CodeExecutor {
         } else if (code.contains("public static ")) {
             code = code.replaceFirst("public static (\\S+) \\S+?\\(", "public static $1 " + mainFunctionName + "(");
         }
+        code = code.replaceAll("Solution", solutionClassName);
 
-        if (code.contains("public class")) {
-            if (code.contains("public class Main")) {
-                return code;
-            } else {
-                return code.replaceFirst("public class \\w+", "public class Main ");
-            }
-        } else {
-            return "public class Main {\n" + code + "\n}";
+        if (!code.contains("public class")) {
+            code = code.replaceFirst("class ", "public class ");
         }
+        return code;
     }
 
     private static String prepareTestCode(String code, String solutionClassName, String testClassName) {
@@ -152,6 +148,13 @@ public class JavaExecutor implements CodeExecutor {
         } else {
             code = "public class " + testClassName + " {\n" + code + "\n}";
         }
+
+        if (code.contains("Solution")) {
+            code = code.replaceAll("Solution", solutionClassName);
+        }
+
+        code = "import java.util.*;\n" +
+                "import java.lang.*;\n\n" + code;
 
         return code;
     }

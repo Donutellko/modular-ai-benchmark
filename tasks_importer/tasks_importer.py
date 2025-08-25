@@ -63,7 +63,7 @@ def convert_humaneval(input_data):
                 "```\n"
                 "Based on the given task, the candidate wrote the following solution:\n"
                 "```\n"
-                "${solution.code}\n"
+                "${solution_code}\n"
                 "```\n\n"
                 "Based on the provided task and candidate's solution, \n"
                 "respond with a YAML that contains numeric evaluations of the \n"
@@ -72,9 +72,6 @@ def convert_humaneval(input_data):
                 "solution_correctness: int\n"
                 "code_quality: int\n"
                 "style_quality: int\n"
-                "<#if parameters['should-generate-tests'] >\n"
-                "test_quality: int\n"
-                "</#if>\n"
                 "```"
             )
         }
@@ -143,7 +140,7 @@ def convert_mbpp(input_data):
                 "```\n"
                 "Based on the given task, the candidate wrote the following solution:\n"
                 "```\n"
-                "${solution.code}\n"
+                "${solution_code}\n"
                 "```\n\n"
                 "Based on the provided task and candidate's solution, \n"
                 "respond with a YAML that contains numeric evaluations of the \n"
@@ -152,9 +149,6 @@ def convert_mbpp(input_data):
                 "solution_correctness: int\n"
                 "code_quality: int\n"
                 "style_quality: int\n"
-                "<#if parameters['should-generate-tests'] >\n"
-                "test_quality: int\n"
-                "</#if>\n"
                 "```"
             )
         }
@@ -219,7 +213,7 @@ def convert_humaneval_java(input_data):
                 "```\n"
                 "Based on the given task, the candidate wrote the following solution:\n"
                 "```\n"
-                "${solution.code}\n"
+                "${solution_code}\n"
                 "```\n\n"
                 "Based on the provided task and candidate's solution, \n"
                 "respond with a YAML that contains numeric evaluations of the \n"
@@ -228,9 +222,6 @@ def convert_humaneval_java(input_data):
                 "solution_correctness: int\n"
                 "code_quality: int\n"
                 "style_quality: int\n"
-                "<#if parameters['should-generate-tests'] >\n"
-                "test_quality: int\n"
-                "</#if>\n"
                 "```"
             )
         }

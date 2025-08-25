@@ -73,9 +73,9 @@ tasks:
               # for example if we don't want the solution 
               # to involve additional dependencies
               if parameters['should-use-libraries'] == True:
-                  assert ${solution.code}.contains('numpy')
+                  assert ${solution_code}.contains('numpy')
               else:
-                  assert not ${solution.code}.contains('import')
+                  assert not ${solution_code}.contains('import')
         java:
           description: |
             ${common_prompt}
@@ -117,7 +117,7 @@ tasks:
       ```
       Based on the given task, the candidate wrote the following solution:
       ```
-      ${solution.code}
+      ${solution_code}
       ```
       
       <#if parameters['should-generate-tests'] >

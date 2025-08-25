@@ -113,9 +113,9 @@
           time_millis: null
       - language: "java"
         provider_name: "org.donutellko.modularbench.llm.SpringAiLLMClient"
-        model_name: "mistralai/devstral-small:free"
+        model_name: "mistralai/devstral-small-2505:free"
         llm_response:
-          model_name: "mistralai/devstral-small:free"
+          model_name: "mistralai/devstral-small-2505:free"
           prompt: "Write a function in java to calculate the \nhighest common factor\
             \ of two numbers. \nIn response, return only the code of the function.\
             \ There should be no additional text, comments, or explanations, just\
