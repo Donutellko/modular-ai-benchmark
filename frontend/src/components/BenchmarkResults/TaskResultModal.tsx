@@ -1,4 +1,4 @@
-// import React from 'react';
+import React from 'react';
 import { Dialog, Button, HTMLTable, Icon } from '@blueprintjs/core';
 import { Editor } from '@monaco-editor/react';
 import './BenchmarkResults.css';

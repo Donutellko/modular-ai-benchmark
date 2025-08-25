@@ -38,6 +38,7 @@ interface Result {
 interface CriteriaStats {
     criteria: string;
     avgScore: number;
+    unit: string;
     complete: number;
     skipped: number;
     errors: number;
@@ -69,12 +70,13 @@ export const CriteriaStatsTable: React.FC<Props> = ({ results, modelName, taskSo
             result.details.task_results.forEach(taskResult => {
                 if (taskResult.model_name === modelName) {
                     taskResult.evaluation_result.forEach(evalResult => {
-                        const { criteria } = evalResult;
+                        const { criteria, unit } = evalResult;
 
                         if (!statsMap.has(criteria)) {
                             statsMap.set(criteria, {
                                 criteria,
                                 avgScore: 0,
+                                unit: unit,
                                 complete: 0,
                                 skipped: 0,
                                 errors: 0,
@@ -141,6 +143,7 @@ export const CriteriaStatsTable: React.FC<Props> = ({ results, modelName, taskSo
                     <tr>
                         <th>Criteria</th>
                         <th>Avg. Score</th>
+                        <th>Unit</th>
                         <th>Complete</th>
                         <th>Skipped</th>
                         <th>Errors</th>
@@ -151,6 +154,7 @@ export const CriteriaStatsTable: React.FC<Props> = ({ results, modelName, taskSo
                         <tr key={stats.criteria}>
                             <td>{stats.criteria}</td>
                             <td>{stats.avgScore.toFixed(2)}</td>
+                            <td>{stats.unit}</td>
                             <td>
                                 <Button
                                     minimal
@@ -208,4 +212,3 @@ export const CriteriaStatsTable: React.FC<Props> = ({ results, modelName, taskSo
         </div>
     );
 };
-
