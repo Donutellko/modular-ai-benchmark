@@ -61,6 +61,7 @@ public class LlmJudgeEvaluator implements Evaluator {
         templateModel.putAll(Map.<String, Object>of(
                 "prompt", llmResponse.getPrompt(),
                 "solution", llmResponse.getResponseText(),
+                "solution.code", llmResponse.getResponseText(),
                 "language", llmResponse.getLanguage()
         ));
 
