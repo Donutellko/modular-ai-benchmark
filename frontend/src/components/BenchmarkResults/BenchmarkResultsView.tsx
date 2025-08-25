@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Button, HTMLSelect, NonIdealState, Spinner } from '@blueprintjs/core';
+import { Card, Button, HTMLSelect, NonIdealState, Spinner, Collapse, H3, H4 } from '@blueprintjs/core';
 import { api } from '../../services/api';
-import { BenchmarkResultsTable } from './BenchmarkResultsTable';
+import { CriteriaStatsTable } from './CriteriaStatsTable';
 import './BenchmarkResults.css';
 
 interface Props {
@@ -9,11 +9,62 @@ interface Props {
     onFileSelect: (file: string | null) => void;
 }
 
+// Define interfaces for the data structure
+interface CriteriaResult {
+    criteria: string;
+    score: number;
+    unit: string;
+    error?: string;
+    output?: string;
+    time_millis: number;
+    executor_class: string;
+    prepared_code?: string;
+    test_number?: number;
+    exit_code?: number;
+}
+
+interface TaskResult {
+    language: string;
+    provider_name: string;
+    model_name: string;
+    llm_response: {
+        model_name: string;
+        prompt: string;
+        language: string;
+        response_text: string;
+        token_count: number;
+        prompt_token_count: number;
+        time_millis: number;
+    };
+    evaluation_result: CriteriaResult[];
+}
+
+interface TaskDetails {
+    task_source_path: string;
+    task_source_name: string;
+    task_definition_name: string;
+    skip_reasons: string[];
+    task_results: TaskResult[];
+}
+
+interface Result {
+    area: string;
+    name: string;
+    details: TaskDetails;
+}
+
+interface BenchmarkEntry {
+    results: Result[];
+    'task-source-name': string;
+    'task-source-path': string;
+}
+
 export const BenchmarkResultsView: React.FC<Props> = ({ selectedFile, onFileSelect }) => {
-    const [results, setResults] = useState<any[]>([]);
+    const [rawData, setRawData] = useState<BenchmarkEntry[]>([]);
     const [loading, setLoading] = useState(true);
     const [availableFiles, setAvailableFiles] = useState<string[]>([]);
     const [error, setError] = useState<string | null>(null);
+    const [openSections, setOpenSections] = useState<{[key: string]: boolean}>({});
 
     // For FileList - benchmark results are read-only
     const modifiedFiles = new Set<string>();
@@ -50,29 +101,45 @@ export const BenchmarkResultsView: React.FC<Props> = ({ selectedFile, onFileSele
             const data = await api.getFile('bench_results', filename);
             // Parse YAML string to object
             const yamlData = await api.parseYaml(data);
-            setResults(transformResults(yamlData));
+            setRawData(yamlData);
+            setLoading(false);
         } catch (err) {
             setError('Failed to load benchmark results');
-            setResults([]);
-        } finally {
+            setRawData([]);
             setLoading(false);
         }
     };
 
-    const transformResults = (data: any) => {
-        if (!Array.isArray(data)) return [];
+    // Group results by model name and task source
+    const getGroupedResults = () => {
+        const modelMap: {[key: string]: {[key: string]: Result[]}} = {};
 
-        return data.map(result => ({
-            taskSourceName: result['task-source-name'],
-            taskName: result.results[0].name,
-            languages: result.results[0].details.task_results?.map((tr: any) => tr.language) || [],
-            domain: result.results[0].details.task_definition?.domain || 'N/A',
-            difficulty: result.results[0].details.task_definition?.difficulty || 'N/A',
-            isSkipped: result.results[0].details.skip_reasons?.length > 0,
-            hasErrors: result.results[0].details.task_results?.some((tr: any) =>
-                tr.evaluation_result?.some((er: any) => er.error)
-            ) || false,
-            details: result.results[0].details
+        rawData.forEach(entry => {
+            entry.results.forEach(result => {
+                result.details.task_results.forEach(taskResult => {
+                    const modelName = taskResult.model_name;
+                    const taskSourceName = result.details.task_source_name;
+
+                    if (!modelMap[modelName]) {
+                        modelMap[modelName] = {};
+                    }
+
+                    if (!modelMap[modelName][taskSourceName]) {
+                        modelMap[modelName][taskSourceName] = [];
+                    }
+
+                    modelMap[modelName][taskSourceName].push(result);
+                });
+            });
+        });
+
+        return modelMap;
+    };
+
+    const toggleSection = (sectionKey: string) => {
+        setOpenSections(prev => ({
+            ...prev,
+            [sectionKey]: !prev[sectionKey]
         }));
     };
 
@@ -87,7 +154,7 @@ export const BenchmarkResultsView: React.FC<Props> = ({ selectedFile, onFileSele
         );
     }
 
-    if (loading && !results.length) {
+    if (loading && !rawData.length) {
         return (
             <NonIdealState
                 icon={<Spinner />}
@@ -107,6 +174,8 @@ export const BenchmarkResultsView: React.FC<Props> = ({ selectedFile, onFileSele
         );
     }
 
+    const groupedResults = getGroupedResults();
+
     return (
         <Card className="benchmark-results">
             <div style={{ marginBottom: '20px', display: 'flex', gap: '10px', alignItems: 'center' }}>
@@ -123,14 +192,44 @@ export const BenchmarkResultsView: React.FC<Props> = ({ selectedFile, onFileSele
                 />
             </div>
 
-            {results.length > 0 ? (
-                <BenchmarkResultsTable results={results} />
-            ) : !loading && (
+            {Object.keys(groupedResults).length === 0 && !loading ? (
                 <NonIdealState
                     icon="document"
                     title="No Results"
                     description="This benchmark result file is empty or has invalid format."
                 />
+            ) : (
+                <div className="benchmark-results-content">
+                    {Object.entries(groupedResults).map(([modelName, taskSources]) => (
+                        <div key={modelName} className="model-section">
+                            <H3
+                                className="model-header"
+                                onClick={() => toggleSection(`model-${modelName}`)}
+                            >
+                                {modelName} <Button minimal small icon={openSections[`model-${modelName}`] ? "chevron-down" : "chevron-right"} />
+                            </H3>
+                            <Collapse isOpen={!!openSections[`model-${modelName}`]}>
+                                {Object.entries(taskSources).map(([taskSourceName, results]) => (
+                                    <div key={taskSourceName} className="task-source-section">
+                                        <H4
+                                            className="task-source-header"
+                                            onClick={() => toggleSection(`${modelName}-${taskSourceName}`)}
+                                        >
+                                            {taskSourceName} <Button minimal small icon={openSections[`${modelName}-${taskSourceName}`] ? "chevron-down" : "chevron-right"} />
+                                        </H4>
+                                        <Collapse isOpen={!!openSections[`${modelName}-${taskSourceName}`]}>
+                                            <CriteriaStatsTable
+                                                results={results}
+                                                modelName={modelName}
+                                                taskSourceName={taskSourceName}
+                                            />
+                                        </Collapse>
+                                    </div>
+                                ))}
+                            </Collapse>
+                        </div>
+                    ))}
+                </div>
             )}
         </Card>
     );

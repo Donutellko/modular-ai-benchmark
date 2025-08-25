@@ -2,21 +2,21 @@ import { useState } from 'react'
 import { Button } from '@blueprintjs/core'
   overflow: auto;
 }
-.benchmark-results-filters {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  padding: 10px;
-  background: #f5f8fa;
-  border-radius: 3px;
+.benchmark-results {
+    margin: 20px;
+    padding: 20px;
 }
 
-.benchmark-results-filters .bp4-input-group {
+.benchmark-results-filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
 
 .benchmark-results-table {
-  width: 100%;
-  margin-bottom: 20px;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 .benchmark-results-table td {
@@ -25,18 +25,96 @@ import { Button } from '@blueprintjs/core'
 }
 
 .benchmark-results-pagination {
-  display: flex;
-  padding-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
 }
-      <div className="app-container">
-        <div
-  border-bottom: none;
-          className={`left-panel ${isCollapsed ? 'collapsed' : ''} ${isResizing ? 'resizing' : ''}`}
+
 .code-editor-container {
-          <div className="resize-handle" onMouseDown={startResizing}></div>
-        <div className={`left-panel ${isCollapsed ? 'collapsed' : ''}`}>
-  margin: 10px 0;
-  border: 1px solid #d8e1e8;
-  border-radius: 3px;
-            className="collapse-button"
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #d8e1e8;
+    border-radius: 3px;
+}
+
+.bp5-dialog {
+    width: 1000pt!important;
+    padding: 10pt;
+}
+
+.task-details-modal {
+    width: 90%;
+    max-width: 1200px;
+}
+
+.task-details-content {
+    padding: 10px;
+}
+
+.task-details-tabs {
+    margin-top: 20px;
+}
+
+.task-results-section {
+    margin-bottom: 20px;
+}
+
+.model-section {
+    margin-bottom: 20px;
+    border: 1px solid #e1e8ed;
+    border-radius: 5px;
+}
+
+.model-header {
+    padding: 10px 15px;
+    background-color: #f5f8fa;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    border-bottom: 1px solid #e1e8ed;
+}
+
+.task-source-section {
+    margin: 10px;
+    border: 1px solid #e1e8ed;
+    border-radius: 5px;
+}
+
+.task-source-header {
+    padding: 8px 12px;
+    background-color: #f5f8fa;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    border-bottom: 1px solid #e1e8ed;
+}
+
+.criteria-stats-table {
+    padding: 10px;
+}
+
+.status-browser-modal .bp3-tabs {
+    margin-top: 15px;
+}
+
+.criteria-result-section,
+.task-result-section {
+    margin-bottom: 25px;
+}
+
+.criteria-result-section h3,
+.task-result-section h3 {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e1e8ed;
+    padding-bottom: 5px;
+}
+
+.status-icons {
+    display: flex;
+    gap: 5px;
 }

@@ -1,21 +1,15 @@
-/* Reset and viewport containment */
-html, body, #root {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-}
-
 .app {
   display: flex;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  position: fixed;
-  top: 0;
-  left: 0;
-  box-sizing: border-box;
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
 
 .left-panel {
@@ -31,7 +25,6 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-sizing: border-box;
 }
 
 .left-panel::after {
@@ -124,7 +117,6 @@ html, body, #root {
   background: white;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
 }
 
 .file-list {
@@ -319,32 +311,27 @@ html, body, #root {
 
 .resize-handle {
   position: absolute;
-  right: -2px;
+  right: 0;
   top: 0;
   bottom: 0;
   width: 4px;
   cursor: ew-resize;
   background: transparent;
   transition: background 0.2s;
-  z-index: 10;
 }
 
 .resize-handle:hover,
-.left-panel.resizing .resize-handle {
+.resizing .resize-handle {
   background: rgba(19, 124, 189, 0.2);
 }
 
-.left-panel.resizing {
-  transition: none;
+.resizing {
   user-select: none;
+  cursor: ew-resize;
 }
 
-.left-panel.resizing * {
+.resizing .left-panel-content {
   pointer-events: none;
-}
-
-.left-panel.collapsed .resize-handle {
-  display: none;
 }
 
 .sections-container {

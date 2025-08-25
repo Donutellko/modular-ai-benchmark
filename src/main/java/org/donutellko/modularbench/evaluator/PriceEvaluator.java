@@ -26,7 +26,7 @@ public class PriceEvaluator implements Evaluator {
 
         return List.of(
                 TaskResults.CodeQualityResult.builder()
-                        .criteria("java-pmd")
+                        .criteria("token-count")
                         .score(llmResponse.getTokenCount() + 0.0)
                         .executorClass(PriceEvaluator.class.getName())
                         .unit("tokens")
